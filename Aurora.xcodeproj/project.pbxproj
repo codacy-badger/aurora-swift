@@ -19,10 +19,10 @@
 		E1AA401C21F8BDCC003E61D2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E1AA401D21F8BDE6003E61D2 /* Aurora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aurora.swift; sourceTree = "<group>"; };
 		E1AA401E21F8BE24003E61D2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		E1AA402421F8C160003E61D2 /* Aurora_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Aurora_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1AA402421F8C160003E61D2 /* Aurora.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Aurora.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1AA402721F8C160003E61D2 /* Aurora_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Aurora_iOS.h; sourceTree = "<group>"; };
 		E1AA402821F8C160003E61D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1AA403221F8C19B003E61D2 /* Aurora_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Aurora_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1AA403221F8C19B003E61D2 /* Aurora.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Aurora.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1AA403421F8C19B003E61D2 /* Aurora_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Aurora_macOS.h; sourceTree = "<group>"; };
 		E1AA403521F8C19B003E61D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,8 +70,8 @@
 		E1AA402521F8C160003E61D2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E1AA402421F8C160003E61D2 /* Aurora_iOS.framework */,
-				E1AA403221F8C19B003E61D2 /* Aurora_macOS.framework */,
+				E1AA402421F8C160003E61D2 /* Aurora.framework */,
+				E1AA403221F8C19B003E61D2 /* Aurora.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,7 +131,7 @@
 			);
 			name = "Aurora iOS";
 			productName = "Aurora iOS";
-			productReference = E1AA402421F8C160003E61D2 /* Aurora_iOS.framework */;
+			productReference = E1AA402421F8C160003E61D2 /* Aurora.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E1AA403121F8C19B003E61D2 /* Aurora macOS */ = {
@@ -149,7 +149,7 @@
 			);
 			name = "Aurora macOS";
 			productName = "Aurora macOS";
-			productReference = E1AA403221F8C19B003E61D2 /* Aurora_macOS.framework */;
+			productReference = E1AA403221F8C19B003E61D2 /* Aurora.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -305,7 +305,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spacenation.aurora.framework.ios;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = Aurora;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -380,7 +380,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spacenation.aurora.framework.ios;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = Aurora;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -465,7 +465,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spacenation.aurora.framework.macos;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = Aurora;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -541,7 +541,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spacenation.aurora.framework.macos;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = Aurora;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
