@@ -6,11 +6,32 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXFileReference section */
+		E1AA401A21F8BDBD003E61D2 /* .codeclimate.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .codeclimate.yml; sourceTree = "<group>"; };
+		E1AA401B21F8BDC5003E61D2 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		E1AA401C21F8BDCC003E61D2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E1AA401D21F8BDE6003E61D2 /* Aurora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aurora.swift; sourceTree = "<group>"; };
+		E1AA401E21F8BE24003E61D2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		E1AA401221F8BB8C003E61D2 = {
 			isa = PBXGroup;
 			children = (
+				E1AA401C21F8BDCC003E61D2 /* README.md */,
+				E1AA401A21F8BDBD003E61D2 /* .codeclimate.yml */,
+				E1AA401B21F8BDC5003E61D2 /* .swiftlint.yml */,
+				E1AA401E21F8BE24003E61D2 /* .gitignore */,
+				E1AA401921F8BD4F003E61D2 /* Sources */,
 			);
+			sourceTree = "<group>";
+		};
+		E1AA401921F8BD4F003E61D2 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				E1AA401D21F8BDE6003E61D2 /* Aurora.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
