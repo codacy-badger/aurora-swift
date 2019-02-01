@@ -1,7 +1,6 @@
 import Foundation
 
 extension Aurora {
-
     public static func from(file: String) -> Aurora? {
         if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             let fileURL = dir.appendingPathComponent(file)
@@ -22,7 +21,6 @@ extension Aurora {
                 print(String(bytes: encoded, encoding: .utf8) ?? "No data")
                 try? encoded.write(to: fileURL)
             }
-
         }
     }
 }

@@ -1,8 +1,7 @@
-import XCTest
 @testable import Aurora
+import XCTest
 
 class AuroraTests: XCTestCase {
-
     func testAuroraBehaviour() {
         let jsonFileContents = """
         {
@@ -62,5 +61,4 @@ class AuroraTests: XCTestCase {
         XCTAssert(aurora.connectors.count == 1)
         XCTAssert(aurora.attachedConnectors.count == 1)
     }
-
 }

@@ -1,7 +1,6 @@
 import Foundation
 
 extension Aurora: Codable {
-
     enum CodingKeys: String, CodingKey {
         case mode
         case lights

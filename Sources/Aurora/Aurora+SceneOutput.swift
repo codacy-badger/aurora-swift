@@ -1,7 +1,6 @@
 import Foundation
 
 extension Aurora {
-
     public func set(outputMode: Output.Mode, forSceneWithIdentifier identifier: UUID) {
         if let scene = scenes[identifier], scene.output.mode != outputMode {
             scenes[identifier]?.output.mode = outputMode
@@ -14,5 +13,4 @@ extension Aurora {
         scenes[identifier]?.output.track = outputTrack
         refreshOutputForSceneWith(identifier: identifier)
     }
-
 }

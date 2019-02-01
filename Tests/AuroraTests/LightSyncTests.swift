@@ -1,8 +1,7 @@
-import XCTest
 @testable import Aurora
+import XCTest
 
 class LightSyncTests: XCTestCase {
-
     func testLightSync() {
         var lights: [Light] = []
 
@@ -128,7 +127,5 @@ class LightSyncTests: XCTestCase {
         } else {
             XCTFail("Could not find a light")
         }
-
     }
-
 }

@@ -1,7 +1,6 @@
 import Foundation
 
 public protocol Connectable: AnyObject {
-
     /// Type of device connection supported by this connector.
     static var type: String { get }
 

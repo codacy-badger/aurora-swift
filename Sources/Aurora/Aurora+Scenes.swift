@@ -1,7 +1,6 @@
 import Foundation
 
 extension Aurora {
-
     /// Stable
 
     /// Simplex-only property get an active scene. This will return `nil` in a multiplex mode.
@@ -30,6 +29,7 @@ extension Aurora {
             } else {
                 activeSceneIdentifiers = [identifier]
             }
+
         case .multiplex:
             if isActive(sceneWithIdentifier: identifier) {
                 activeSceneIdentifiers.remove(identifier)

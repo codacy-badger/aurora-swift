@@ -10,11 +10,10 @@ import Foundation
 internal typealias LightsTransformer = ([Light]) -> [(updatedLight: Light, update: Light.Update)]
 
 extension Aurora {
-
     /// Updates lights from preset
     internal func lightsTransformer(preset: Scene) -> LightsTransformer {
         return { lights in
-            return lights.compactMap { [weak self] light in
+            lights.compactMap { [weak self] light in
                 var light = light
                 let update = light.update(
                     with: Light.State.Update(
@@ -38,7 +37,7 @@ extension Aurora {
     /// Updates lights from preset with monocolor
     internal func lightsTransformer(preset: Scene, hue: Float, brightness: Float, saturation: Float) -> LightsTransformer {
         return { lights in
-            return lights.compactMap { [weak self] light in
+            lights.compactMap { [weak self] light in
                 let saturation = min(preset.coloring.saturation.maximum, max(saturation, preset.coloring.saturation.minimum))
                 let brightness = min(preset.coloring.brightness.maximum, max(brightness, preset.coloring.brightness.minimum))
 
@@ -64,8 +63,7 @@ extension Aurora {
 
     internal func lightsTransformer(power: Bool) -> LightsTransformer {
         return { lights in
-            return lights.compactMap { [weak self] light in
-
+            lights.compactMap { [weak self] light in
                 var light = light
 
                 let powerOnChanges = Light.State.Update(
@@ -93,8 +91,7 @@ extension Aurora {
 
     internal func randomLightsTransformer() -> LightsTransformer {
         return { lights in
-            return lights.compactMap { [weak self] light in
-
+            lights.compactMap { [weak self] light in
                 var light = light
                 let update = light.update(
                     with: Light.State.Update(
@@ -114,5 +111,4 @@ extension Aurora {
             }
         }
     }
-
 }

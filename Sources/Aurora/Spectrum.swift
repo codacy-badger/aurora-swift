@@ -1,7 +1,6 @@
 import Foundation
 
 public struct Spectrum: OptionSet, Codable, Equatable {
-
     public var rawValue: Int
 
     public init(rawValue: Int) {

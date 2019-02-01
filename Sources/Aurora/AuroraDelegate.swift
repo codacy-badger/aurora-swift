@@ -1,7 +1,6 @@
 import Foundation
 
 public protocol AuroraDelegate: AnyObject {
-
     func didUpdateConnectors()
     func didUpdateLights()
 
@@ -16,7 +15,6 @@ public protocol AuroraDelegate: AnyObject {
 }
 
 extension AuroraDelegate {
-
     public func didUpdateConnectors() {}
     public func didUpdateLights() {}
     public func didUpdateScenes() {}

@@ -1,7 +1,6 @@
 import Foundation
 
 public struct Light: Identifiable, Codable, Equatable {
-
     enum CodingKeys: String, CodingKey {
         case identifier
         case name
@@ -49,7 +48,6 @@ public struct Light: Identifiable, Codable, Equatable {
     /// Updates lights properties and creates a state update
     /// Only neccessary changes are generated
     internal mutating func update(with changes: State.Update) -> Light.Update? {
-
         guard !changes.isEmpty else {
             return nil
         }
@@ -109,7 +107,6 @@ public struct Light: Identifiable, Codable, Equatable {
 }
 
 extension Array where Element == Light {
-
     public var reachable: [Light] {
         return self.filter({ $0.isReachable })
     }

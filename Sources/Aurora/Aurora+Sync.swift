@@ -1,7 +1,6 @@
 import Foundation
 
 extension Aurora {
-
     func sync(lights: [Light]) {
         /// Sync lights
         if self.lights.sync(with: lights) {

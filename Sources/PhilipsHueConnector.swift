@@ -4,7 +4,6 @@ import HueSDK
 #endif
 
 public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnectionObserver, PHSBridgeStateUpdateObserver, PHSFindNewDevicesCallback {
-
     public struct State: Equatable {
         public var bridge: Bridge?
         public var isSearchingForBridges: Bool = false
@@ -96,7 +95,7 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
         }
         state.isSearchingForBridges = true
         print("PhilipsHueConnector: Start bridge discovery")
-        bridgeDiscovery.search([.upnp, .nupnp, .ipscan], cb: { [weak self] (results, _) in
+        bridgeDiscovery.search([.upnp, .nupnp, .ipscan], cb: { [weak self] results, _ in
                 self?.state.isSearchingForBridges = false
                 if let results = results, let result = results.first {
                     print("PhilipsHueConnector: Bridge discovered: ", result.ip, result.uniqueId)
@@ -123,7 +122,7 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
 
     private func buildBridge(info: Bridge) -> PHSBridge {
         // Replace app name and device name
-        return PHSBridge.init(block: { (builder) in
+        return PHSBridge(block: { builder in
             builder?.connectionTypes = .local
             builder?.ipAddress = info.ip
             builder?.bridgeID = info.id
@@ -153,15 +152,15 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
     /// MARK: PHSBridgeConnectionObserver
 
     public func bridgeConnection(_ bridgeConnection: PHSBridgeConnection!, handle connectionEvent: PHSBridgeConnectionEvent) {
-
         switch connectionEvent {
-
         /// Authentication
         case .notAuthenticated:
             print("PhilipsHueConnector: Connection Event: Not Authenticated")
+
         case .linkButtonNotPressed:
             print("PhilipsHueConnector: Connection Event: Link button not pressed")
             state.bridge?.isAuthenticationRequired = true
+
         case .authenticated:
             print("PhilipsHueConnector: Connection Event: Authenticated")
             state.bridge?.isAuthenticationRequired = false
@@ -186,6 +185,7 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
         /// Other
         case .rateLimitQuotaViolation:
             print("PhilipsHueConnector: Connection Event: Rate limit quota violation")
+
         case .none:
             print("PhilipsHueConnector: Connection Event: None")
         }
@@ -201,8 +201,10 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
         case .fullConfig:
             print("HueController: Update Event: Full Config")
             syncLights()
+
         case .initialized:
             print("HueController: Update Event: Initialized")
+
         default:
             print("HueController: Update Event")
         }
@@ -248,7 +250,6 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
     }
 
     public func perform(lightUpdate: Light.Update) {
-
         let state = PHSLightState()
 
         if let isPowered = lightUpdate.updates.isPowered {
@@ -272,13 +273,12 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
         state.transitionTime = NSNumber(value: Int(lightUpdate.updates.transitionTime * 10))
 
         if let lightPoint = bridge?.bridgeState.getDeviceOf(.light, withIdentifier: lightUpdate.manufacturerIdentifier) as? PHSLightPoint {
-            lightPoint.update(state, allowedConnectionTypes: .local) { (_, errors, _) in
+            lightPoint.update(state, allowedConnectionTypes: .local) { _, errors, _ in
                 if let errors = errors {
                     print(errors)
                 }
             }
         }
-
     }
 
     public func send(event: Event) {
@@ -296,6 +296,7 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
         case EventName.stateUpdate.rawValue:
             print("PhilipsHueConnector: User requested state update")
             send(state: self.state)
+
         default:
             break
         }

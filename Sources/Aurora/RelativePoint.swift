@@ -6,7 +6,6 @@ import CoreGraphics
 
 /// RelativePoint struct that represents relation between point and size
 public struct RelativePoint: CustomStringConvertible, Equatable {
-
     /// X coordinate represented as Double from 0.0 to 1.0
     public var relativeX: Double
 
@@ -29,7 +28,6 @@ public struct RelativePoint: CustomStringConvertible, Equatable {
 
     /// Description
     public var description: String { return ("RelativePoint - X:\(relativeX), Y:\(relativeY)") }
-
 }
 
 #if os(macOS)
@@ -60,10 +58,8 @@ extension CGPoint {
 #endif
 
 extension RelativePoint {
-
     /// Create from center point, 12-point circle cluster, excluding point that are out of bounds
     public func cluster(relativeGap: Double) -> [RelativePoint] {
-
         let halfGap = relativeGap / 2
         /// Top
 

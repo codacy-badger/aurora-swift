@@ -1,8 +1,7 @@
-import XCTest
 @testable import Aurora
+import XCTest
 
 class LightUnreachableTests: XCTestCase {
-
     func testForceUnrechable() {
         var lights = [
             Light(
@@ -41,5 +40,4 @@ class LightUnreachableTests: XCTestCase {
         XCTAssert(lights.count == 3)
         XCTAssert(lights.reachable.isEmpty)
     }
-
 }

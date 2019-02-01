@@ -14,6 +14,5 @@ extension Array where Element: Identifiable {
                 self[index] = element
             }
         }
-
     }
 }

@@ -1,7 +1,6 @@
 import Foundation
 
 extension Aurora {
-
     public func powerOnActiveLights() {
         guard mode == .simplex else {
             return

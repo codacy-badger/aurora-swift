@@ -1,7 +1,6 @@
 import Foundation
 
 extension Aurora {
-
     /// Should be called after setting scene input mode to sync inputs
     internal func refreshInputForSceneWith(identifier: UUID) {
         /// Remove old time loops that might still be in progress
@@ -14,17 +13,20 @@ extension Aurora {
             switch scene.input.mode {
             case .none:
                 print("Aurora: Refreshing input for mode `none` is not required")
+
             case .time:
                 if input.time == nil, let timeInput = constructor?.constructTimeInput() {
                     input.time = timeInput
                     input.time?.start(onLoop: self.onTimeLoop)
                 }
                 input.time?.add(loop: identifier, duration: scene.input.interval)
+
             case .audio:
                 if input.audio == nil, let audioInput = constructor?.constructAudioInput() {
                     input.audio = audioInput
                     input.audio?.start(onLevel: self.onAudioLevelChange)
                 }
+
             case .video:
                 if input.video == nil, let videoInput = constructor?.constructVideoInput() {
                     input.video = videoInput
@@ -86,6 +88,7 @@ extension Aurora {
         case .simplex:
             let activeLights = self.activeLights.reachable
             update(lights: activeLights, with: transformer)
+
         case .multiplex:
             let sceneActiveLights = self.activeLights(forSceneWithIdentifier: activeLightScene.identifier).reachable
             update(lights: sceneActiveLights, with: transformer)

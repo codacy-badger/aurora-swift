@@ -21,7 +21,7 @@ public struct AudioProcessor {
             thresholdLevel = level
         } else {
             /// Make autoAudioThresholdLevel lower with every tick, limiting at 0.0
-            thresholdLevel -= 0.0005 * audioExponent
+            thresholdLevel -= 0.000_5 * audioExponent
             if thresholdLevel < thresholdMinimumLevel {
                 thresholdLevel = thresholdMinimumLevel
             }

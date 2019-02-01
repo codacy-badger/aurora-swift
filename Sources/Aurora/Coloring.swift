@@ -1,7 +1,6 @@
 import Foundation
 
 public struct Coloring: Codable, Equatable {
-
     public enum Mode: String, Codable, Equatable {
         case hue, range, spectrum
     }
@@ -28,8 +27,10 @@ public struct Coloring: Codable, Equatable {
         switch self.mode {
         case .hue:
             return hue
+
         case .range:
             return .random(in: range)
+
         case .spectrum:
             return spectrum.randomHue
         }

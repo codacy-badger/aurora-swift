@@ -1,7 +1,6 @@
 import Foundation
 
 public struct Input {
-
     public enum Mode: String, Equatable, Codable {
         case none, time, audio, video
     }

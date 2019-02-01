@@ -2,7 +2,6 @@ import Foundation
 
 extension Light {
     public struct State: Codable, Equatable {
-
         internal struct Update: Codable, Equatable {
             internal let hue: Float?
             internal let saturation: Float?

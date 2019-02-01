@@ -1,7 +1,6 @@
 import Foundation
 
 public class DeviceTimeInput: TimeInputable {
-
     private var onLoop: (UUID) -> Void = { _ in }
     private var loopVariations: [UUID: UUID] = [:]
 

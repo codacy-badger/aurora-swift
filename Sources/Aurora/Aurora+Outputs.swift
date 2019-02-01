@@ -1,9 +1,7 @@
 import Foundation
 
 extension Aurora {
-
     internal func refreshOutputForSceneWith(identifier: UUID) {
-
         removeUnusedOutputs()
 
         guard let scene = scenes.first(where: { $0.identifier == identifier }) else {
@@ -19,6 +17,7 @@ extension Aurora {
         switch scene.output.mode {
         case .none:
             print("No output")
+
         case .audio:
             if mode == .simplex, let track = scene.output.track, let audioOutput = constructor?.constructAudioOutput() {
                 print("Aurora: Building Audio Output")

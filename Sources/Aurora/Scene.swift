@@ -1,7 +1,6 @@
 import Foundation
 
 public struct Scene: Codable, Identifiable, Equatable {
-
     public struct Effects: OptionSet, Codable, Equatable {
         public let rawValue: Int
 

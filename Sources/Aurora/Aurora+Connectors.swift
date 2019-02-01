@@ -2,7 +2,6 @@
 import Foundation
 
 extension Aurora {
-
     public func attachConnectors() {
         update(connectors: connectors)
     }

@@ -1,7 +1,6 @@
 import Foundation
 
 extension Aurora {
-
     public func set(coloringMode: Coloring.Mode, forSceneWithIdentifier identifier: UUID) {
         scenes[identifier]?.coloring.mode = coloringMode
     }

@@ -1,6 +1,6 @@
 #if os(macOS) || os(iOS)
-import Foundation
 import AVFoundation
+import Foundation
 
 public class DeviceAudioOutput: AudioOutputable {
     private var player: AVAudioPlayer?

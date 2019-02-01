@@ -1,7 +1,6 @@
 import Foundation
 
 extension ClosedRange: Codable where Bound == Float {
-
     enum CodableError: Error {
         case decodingFailed
     }
@@ -27,7 +26,6 @@ extension ClosedRange where Bound == Float {
 }
 
 extension ClosedRange where Bound == Float {
-
     public var minimum: Float {
         get {
             return self.lowerBound

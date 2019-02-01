@@ -1,7 +1,6 @@
 import Foundation
 
 extension Aurora {
-
     public func toggle(lightWithIdentifier lightIdentifier: UUID, forSceneWithIdentifier sceneIdentifier: UUID) {
         guard let scene = scenes[sceneIdentifier] else {
             return
@@ -50,11 +49,9 @@ extension Aurora {
     }
 
     public func set(effects: Scene.Effects, forSceneWithIdentifier identifier: UUID) {
-
     }
 
     public func toggle(effects: Scene.Effects, forSceneWithIdentifier identifier: UUID) {
-
     }
 
     public func set(brightness: Float) {

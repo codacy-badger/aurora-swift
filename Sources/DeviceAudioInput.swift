@@ -1,7 +1,7 @@
 #if os(iOS) || os(macOS)
-import Foundation
 import AVFoundation
 import CoreAudio
+import Foundation
 
 public class DeviceAudioInput: NSObject, AudioInputable, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     public var processor: AudioProcessor = AudioProcessor()
@@ -39,7 +39,6 @@ public class DeviceAudioInput: NSObject, AudioInputable, AVAudioRecorderDelegate
     }
 
     private func setup() {
-
         switch AVAudioSession.sharedInstance().recordPermission {
         case AVAudioSession.RecordPermission.granted:
             print("Pemission granted")
@@ -65,7 +64,7 @@ public class DeviceAudioInput: NSObject, AudioInputable, AVAudioRecorderDelegate
             // 3. set up a high-quality recording session
             let settings = [
                 AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                AVSampleRateKey: 44100,
+                AVSampleRateKey: 44_100,
                 AVNumberOfChannelsKey: 1,
                 AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
             ]
@@ -74,7 +73,7 @@ public class DeviceAudioInput: NSObject, AudioInputable, AVAudioRecorderDelegate
             recorder?.isMeteringEnabled = true
             recorder?.delegate = self
             recorder?.record()
-        } catch let error {
+        } catch {
             print(error)
         }
     }
@@ -118,13 +117,12 @@ public class DeviceAudioInput: NSObject, AudioInputable, AVAudioRecorderDelegate
     }
 
     private func setup() {
-
         let outputURL = NSURL.fileURL(withPath: "/dev/null")
 
         do {
             let settings = [
                 AVFormatIDKey: Int(kAudioFormatAppleLossless),
-                AVSampleRateKey: 44100,
+                AVSampleRateKey: 44_100,
                 AVNumberOfChannelsKey: 1,
                 AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
             ]
@@ -133,7 +131,7 @@ public class DeviceAudioInput: NSObject, AudioInputable, AVAudioRecorderDelegate
             recorder?.isMeteringEnabled = true
             recorder?.delegate = self
             recorder?.record()
-        } catch let error {
+        } catch {
             print(error)
             // failed to record!
         }
@@ -142,7 +140,6 @@ public class DeviceAudioInput: NSObject, AudioInputable, AVAudioRecorderDelegate
     #endif
 
     func audioLevelsLoop() {
-
         if updateInputLevels == false {
             recorder?.stop()
             return
@@ -154,7 +151,6 @@ public class DeviceAudioInput: NSObject, AudioInputable, AVAudioRecorderDelegate
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             self.audioLevelsLoop()
         }
-
     }
 
     private func processAudioLevels() {

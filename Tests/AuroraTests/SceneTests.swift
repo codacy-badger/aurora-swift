@@ -1,8 +1,7 @@
-import XCTest
 import Aurora
+import XCTest
 
 class SceneTests: XCTestCase {
-
 //    func testSceneInit() {
 //        let scene = Scene(
 //            identifier: UUID(),

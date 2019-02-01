@@ -1,9 +1,8 @@
 #if os(macOS)
-import Foundation
 import CoreGraphics
+import Foundation
 
 public class DeviceVideoInput: VideoInputable {
-
     public var processor: VideoProcessor = VideoProcessor()
 
     struct MatrixData {
@@ -18,11 +17,9 @@ public class DeviceVideoInput: VideoInputable {
     }
 
     public func start(index: Int, onColor: @escaping (Float, Float, Float) -> Void) {
-
     }
 
     public func stop() {
-
     }
 
     public func colors(at relativePointClusters: [[RelativePoint]], for inputIndex: Int) -> [[Color]] {
@@ -45,7 +42,6 @@ public class DeviceVideoInput: VideoInputable {
 
         for pointY in 0...height {
             for pointX in 0...width {
-
                 let pixelInfo = pointY * bytesPerRow + pointX * 4
 
                 let red = UInt8(Float(rawData[pixelInfo + 2]) / 8.000)
@@ -66,7 +62,6 @@ public class DeviceVideoInput: VideoInputable {
                         dictionary[stringHash] = 1
                     }
                 }
-
             }
         }
 
@@ -84,7 +79,6 @@ public class DeviceVideoInput: VideoInputable {
     }
 
     func incrementedFlatMatrix(with data: [MatrixData]) -> [String: UInt16] {
-
         var dictionary: [String: UInt16] = [:]
         data.forEach { item in
             let stringHash: String = "\(item.first):\(item.second):\(item.third)"
@@ -96,13 +90,10 @@ public class DeviceVideoInput: VideoInputable {
         }
         return dictionary
     }
-
 }
 
 extension CGImage {
-
     func pixelColors(at relativePointClusters: [[RelativePoint]]) -> [[Color]] {
-
         let width = self.width
         let height = self.height
 
@@ -115,7 +106,6 @@ extension CGImage {
                 var clusterColors: [Color] = []
 
                 for relativePoint in relativePointCluster {
-
                     let pos = CGPoint(relativePoint, size: CGSize(width: width, height: height))
 
                     let pixelInfo: Int = ((Int(self.width) * Int(pos.y)) + Int(pos.x)) * 4

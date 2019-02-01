@@ -3,7 +3,6 @@ import Foundation
 import HomeKit
 
 public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDelegate, HMAccessoryDelegate, Connectable {
-
     public enum EventName: String {
         case stateUpdate = "homeKitStateUpdate"
         case startDeviceDiscovery = "homeKitStartDeviceDiscovery"
@@ -63,7 +62,6 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
         DispatchQueue.main.asyncAfter(deadline: .now() + 7.0) { [weak self] in
             self?.loop()
         }
-
     }
 
     private func send(_ state: State) {
@@ -100,7 +98,6 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
     }
 
     public func perform(lightUpdate: Light.Update) {
-
         guard let service = home?.allColorfulLightServices.first(where: { $0.name == lightUpdate.manufacturerIdentifier }) else {
             return
         }
@@ -159,6 +156,7 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
         case EventName.stateUpdate.rawValue:
             print("HomeKit Connector: User requested state update")
             send(state)
+
         default:
             break
         }
@@ -186,7 +184,6 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
                 }
             )
         }
-
     }
 
     public func homeManagerDidUpdatePrimaryHome(_ manager: HMHomeManager) {
@@ -236,7 +233,6 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
     deinit {
         print("HomeKit connector deallocated")
     }
-
 }
 
 extension HMService {
@@ -251,7 +247,7 @@ extension HMHome {
     /// All the services within all the accessories within the home.
     var allServices: [HMService] {
             return accessories.reduce([], { accumulator, accessory -> [HMService] in
-                return accumulator + accessory.services.filter { return !accumulator.contains($0) }
+                accumulator + accessory.services.filter { !accumulator.contains($0) }
             }
         )
     }
@@ -286,7 +282,6 @@ extension HMHome {
 }
 
 extension HMCharacteristic {
-
     func relativeValue(_ value: Float, minimum: Float = 0.0, maximum: Float = 100.0, step: Float = 1.0) -> Float {
         let max = self.metadata?.maximumValue as? Float ?? maximum
         let min = self.metadata?.minimumValue as? Float ?? minimum
@@ -294,8 +289,6 @@ extension HMCharacteristic {
         let relativeValue = round(((max - min) + min) * value)
 
         return relativeValue
-
     }
-
 }
 #endif

@@ -1,7 +1,6 @@
 import Foundation
 
 public struct Output {
-
     public enum Mode: String, Equatable, Codable {
         case none, audio
     }

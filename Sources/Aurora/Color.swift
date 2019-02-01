@@ -1,7 +1,6 @@
 import Foundation
 
 public struct Color: Codable, Equatable {
-
     public var hue: Float
     public var saturation: Float
     public var brightness: Float
@@ -25,7 +24,6 @@ public struct Color: Codable, Equatable {
     /// - parameter blue: Blue component  value represented as Float from 0.0 to 1.0
     /// - returns: Color struct
     public init(red: Float, green: Float, blue: Float) {
-
         var hue: Float
         var saturation: Float
         var brightness: Float
@@ -47,7 +45,6 @@ public struct Color: Codable, Equatable {
 
         self.init(hue: hue, saturation: saturation, brightness: brightness)
     }
-
 }
 
 extension Color {

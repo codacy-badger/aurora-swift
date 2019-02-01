@@ -1,7 +1,6 @@
 import Foundation
 
 extension Aurora {
-
     public var activeLights: [Light] {
         return lights.filter({ activeLightIdentifiers.contains($0.identifier) })
     }

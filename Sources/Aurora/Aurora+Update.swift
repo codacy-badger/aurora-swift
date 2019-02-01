@@ -1,7 +1,6 @@
 import Foundation
 
 extension Aurora {
-
     internal func update(lights: [Light], with transformer: @escaping LightsTransformer) {
         if transformatorLock {
             print("Blocked with transformator lock")
