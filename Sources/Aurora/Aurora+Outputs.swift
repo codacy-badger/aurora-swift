@@ -2,7 +2,7 @@ import Foundation
 
 extension Aurora {
 
-    public func refreshOutputForSceneWith(identifier: UUID) {
+    internal func refreshOutputForSceneWith(identifier: UUID) {
 
         removeUnusedOutputs()
 

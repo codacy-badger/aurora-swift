@@ -2,9 +2,9 @@ import Foundation
 
 public struct AudioProcessor {
     /// Audio level, should be 0 at init.
-    public var level: Float = 0.0
+    internal var level: Float = 0.0
     /// Auto audio threshold level, should be 0 at init.
-    public var thresholdLevel: Float = 0.0
+    internal var thresholdLevel: Float = 0.0
     /// Auto audio threshold minimum level, should be around 0.1 at init.
     private var thresholdMinimumLevel: Float = 0.05
     /// Audio exponent, should be 1.0 at init.

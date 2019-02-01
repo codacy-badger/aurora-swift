@@ -8,50 +8,27 @@ extension Aurora {
         input.time?.remove(loop: identifier)
         removeUnusedInputs()
 
-        guard let scene = scenes[identifier] else {
-            print("Aurora: Unable to find scene with identifier", identifier)
-            return
-        }
-
-        guard isActive(sceneWithIdentifier: identifier) else {
-            print("Aurora: Refreshing input for inactive scene \(identifier) is not required")
-            return
-        }
-
-        /// Refresh time input loop
-        /// Start shared inputs
-        switch scene.input.mode {
-        case .none:
-            print("Aurora: Refreshing input for mode `none` is not required")
-        case .time:
-            if input.time == nil {
-                if let timeInput = constructor?.constructTimeInput() {
-                    print("Aurora: Building Time Input")
+        if let scene = scenes[identifier], isActive(sceneWithIdentifier: identifier) {
+            /// Refresh time input loop
+            /// Start shared inputs
+            switch scene.input.mode {
+            case .none:
+                print("Aurora: Refreshing input for mode `none` is not required")
+            case .time:
+                if input.time == nil, let timeInput = constructor?.constructTimeInput() {
                     input.time = timeInput
                     input.time?.start(onLoop: self.onTimeLoop)
-                } else {
-                    print("Aurora: Time Input is not supported")
                 }
-            }
-            input.time?.add(loop: identifier, duration: scene.input.interval)
-        case .audio:
-            if input.audio == nil {
-                if let audioInput = constructor?.constructAudioInput() {
-                    print("Aurora: Building Audio Input")
+                input.time?.add(loop: identifier, duration: scene.input.interval)
+            case .audio:
+                if input.audio == nil, let audioInput = constructor?.constructAudioInput() {
                     input.audio = audioInput
                     input.audio?.start(onLevel: self.onAudioLevelChange)
-                } else {
-                    print("Aurora: Audio Input is not supported")
                 }
-            }
-        case .video:
-            if input.video == nil {
-                if let videoInput = constructor?.constructVideoInput() {
-                    print("Aurora: Building Video Input")
+            case .video:
+                if input.video == nil, let videoInput = constructor?.constructVideoInput() {
                     input.video = videoInput
                     input.video?.start(index: 0, onColor: self.onVideoColorChange)
-                } else {
-                    print("Aurora: Video Input is not supported")
                 }
             }
         }

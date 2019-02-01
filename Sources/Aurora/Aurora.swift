@@ -12,21 +12,21 @@ public final class Aurora {
     public internal(set) var mode: Mode
 
     public internal(set) var lights: [Light]
-    internal(set) var activeLightIdentifiers: Set<UUID>
+    internal var activeLightIdentifiers: Set<UUID>
 
     public internal(set) var scenes: [Scene]
-    internal(set) var activeSceneIdentifiers: Set<UUID>
+    internal var activeSceneIdentifiers: Set<UUID>
 
     /// should be internal set
     public internal(set) var brightness: Float
     public internal(set) var volume: Float
 
-    public var delegates: [AuroraDelegate]
+    public internal(set) var delegates: [AuroraDelegate]
 
-    var input: Input
-    var output: Output
+    internal var input: Input
+    internal var output: Output
 
-    public var transformatorLock: Bool
+    internal var transformatorLock: Bool
     /// Should be intenal/private
     public internal(set) var connectors: Set<String>
     internal var attachedConnectors: [Connectable]

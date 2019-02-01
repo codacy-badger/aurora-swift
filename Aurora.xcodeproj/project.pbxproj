@@ -135,6 +135,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E108DDB92204D49100B252FE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E113456821FE00470052B43B /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		E113456E21FE204C0052B43B /* DeviceTimeInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTimeInput.swift; sourceTree = "<group>"; };
 		E113457A21FE3D570052B43B /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
@@ -350,6 +351,7 @@
 			children = (
 				E184F20B21FE98D900BD237B /* Package.swift */,
 				E1AA401C21F8BDCC003E61D2 /* README.md */,
+				E108DDB92204D49100B252FE /* .gitignore */,
 				E1AA401A21F8BDBD003E61D2 /* .codeclimate.yml */,
 				E1AA401B21F8BDC5003E61D2 /* .swiftlint.yml */,
 				E1AA401E21F8BE24003E61D2 /* .gitignore */,

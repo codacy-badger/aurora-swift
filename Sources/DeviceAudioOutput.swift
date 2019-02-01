@@ -3,7 +3,7 @@ import Foundation
 import AVFoundation
 
 public class DeviceAudioOutput: AudioOutputable {
-    public var player: AVAudioPlayer?
+    private var player: AVAudioPlayer?
 
     public init() {}
 

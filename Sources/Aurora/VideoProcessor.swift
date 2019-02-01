@@ -1,9 +1,9 @@
 import Foundation
 
 public struct VideoProcessor {
-    public var hue: Float = 0.0
-    public var brightness: Float = 0.0
-    public var saturation: Float = 0.0
+    private var hue: Float = 0.0
+    private var brightness: Float = 0.0
+    private var saturation: Float = 0.0
 
     public init() {}
 
