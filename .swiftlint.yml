@@ -69,3 +69,10 @@ identifier_name:
   - id
   - ip
   - to
+
+nesting:
+  type_level:
+    warning: 2
+
+cyclomatic_complexity:
+  ignores_case_statements: true
