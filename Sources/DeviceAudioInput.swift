@@ -20,7 +20,7 @@ public class DeviceAudioInput: NSObject, AudioInputable, AVAudioRecorderDelegate
 
     var recorder: AVAudioRecorder?
 
-    public override required init() {
+    override public required init() {
         super.init()
     }
 

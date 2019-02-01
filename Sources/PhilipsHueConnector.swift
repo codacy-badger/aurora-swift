@@ -3,7 +3,7 @@ import Foundation
 import HueSDK
 #endif
 
-final public class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnectionObserver, PHSBridgeStateUpdateObserver, PHSFindNewDevicesCallback {
+public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnectionObserver, PHSBridgeStateUpdateObserver, PHSFindNewDevicesCallback {
 
     public struct State: Equatable {
         public var bridge: Bridge?
@@ -97,17 +97,18 @@ final public class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
         state.isSearchingForBridges = true
         print("PhilipsHueConnector: Start bridge discovery")
         bridgeDiscovery.search([.upnp, .nupnp, .ipscan], cb: { [weak self] (results, _) in
-            self?.state.isSearchingForBridges = false
-            if let results = results, let result = results.first {
-                print("PhilipsHueConnector: Bridge discovered: ", result.ip, result.uniqueId)
-                let bridge = Bridge(ip: result.ip, id: result.uniqueId, isAuthenticationRequired: false, isSearchingForLights: false)
-                self?.update(bridge: bridge)
-                self?.start()
-            } else {
-                print("PhilipsHueConnector: Bridge discovered: Nothing Found")
-                self?.start()
+                self?.state.isSearchingForBridges = false
+                if let results = results, let result = results.first {
+                    print("PhilipsHueConnector: Bridge discovered: ", result.ip, result.uniqueId)
+                    let bridge = Bridge(ip: result.ip, id: result.uniqueId, isAuthenticationRequired: false, isSearchingForLights: false)
+                    self?.update(bridge: bridge)
+                    self?.start()
+                } else {
+                    print("PhilipsHueConnector: Bridge discovered: Nothing Found")
+                    self?.start()
+                }
             }
-        })
+        )
     }
 
     private func update(bridge: Bridge) {
@@ -209,32 +210,35 @@ final public class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
 
     private func syncLights() {
         guard let lights = bridge?.bridgeState
-            .getDevicesOf(.light)?.compactMap({ $0 as? PHSLightPoint })
+            .getDevicesOf(.light)?
+            .compactMap({ $0 as? PHSLightPoint })
             .filter({ $0.lightType == .color || $0.lightType == .extendedColor }) else { return }
 
         guard let bridge = self.bridge else {
             return
         }
 
-        onSync(lights.map { light in
-            let lightState = Light.State(
-                hue: light.lightState.hue.floatValue / 65_535,
-                saturation: light.lightState.saturation.floatValue / 254,
-                brightness: light.lightState.brightness.floatValue / 254,
-                isPowered: light.lightState.on.boolValue
-            )
+        onSync(
+            lights.map { light in
+                let lightState = Light.State(
+                    hue: light.lightState.hue.floatValue / 65_535,
+                    saturation: light.lightState.saturation.floatValue / 254,
+                    brightness: light.lightState.brightness.floatValue / 254,
+                    isPowered: light.lightState.on.boolValue
+                )
 
-            let light = Light(
-                identifier: UUID(),
-                name: light.name,
-                type: PhilipsHueConnector.type,
-                state: light.lightState.reachable.boolValue ? lightState : nil,
-                manufacturerIdentifier: light.identifier,
-                bridgeIdentifier: bridge.identifier,
-                model: light.lightInfo.modelId
-            )
-            return light
-        })
+                let light = Light(
+                    identifier: UUID(),
+                    name: light.name,
+                    type: PhilipsHueConnector.type,
+                    state: light.lightState.reachable.boolValue ? lightState : nil,
+                    manufacturerIdentifier: light.identifier,
+                    bridgeIdentifier: bridge.identifier,
+                    model: light.lightInfo.modelId
+                )
+                return light
+            }
+        )
     }
 
     func send(state: State) {

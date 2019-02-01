@@ -16,7 +16,8 @@ extension Aurora {
         return { lights in
             return lights.compactMap { [weak self] light in
                 var light = light
-                let update = light.update(with: Light.State.Update(
+                let update = light.update(
+                    with: Light.State.Update(
                         hue: preset.coloring.randomHue,
                         saturation: preset.coloring.randomSaturation,
                         brightness: preset.coloring.randomBrightness * (self?.brightness ?? 1.0),
@@ -42,7 +43,8 @@ extension Aurora {
                 let brightness = min(preset.coloring.brightness.maximum, max(brightness, preset.coloring.brightness.minimum))
 
                 var light = light
-                let update = light.update(with: Light.State.Update(
+                let update = light.update(
+                    with: Light.State.Update(
                         hue: hue,
                         saturation: saturation,
                         brightness: brightness * (self?.brightness ?? 1.0),
@@ -94,12 +96,13 @@ extension Aurora {
             return lights.compactMap { [weak self] light in
 
                 var light = light
-                let update = light.update(with: Light.State.Update(
-                    hue: Float.random(in: 0...1),
-                    saturation: Float.random(in: 0...1),
-                    brightness: Float.random(in: 0...1) * (self?.brightness ?? 1.0),
-                    isPowered: true,
-                    transitionTime: Float.random(in: 0...5)
+                let update = light.update(
+                    with: Light.State.Update(
+                        hue: Float.random(in: 0...1),
+                        saturation: Float.random(in: 0...1),
+                        brightness: Float.random(in: 0...1) * (self?.brightness ?? 1.0),
+                        isPowered: true,
+                        transitionTime: Float.random(in: 0...5)
                     )
                 )
 

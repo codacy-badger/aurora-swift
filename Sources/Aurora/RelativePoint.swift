@@ -92,7 +92,3 @@ extension RelativePoint {
         return point.relativeX >= 0.0 && point.relativeX <= 1.0 && point.relativeY >= 0.0 && point.relativeY <= 1.0
     }
 }
-
-public func == (lhs: RelativePoint, rhs: RelativePoint) -> Bool {
-    return lhs.relativeX == rhs.relativeX && lhs.relativeY == rhs.relativeY
-}

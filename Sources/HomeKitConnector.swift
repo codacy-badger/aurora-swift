@@ -2,7 +2,7 @@
 import Foundation
 import HomeKit
 
-final public class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDelegate, HMAccessoryDelegate, Connectable {
+public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDelegate, HMAccessoryDelegate, Connectable {
 
     public enum EventName: String {
         case stateUpdate = "homeKitStateUpdate"
@@ -77,31 +77,33 @@ final public class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
             return
         }
 
-        onSync(home.allColorfulLightServices.map { service in
-            let lightState = Light.State(
-                hue: service.characteristics.first(where: { $0.characteristicType == HMCharacteristicTypeHue })?.value as? Float ?? 0.0,
-                saturation: service.characteristics.first(where: { $0.characteristicType == HMCharacteristicTypeSaturation })?.value as? Float ?? 1.0,
-                brightness: service.characteristics.first(where: { $0.characteristicType == HMCharacteristicTypeBrightness })?.value as? Float ?? 1.0,
-                isPowered: service.characteristics.first(where: { $0.characteristicType == HMCharacteristicTypePowerState })?.value as? Bool ?? true
-            )
+        onSync(
+            home.allColorfulLightServices.map { service in
+                let lightState = Light.State(
+                    hue: service.characteristics.first(where: { $0.characteristicType == HMCharacteristicTypeHue })?.value as? Float ?? 0.0,
+                    saturation: service.characteristics.first(where: { $0.characteristicType == HMCharacteristicTypeSaturation })?.value as? Float ?? 1.0,
+                    brightness: service.characteristics.first(where: { $0.characteristicType == HMCharacteristicTypeBrightness })?.value as? Float ?? 1.0,
+                    isPowered: service.characteristics.first(where: { $0.characteristicType == HMCharacteristicTypePowerState })?.value as? Bool ?? true
+                )
 
-            let light = Light(
-                identifier: UUID(),
-                name: service.name,
-                type: HomeKitConnector.type,
-                state: service.accessory?.isReachable ?? false ? lightState : nil,
-                manufacturerIdentifier: service.name,
-                model: service.characteristics.first(where: { $0.characteristicType == HMCharacteristicTypeModel })?.value as? String
-            )
-            return light
-        })
+                let light = Light(
+                    identifier: UUID(),
+                    name: service.name,
+                    type: HomeKitConnector.type,
+                    state: service.accessory?.isReachable ?? false ? lightState : nil,
+                    manufacturerIdentifier: service.name,
+                    model: service.characteristics.first(where: { $0.characteristicType == HMCharacteristicTypeModel })?.value as? String
+                )
+                return light
+            }
+        )
     }
 
     public func perform(lightUpdate: Light.Update) {
 
-        guard let service = home?.allColorfulLightServices.first(where: {
-            $0.name == lightUpdate.manufacturerIdentifier
-        }) else { return }
+        guard let service = home?.allColorfulLightServices.first(where: { $0.name == lightUpdate.manufacturerIdentifier }) else {
+            return
+        }
 
         service.characteristics.forEach { characteristic in
             if
@@ -174,13 +176,15 @@ final public class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
             state = State(home: home?.name, homeSelection: manager.homes.map({ $0.name }))
         } else {
             print("HomeKit Connector: Creating a default Home")
-            manager.addHome(withName: "Home", completionHandler: { home, error in
-                if home != nil {
-                    self.homeManagerDidUpdateHomes(manager)
-                } else {
-                    print(error ?? "no error")
+            manager.addHome(
+                withName: "Home", completionHandler: { home, error in
+                    if home != nil {
+                        self.homeManagerDidUpdateHomes(manager)
+                    } else {
+                        print(error ?? "no error")
+                    }
                 }
-            })
+            )
         }
 
     }
@@ -227,11 +231,7 @@ final public class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
         sync()
     }
 
-    public func accessory(_ accessory: HMAccessory,
-                          service: HMService,
-                          didUpdateValueFor characteristic: HMCharacteristic) {
-
-    }
+    public func accessory(_ accessory: HMAccessory, service: HMService, didUpdateValueFor characteristic: HMCharacteristic) {}
 
     deinit {
         print("HomeKit connector deallocated")
@@ -250,9 +250,10 @@ extension HMService {
 extension HMHome {
     /// All the services within all the accessories within the home.
     var allServices: [HMService] {
-        return accessories.reduce([], { accumulator, accessory -> [HMService] in
-            return accumulator + accessory.services.filter { return !accumulator.contains($0) }
-        })
+            return accessories.reduce([], { accumulator, accessory -> [HMService] in
+                return accumulator + accessory.services.filter { return !accumulator.contains($0) }
+            }
+        )
     }
 
     var allColorfulLightServices: [HMService] {
@@ -270,11 +271,14 @@ extension HMHome {
             if let
                 identifiers = bridge.uniqueIdentifiersForBridgedAccessories,
                 identifiers.contains(device.uniqueIdentifier) {
-                return bridge.services.first(where: {
-                    $0.serviceType == HMServiceTypeAccessoryInformation
-                })?.characteristics.first(where: {
+                    return bridge.services.first(where: {
+                        $0.serviceType == HMServiceTypeAccessoryInformation
+                    }
+                )?
+                .characteristics.first(where: {
                     $0.characteristicType == HMCharacteristicTypeSerialNumber
-                })?.value as? String
+                }
+                )?.value as? String
             }
         }
         return nil

@@ -71,7 +71,8 @@ public struct Light: Identifiable, Codable, Equatable {
             type: type,
             manufacturerIdentifier: manufacturerIdentifier,
             bridgeIdentifier: bridgeIdentifier,
-            updates: stateUpdate)
+            updates: stateUpdate
+        )
     }
 
     /// Returns true if sync made changes

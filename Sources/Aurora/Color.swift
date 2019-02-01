@@ -50,15 +50,12 @@ public struct Color: Codable, Equatable {
 
 }
 
-public func == (lhs: Color, rhs: Color) -> Bool {
-    return lhs.hue == rhs.hue && lhs.saturation == rhs.saturation && lhs.brightness == rhs.brightness
-}
-
 extension Color {
     public func maxComponentOffset(with color: Color) -> Float {
         return [
             self.hue - color.hue,
             self.saturation - color.saturation,
-            self.brightness - color.brightness].map({ abs($0) }).max() ?? 0.0
+            self.brightness - color.brightness
+        ].map({ abs($0) }).max() ?? 0.0
     }
 }
