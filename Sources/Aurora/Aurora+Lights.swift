@@ -2,7 +2,7 @@ import Foundation
 
 extension Aurora {
     public var activeLights: [Light] {
-        return lights.filter({ activeLightIdentifiers.contains($0.identifier) })
+        return lights.filter { activeLightIdentifiers.contains($0.identifier) }
     }
 
     public func isActive(lightWithIdentifier identifier: UUID) -> Bool {
@@ -32,7 +32,7 @@ extension Aurora {
         guard let scene = scenes[identifier] else {
             return []
         }
-        return lights.filter({ scene.lights.contains($0.identifier) })
+        return lights.filter { scene.lights.contains($0.identifier) }
     }
 
     public func resetLights() {

@@ -7,7 +7,7 @@ extension ClosedRange: Codable where Bound == Float {
 
     public init(from decoder: Decoder) throws {
         let stringValue = try decoder.singleValueContainer().decode(String.self)
-        let values: [Float] = stringValue.components(separatedBy: "...").compactMap({ Float($0) })
+        let values: [Float] = stringValue.components(separatedBy: "...").compactMap { Float($0) }
         if let lowerBound = values.first, let upperBound = values.last {
             self = lowerBound...upperBound
         } else {

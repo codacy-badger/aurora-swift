@@ -16,7 +16,7 @@ public class DeviceAudioOutput: AudioOutputable {
         print("Device Audio Output: Playing track", name)
         if
             let filePath: String = Bundle.main.path(forResource: name.filter({ $0 != " " }), ofType: "mp3"),
-            let url: URL = URL(string: filePath),
+            let url = URL(string: filePath),
             let audioPlayer: AVAudioPlayer = try? AVAudioPlayer(contentsOf: url) {
                 self.player = audioPlayer
                 self.player?.volume = volume

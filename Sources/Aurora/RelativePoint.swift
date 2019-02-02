@@ -28,10 +28,9 @@ public struct RelativePoint: CustomStringConvertible, Equatable {
 
     /// Description
     public var description: String { return ("RelativePoint - X:\(relativeX), Y:\(relativeY)") }
-}
 
-#if os(macOS)
-extension RelativePoint {
+    #if os(macOS)
+
     /// Initializes a new RelativePoint struct with CGPoint and CGSize
     ///
     /// - parameter point: Coordinates in a target object
@@ -41,23 +40,8 @@ extension RelativePoint {
         relativeX = Double(point.x) / Double(size.width)
         relativeY = Double(point.y) / Double(size.height)
     }
-}
+    #endif
 
-extension CGPoint {
-    /// Initializes a new CGPoint with RelativePoint and CGSize
-    ///
-    /// - parameter relativePoint: relative coordinates in a target object
-    /// - parameter size: Size of a target object
-    /// - returns: RelativePoint struct
-    public init(_ relativePoint: RelativePoint, size: CGSize) {
-        self.init()
-        x = CGFloat(relativePoint.relativeX) * size.width
-        y = CGFloat(relativePoint.relativeY) * size.height
-    }
-}
-#endif
-
-extension RelativePoint {
     /// Create from center point, 12-point circle cluster, excluding point that are out of bounds
     public func cluster(relativeGap: Double) -> [RelativePoint] {
         let halfGap = relativeGap / 2
@@ -88,3 +72,18 @@ extension RelativePoint {
         return point.relativeX >= 0.0 && point.relativeX <= 1.0 && point.relativeY >= 0.0 && point.relativeY <= 1.0
     }
 }
+
+#if os(macOS)
+extension CGPoint {
+    /// Initializes a new CGPoint with RelativePoint and CGSize
+    ///
+    /// - parameter relativePoint: relative coordinates in a target object
+    /// - parameter size: Size of a target object
+    /// - returns: RelativePoint struct
+    public init(_ relativePoint: RelativePoint, size: CGSize) {
+        self.init()
+        x = CGFloat(relativePoint.relativeX) * size.width
+        y = CGFloat(relativePoint.relativeY) * size.height
+    }
+}
+#endif

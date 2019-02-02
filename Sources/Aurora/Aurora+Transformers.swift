@@ -15,21 +15,14 @@ extension Aurora {
         return { lights in
             lights.compactMap { [weak self] light in
                 var light = light
-                let update = light.update(
-                    with: Light.State.Update(
-                        hue: preset.coloring.randomHue,
-                        saturation: preset.coloring.randomSaturation,
-                        brightness: preset.coloring.randomBrightness * (self?.brightness ?? 1.0),
-                        isPowered: preset.effects.contains(.strobe) ? !(light.state?.isPowered ?? false) : true,
-                        transitionTime: preset.input.transition
-                    )
+                let lightState = Light.State(
+                    hue: preset.coloring.randomHue,
+                    saturation: preset.coloring.randomSaturation,
+                    brightness: preset.coloring.randomBrightness * (self?.brightness ?? 1.0),
+                    isPowered: preset.effects.contains(.strobe) ? !(light.state?.isPowered ?? false) : true
                 )
-
-                if let update = update {
-                    return (light, update)
-                } else {
-                    return nil
-                }
+                let update = light.update(from: lightState, withTransitionTime: preset.input.transition)
+                return (light, update)
             }
         }
     }
@@ -42,21 +35,14 @@ extension Aurora {
                 let brightness = min(preset.coloring.brightness.maximum, max(brightness, preset.coloring.brightness.minimum))
 
                 var light = light
-                let update = light.update(
-                    with: Light.State.Update(
-                        hue: hue,
-                        saturation: saturation,
-                        brightness: brightness * (self?.brightness ?? 1.0),
-                        isPowered: true,
-                        transitionTime: preset.input.transition
-                    )
+                let lightState = Light.State(
+                    hue: hue,
+                    saturation: saturation,
+                    brightness: brightness * (self?.brightness ?? 1.0),
+                    isPowered: true
                 )
-
-                if let update = update {
-                    return (light, update)
-                } else {
-                    return nil
-                }
+                let update = light.update(from: lightState, withTransitionTime: preset.input.transition)
+                return (light, update)
             }
         }
     }
@@ -66,25 +52,26 @@ extension Aurora {
             lights.compactMap { [weak self] light in
                 var light = light
 
-                let powerOnChanges = Light.State.Update(
-                    saturation: 1.0,
-                    brightness: 1.0 * (self?.brightness ?? 1.0),
-                    isPowered: true,
-                    transitionTime: 1.0
-                )
+                let lightState: Light.State
 
-                let powerOffChanges = Light.State.Update(
-                    isPowered: true,
-                    transitionTime: 1.0
-                )
-
-                let update = light.update(with: power ? powerOnChanges : powerOffChanges)
-
-                if let update = update {
-                    return (light, update)
+                if power {
+                    lightState = Light.State(
+                        hue: nil,
+                        saturation: 1.0,
+                        brightness: 1.0 * (self?.brightness ?? 1.0),
+                        isPowered: true
+                    )
                 } else {
-                    return nil
+                    lightState = Light.State(
+                        hue: nil,
+                        saturation: nil,
+                        brightness: nil,
+                        isPowered: true
+                    )
                 }
+
+                let update = light.update(from: lightState, withTransitionTime: 1.0)
+                return (light, update)
             }
         }
     }
@@ -93,21 +80,14 @@ extension Aurora {
         return { lights in
             lights.compactMap { [weak self] light in
                 var light = light
-                let update = light.update(
-                    with: Light.State.Update(
-                        hue: Float.random(in: 0...1),
-                        saturation: Float.random(in: 0...1),
-                        brightness: Float.random(in: 0...1) * (self?.brightness ?? 1.0),
-                        isPowered: true,
-                        transitionTime: Float.random(in: 0...5)
-                    )
+                let lightState = Light.State(
+                    hue: Float.random(in: 0...1),
+                    saturation: Float.random(in: 0...1),
+                    brightness: Float.random(in: 0...1) * (self?.brightness ?? 1.0),
+                    isPowered: true
                 )
-
-                if let update = update {
-                    return (light, update)
-                } else {
-                    return nil
-                }
+                let update = light.update(from: lightState, withTransitionTime: Float.random(in: 0...5))
+                return (light, update)
             }
         }
     }

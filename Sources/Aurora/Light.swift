@@ -10,12 +10,20 @@ public struct Light: Identifiable, Codable, Equatable {
         case model
     }
 
+    public struct State: Codable, Equatable {
+        public internal(set) var hue: Float?
+        public internal(set) var saturation: Float?
+        public internal(set) var brightness: Float?
+        public internal(set) var isPowered: Bool
+    }
+
     public struct Update: Codable, Equatable {
-        internal let identifier: UUID
-        internal let type: String
-        internal let manufacturerIdentifier: String
-        internal let bridgeIdentifier: String?
-        internal let updates: State.Update
+        public let identifier: UUID
+        public let type: String
+        public let manufacturerIdentifier: String
+        public let bridgeIdentifier: String?
+        public let state: State
+        public let transitionTime: Float
     }
 
     public internal(set) var identifier: UUID
@@ -45,31 +53,29 @@ public struct Light: Identifiable, Codable, Equatable {
         self.bridgeIdentifier = bridgeIdentifier
         self.model = model
     }
-    /// Updates lights properties and creates a state update
-    /// Only neccessary changes are generated
-    internal mutating func update(with changes: State.Update) -> Light.Update? {
-        guard !changes.isEmpty else {
-            return nil
+    /// Updates lights properties and creates an update
+    internal mutating func update(from state: State, withTransitionTime transitionTime: Float) -> Update {
+        if let updatedHue = state.hue, self.state?.hue != updatedHue {
+            self.state?.hue = updatedHue
         }
 
-        let stateUpdate = State.Update(
-            hue: changes.hue != state?.hue ? changes.hue : nil,
-            saturation: changes.saturation != state?.saturation ? changes.saturation : nil,
-            brightness: changes.brightness != state?.brightness ? changes.brightness : nil,
-            isPowered: changes.isPowered != state?.isPowered ? changes.isPowered : nil,
-            transitionTime: changes.transitionTime
-        )
-
-        guard !stateUpdate.isEmpty else {
-            return nil
+        if let updatedSaturation = state.saturation, self.state?.saturation != updatedSaturation {
+            self.state?.saturation = updatedSaturation
         }
 
-        return Light.Update(
+        if let updatedBrightness = state.brightness, self.state?.brightness != updatedBrightness {
+            self.state?.brightness = updatedBrightness
+        }
+
+        self.state?.isPowered = state.isPowered
+
+        return Update(
             identifier: identifier,
             type: type,
             manufacturerIdentifier: manufacturerIdentifier,
             bridgeIdentifier: bridgeIdentifier,
-            updates: stateUpdate
+            state: state,
+            transitionTime: transitionTime
         )
     }
 
@@ -108,7 +114,7 @@ public struct Light: Identifiable, Codable, Equatable {
 
 extension Array where Element == Light {
     public var reachable: [Light] {
-        return self.filter({ $0.isReachable })
+        return self.filter { $0.isReachable }
     }
 
     public var forcedUnrechable: [Light] {

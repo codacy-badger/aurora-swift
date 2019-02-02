@@ -33,8 +33,6 @@
 		E147800D2201E6240040C756 /* Aurora+SceneColoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147800B2201E6240040C756 /* Aurora+SceneColoring.swift */; };
 		E147800F2201E7280040C756 /* Aurora+SceneOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147800E2201E7280040C756 /* Aurora+SceneOutput.swift */; };
 		E14780102201E7280040C756 /* Aurora+SceneOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147800E2201E7280040C756 /* Aurora+SceneOutput.swift */; };
-		E1478012220203320040C756 /* Light+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1478011220203320040C756 /* Light+State.swift */; };
-		E1478013220203320040C756 /* Light+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1478011220203320040C756 /* Light+State.swift */; };
 		E17A2277220351EC0088B76E /* LightUnreachableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A2276220351EC0088B76E /* LightUnreachableTests.swift */; };
 		E17A2278220351EC0088B76E /* LightUnreachableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A2276220351EC0088B76E /* LightUnreachableTests.swift */; };
 		E184F1F121FE765C00BD237B /* DeviceAudioInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E184F1F021FE765C00BD237B /* DeviceAudioInput.swift */; };
@@ -149,7 +147,6 @@
 		E14780082201E5A90040C756 /* Aurora+SceneInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aurora+SceneInput.swift"; sourceTree = "<group>"; };
 		E147800B2201E6240040C756 /* Aurora+SceneColoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aurora+SceneColoring.swift"; sourceTree = "<group>"; };
 		E147800E2201E7280040C756 /* Aurora+SceneOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aurora+SceneOutput.swift"; sourceTree = "<group>"; };
-		E1478011220203320040C756 /* Light+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Light+State.swift"; sourceTree = "<group>"; };
 		E17A2276220351EC0088B76E /* LightUnreachableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightUnreachableTests.swift; sourceTree = "<group>"; };
 		E184F1F021FE765C00BD237B /* DeviceAudioInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAudioInput.swift; sourceTree = "<group>"; };
 		E184F1F321FE796000BD237B /* DeviceVideoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceVideoInput.swift; sourceTree = "<group>"; };
@@ -272,7 +269,6 @@
 				E147800E2201E7280040C756 /* Aurora+SceneOutput.swift */,
 				E147800B2201E6240040C756 /* Aurora+SceneColoring.swift */,
 				E1AA40A721FBAFE1003E61D2 /* Light.swift */,
-				E1478011220203320040C756 /* Light+State.swift */,
 				E1AA407621FB5ADF003E61D2 /* Spectrum.swift */,
 				E1AA408021FB5DC1003E61D2 /* Coloring.swift */,
 				E1AA408321FB5E0D003E61D2 /* ClosedRange+Utilities.swift */,
@@ -629,7 +625,6 @@
 				E14780092201E5A90040C756 /* Aurora+SceneInput.swift in Sources */,
 				E1E7FBF721FCE55E0090CC2D /* Aurora+Scene.swift in Sources */,
 				E1AA408D21FB6387003E61D2 /* Identifiable.swift in Sources */,
-				E1478012220203320040C756 /* Light+State.swift in Sources */,
 				E1AA409021FB63FB003E61D2 /* Color.swift in Sources */,
 				E1E7FBD021FCA4380090CC2D /* Aurora.swift in Sources */,
 				E1E7FBF121FCD1E80090CC2D /* Aurora+Actions.swift in Sources */,
@@ -676,7 +671,6 @@
 				E147800A2201E5A90040C756 /* Aurora+SceneInput.swift in Sources */,
 				E1E7FBF821FCE55E0090CC2D /* Aurora+Scene.swift in Sources */,
 				E1AA408E21FB6387003E61D2 /* Identifiable.swift in Sources */,
-				E1478013220203320040C756 /* Light+State.swift in Sources */,
 				E1AA409121FB63FB003E61D2 /* Color.swift in Sources */,
 				E1E7FBD121FCA4380090CC2D /* Aurora.swift in Sources */,
 				E1E7FBF221FCD1E80090CC2D /* Aurora+Actions.swift in Sources */,

@@ -29,13 +29,13 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
         case findLightsEnded = "philipsHueFindLightsEnded"
     }
 
-    internal private(set) var state: State = State(bridge: nil, isSearchingForBridges: false) {
+    internal private(set) var state = State(bridge: nil, isSearchingForBridges: false) {
         didSet { if oldValue != state { send(state: self.state) } }
     }
 
     public static let type: String = "philipsHue"
 
-    private lazy var bridgeDiscovery: PHSBridgeDiscovery = PHSBridgeDiscovery()
+    private lazy var bridgeDiscovery = PHSBridgeDiscovery()
 
     private var bridge: PHSBridge?
 
@@ -62,7 +62,7 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
         PHSPersistence.setStorageLocation(documentsPath, andDeviceId: deviceId)
         //PHSLog.setConsoleLogLevel(.debug)
 
-        if let lastConnectedKnownBridge = PHSKnownBridges.getAll()?.sorted(by: { $0.lastConnected < $1.lastConnected }).first {
+        if let lastConnectedKnownBridge = PHSKnownBridges.getAll()?.min(by: { $0.lastConnected < $1.lastConnected }) {
             let bridge = Bridge(ip: lastConnectedKnownBridge.ipAddress, id: lastConnectedKnownBridge.uniqueId, isAuthenticationRequired: false, isSearchingForLights: false)
             print("PhilipsHueConnector: Known Bridge", bridge.ip, bridge.id)
             update(bridge: bridge)
@@ -95,19 +95,18 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
         }
         state.isSearchingForBridges = true
         print("PhilipsHueConnector: Start bridge discovery")
-        bridgeDiscovery.search([.upnp, .nupnp, .ipscan], cb: { [weak self] results, _ in
-                self?.state.isSearchingForBridges = false
-                if let results = results, let result = results.first {
-                    print("PhilipsHueConnector: Bridge discovered: ", result.ip, result.uniqueId)
-                    let bridge = Bridge(ip: result.ip, id: result.uniqueId, isAuthenticationRequired: false, isSearchingForLights: false)
-                    self?.update(bridge: bridge)
-                    self?.start()
-                } else {
-                    print("PhilipsHueConnector: Bridge discovered: Nothing Found")
-                    self?.start()
-                }
+        bridgeDiscovery.search { [weak self] results, _ in
+            self?.state.isSearchingForBridges = false
+            if let results = results, let result = results.first {
+                print("PhilipsHueConnector: Bridge discovered: ", result.ip, result.uniqueId)
+                let bridge = Bridge(ip: result.ip, id: result.uniqueId, isAuthenticationRequired: false, isSearchingForLights: false)
+                self?.update(bridge: bridge)
+                self?.start()
+            } else {
+                print("PhilipsHueConnector: Bridge discovered: Nothing Found")
+                self?.start()
             }
-        )
+        }
     }
 
     private func update(bridge: Bridge) {
@@ -141,17 +140,17 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
         bridge?.findNewDevices(withAllowedConnections: .local, callback: self)
     }
 
-    public func bridge(_ bridge: PHSBridge!, didFind devices: [PHSDevice]!, errors: [PHSError]!) {
+    public func bridge(_ bridge: PHSBridge, didFind devices: [PHSDevice], errors: [PHSError]) {
         syncLights()
     }
 
-    public func bridge(_ bridge: PHSBridge!, didFinishSearch errors: [PHSError]!) {
+    public func bridge(_ bridge: PHSBridge, didFinishSearch errors: [PHSError]) {
         state.bridge?.isSearchingForLights = false
     }
 
     /// MARK: PHSBridgeConnectionObserver
 
-    public func bridgeConnection(_ bridgeConnection: PHSBridgeConnection!, handle connectionEvent: PHSBridgeConnectionEvent) {
+    public func bridgeConnection(_ bridgeConnection: PHSBridgeConnection, handle connectionEvent: PHSBridgeConnectionEvent) {
         switch connectionEvent {
         /// Authentication
         case .notAuthenticated:
@@ -191,12 +190,12 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
         }
     }
 
-    public func bridgeConnection(_ bridgeConnection: PHSBridgeConnection!, handleErrors connectionErrors: [PHSError]!) {
+    public func bridgeConnection(_ bridgeConnection: PHSBridgeConnection, handleErrors connectionErrors: [PHSError]) {
         print(connectionErrors)
     }
 
     /// MARK: PHSBridgeStateUpdateObserver
-    public func bridge(_ bridge: PHSBridge!, handle updateEvent: PHSBridgeStateUpdatedEvent) {
+    public func bridge(_ bridge: PHSBridge, handle updateEvent: PHSBridgeStateUpdatedEvent) {
         switch updateEvent {
         case .fullConfig:
             print("HueController: Update Event: Full Config")
@@ -251,26 +250,23 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
 
     public func perform(lightUpdate: Light.Update) {
         let state = PHSLightState()
+        state.on = NSNumber(value: lightUpdate.state.isPowered)
 
-        if let isPowered = lightUpdate.updates.isPowered {
-            state.on = NSNumber(value: isPowered)
+        if lightUpdate.state.isPowered {
+            if let hue = lightUpdate.state.hue {
+                state.hue = NSNumber(value: Int(hue * 65_535))
+            }
 
-            if isPowered == true {
-                if let hue = lightUpdate.updates.hue {
-                    state.hue = NSNumber(value: Int(hue * 65_535))
-                }
+            if let saturation = lightUpdate.state.saturation {
+                state.saturation = NSNumber(value: Int(saturation * 254))
+            }
 
-                if let saturation = lightUpdate.updates.saturation {
-                    state.saturation = NSNumber(value: Int(saturation * 254))
-                }
-
-                if let brightness = lightUpdate.updates.brightness {
-                    state.brightness = NSNumber(value: Int(brightness * 254))
-                }
+            if let brightness = lightUpdate.state.brightness {
+                state.brightness = NSNumber(value: Int(brightness * 254))
             }
         }
 
-        state.transitionTime = NSNumber(value: Int(lightUpdate.updates.transitionTime * 10))
+        state.transitionTime = NSNumber(value: Int(lightUpdate.transitionTime * 10))
 
         if let lightPoint = bridge?.bridgeState.getDeviceOf(.light, withIdentifier: lightUpdate.manufacturerIdentifier) as? PHSLightPoint {
             lightPoint.update(state, allowedConnectionTypes: .local) { _, errors, _ in

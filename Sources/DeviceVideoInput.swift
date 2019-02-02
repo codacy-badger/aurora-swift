@@ -3,7 +3,7 @@ import CoreGraphics
 import Foundation
 
 public class DeviceVideoInput: VideoInputable {
-    public var processor: VideoProcessor = VideoProcessor()
+    public var processor = VideoProcessor()
 
     struct MatrixData {
         let first: UInt8

@@ -63,7 +63,7 @@ extension Aurora {
         print("Aurora: Audio Level", level)
         if input.audio?.processor.update(level: level) == true {
             print("Aurora: Audio Burst")
-            activeScenes.filter({ $0.input.mode == .audio }).forEach { activeLightScene in
+            activeScenes.filter { $0.input.mode == .audio }.forEach { activeLightScene in
                 let transformer = lightsTransformer(preset: activeLightScene)
                 updateActiveReachableLightsFor(activeLightScene: activeLightScene, with: transformer)
             }
@@ -75,7 +75,7 @@ extension Aurora {
     private func onVideoColorChange(hue: Float, brightness: Float, saturation: Float) {
         if input.video?.processor.update(hue: hue, brightness: brightness, saturation: saturation) == true {
             print("Aurora: Video Burst")
-            activeScenes.filter({ $0.input.mode == .video }).forEach { activeLightScene in
+            activeScenes.filter { $0.input.mode == .video }.forEach { activeLightScene in
                 let transformer = lightsTransformer(preset: activeLightScene, hue: hue, brightness: brightness, saturation: saturation)
                 updateActiveReachableLightsFor(activeLightScene: activeLightScene, with: transformer)
             }

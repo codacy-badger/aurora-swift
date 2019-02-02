@@ -4,7 +4,7 @@ import CoreAudio
 import Foundation
 
 public class DeviceAudioInput: NSObject, AudioInputable, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
-    public var processor: AudioProcessor = AudioProcessor()
+    public var processor = AudioProcessor()
 
     private var onLevel: (Float) -> Void = { _ in }
 
@@ -164,7 +164,7 @@ public class DeviceAudioInput: NSObject, AudioInputable, AVAudioRecorderDelegate
         let amp = powf(10.0, 0.05 * decibels)
         let adjAmp = (amp - minAmp) * inverseAmpRange
 
-        let level: Float = Float(powf(adjAmp, 1.0 / root))
+        let level = Float(powf(adjAmp, 1.0 / root))
 
         if level >= 1.0 {
             audioLevel = 1.0

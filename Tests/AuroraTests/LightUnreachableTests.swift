@@ -28,7 +28,7 @@ class LightUnreachableTests: XCTestCase {
         ]
 
         XCTAssert(lights.count == 3)
-        XCTAssert(lights.allSatisfy({ $0.isReachable }))
+        XCTAssert(lights.allSatisfy { $0.isReachable })
 
         lights = lights.forcedUnreachable(forType: "simulated")
 

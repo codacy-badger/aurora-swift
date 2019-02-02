@@ -9,7 +9,7 @@ public class DeviceTimeInput: TimeInputable {
     }
 
     public func add(loop: UUID, duration: Float) {
-        let variation: UUID = UUID()
+        let variation = UUID()
         loopVariations[loop] = variation
         self.loop(variation: variation, for: loop, duration: duration)
     }

@@ -42,7 +42,7 @@ extension Aurora {
                 }
             }
         }
-        print("Aurora: Attached connectors:", self.attachedConnectors.map({ type(of: $0).type }))
+        print("Aurora: Attached connectors:", self.attachedConnectors.map { type(of: $0).type })
         delegates.forEach { $0.didUpdateConnectors() }
     }
 }
