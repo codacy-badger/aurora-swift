@@ -29,7 +29,26 @@
       codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E184F21121FE9C7800BD237B"
+               BuildableName = "Aurora macOSTests.xctest"
+               BlueprintName = "Aurora macOSTests"
+               ReferencedContainer = "container:Aurora.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E1AA405F21FB531E003E61D2"
+            BuildableName = "libAurora.a"
+            BlueprintName = "Aurora macOS"
+            ReferencedContainer = "container:Aurora.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
