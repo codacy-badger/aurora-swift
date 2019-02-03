@@ -33,7 +33,7 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
         }
     }
 
-    private var homeManager: HMHomeManager?
+    private let homeManager = HMHomeManager()
 
     public var onSync: ([Light]) -> Void = { _ in }
     public var onEvent: (Event) -> Void = { _ in }
@@ -46,12 +46,15 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
         }
     }
 
+    override public init() {
+        super.init()
+        homeManager.delegate = self
+    }
+
     public func connect(onSync: @escaping ([Light]) -> Void, onEvent: @escaping (Event) -> Void) {
         self.onSync = onSync
         self.onEvent = onEvent
         send(state)
-        self.homeManager = HMHomeManager()
-        homeManager?.delegate = self
         print("HomeKit Connector: Init")
         loop()
     }
@@ -76,50 +79,75 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
         }
 
         onSync(
-            home.allColorfulLightServices.map { service in
+            home.lights.compactMap { accessory in
+                guard let lightService = accessory.lightService else { return nil }
+
                 let lightState = Light.State(
-                    hue: service.characteristics.first { $0.characteristicType == HMCharacteristicTypeHue }?.value as? Float ?? 0.0,
-                    saturation: service.characteristics.first { $0.characteristicType == HMCharacteristicTypeSaturation }?.value as? Float ?? 1.0,
-                    brightness: service.characteristics.first { $0.characteristicType == HMCharacteristicTypeBrightness }?.value as? Float ?? 1.0,
-                    isPowered: service.characteristics.first { $0.characteristicType == HMCharacteristicTypePowerState }?.value as? Bool ?? true
+                    hue: lightService.characteristics.first { $0.characteristicType == HMCharacteristicTypeHue }?.value as? Float ?? 0.0,
+                    saturation: lightService.characteristics.first { $0.characteristicType == HMCharacteristicTypeSaturation }?.value as? Float ?? 1.0,
+                    brightness: lightService.characteristics.first { $0.characteristicType == HMCharacteristicTypeBrightness }?.value as? Float ?? 1.0,
+                    isPowered: lightService.characteristics.first { $0.characteristicType == HMCharacteristicTypePowerState }?.value as? Bool ?? true
                 )
 
                 let light = Light(
                     identifier: UUID(),
-                    name: service.name,
+                    name: accessory.name,
                     type: HomeKitConnector.type,
-                    state: service.accessory?.isReachable ?? false ? lightState : nil,
-                    manufacturerIdentifier: service.name,
-                    model: service.characteristics.first { $0.characteristicType == HMCharacteristicTypeModel }?.value as? String
+                    state: accessory.isReachable ? lightState : nil,
+                    manufacturerIdentifier: accessory.uniqueIdentifier.uuidString,
+                    model: nil
                 )
                 return light
             }
         )
+
+//        onSync(
+//            home.allColorfulLightServices.map { service in
+//                let lightState = Light.State(
+//                    hue: service.characteristics.first { $0.characteristicType == HMCharacteristicTypeHue }?.value as? Float ?? 0.0,
+//                    saturation: service.characteristics.first { $0.characteristicType == HMCharacteristicTypeSaturation }?.value as? Float ?? 1.0,
+//                    brightness: service.characteristics.first { $0.characteristicType == HMCharacteristicTypeBrightness }?.value as? Float ?? 1.0,
+//                    isPowered: service.characteristics.first { $0.characteristicType == HMCharacteristicTypePowerState }?.value as? Bool ?? true
+//                )
+//
+//                let light = Light(
+//                    identifier: UUID(),
+//                    name: service.name,
+//                    type: HomeKitConnector.type,
+//                    state: service.accessory?.isReachable ?? false ? lightState : nil,
+//                    manufacturerIdentifier: service.name,
+//                    model: service.characteristics.first { $0.characteristicType == HMCharacteristicTypeModel }?.value as? String
+//                )
+//                return light
+//            }
+//        )
     }
 
     public func perform(lightUpdate: Light.Update) {
-        guard let service = home?.allColorfulLightServices.first(where: { $0.name == lightUpdate.manufacturerIdentifier }) else {
-            return
-        }
+        guard
+            let manufacturerIdentifier = UUID(uuidString: lightUpdate.manufacturerIdentifier),
+            let accessory = home?.lights.first(where: { $0.uniqueIdentifier == manufacturerIdentifier }) else { return }
 
-        service.characteristics.forEach { characteristic in
-            if characteristic.characteristicType == HMCharacteristicTypePowerState {
-                characteristic.writeValue( lightUpdate.state.isPowered, completionHandler: errorHandler)
-            } else if
-                characteristic.characteristicType == HMCharacteristicTypeBrightness,
-                let brightness = lightUpdate.state.brightness {
-                let value = characteristic.relativeValue(brightness)
-                characteristic.writeValue(value, completionHandler: errorHandler)
-            } else if
-                characteristic.characteristicType == HMCharacteristicTypeHue,
-                let hue = lightUpdate.state.hue {
-                let value = characteristic.relativeValue(hue, maximum: 360.0)
-                characteristic.writeValue(value, completionHandler: errorHandler)
-            } else if
-                characteristic.characteristicType == HMCharacteristicTypeSaturation,
-                let saturation = lightUpdate.state.saturation {
-                let value = characteristic.relativeValue(saturation)
-                characteristic.writeValue(value, completionHandler: errorHandler)
+        accessory.lightServices.forEach { lightService in
+            lightService.characteristics.forEach { characteristic in
+                if characteristic.characteristicType == HMCharacteristicTypePowerState {
+                    characteristic.writeValue( lightUpdate.state.isPowered, completionHandler: errorHandler)
+                } else if
+                    characteristic.characteristicType == HMCharacteristicTypeBrightness,
+                    let brightness = lightUpdate.state.brightness {
+                    let value = characteristic.relativeValue(brightness)
+                    characteristic.writeValue(value, completionHandler: errorHandler)
+                } else if
+                    characteristic.characteristicType == HMCharacteristicTypeHue,
+                    let hue = lightUpdate.state.hue {
+                    let value = characteristic.relativeValue(hue, maximum: 360.0)
+                    characteristic.writeValue(value, completionHandler: errorHandler)
+                } else if
+                    characteristic.characteristicType == HMCharacteristicTypeSaturation,
+                    let saturation = lightUpdate.state.saturation {
+                    let value = characteristic.relativeValue(saturation)
+                    characteristic.writeValue(value, completionHandler: errorHandler)
+                }
             }
         }
     }
@@ -146,7 +174,7 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
             guard let homeName = event.payload as? String else {
                 return
             }
-            let newSelectedHome = homeManager?.homes.first(where: { $0.name == homeName })
+            let newSelectedHome = homeManager.homes.first(where: { $0.name == homeName })
             home = newSelectedHome
             state.home = newSelectedHome?.name
         /// Send state upstream
@@ -231,6 +259,10 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
 }
 
 extension HMService {
+    var isLight: Bool {
+        return self.serviceType == HMServiceTypeLightbulb
+    }
+
     var isColorfulLight: Bool {
         return
             self.serviceType == HMServiceTypeLightbulb &&
@@ -238,7 +270,25 @@ extension HMService {
     }
 }
 
+extension HMAccessory {
+    var isLight: Bool {
+        return isBridged ? services.contains { $0.serviceType == HMServiceTypeLightbulb } : category.categoryType == HMAccessoryCategoryTypeLightbulb
+    }
+
+    var lightService: HMService? {
+        return self.services.first { $0.isLight }
+    }
+
+    var lightServices: [HMService] {
+        return self.services.filter { $0.isLight }
+    }
+}
+
 extension HMHome {
+    var lights: [HMAccessory] {
+        return accessories.filter { $0.isLight }
+    }
+
     /// All the services within all the accessories within the home.
     var allServices: [HMService] {
         return accessories.reduce([]) { accumulator, accessory -> [HMService] in
