@@ -7,10 +7,5 @@ jobs:
     - script: |
         set -o pipefail
         mkdir -p build/reports/
-        swiftlint lint --strict --reporter junit > build/reports/swiftlint.xml
+        swiftlint lint --strict
       displayName: swiftlint
-    - task: PublishTestResults@2
-      inputs:
-        testRunner: JUnit
-        testResultsFiles: build/reports/**
-        failOnStandardError: 'true'
