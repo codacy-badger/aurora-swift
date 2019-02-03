@@ -1,5 +1,8 @@
+trigger:
+- master
+
 jobs:
-- job: CodeQuality
+- job: Code_Quality
   timeoutInMinutes: 5
   pool:
     vmImage: 'Ubuntu 16.04'
@@ -7,6 +10,17 @@ jobs:
   steps:
     - script: |
         set -o pipefail
-        mkdir -p build/reports/
         swiftlint lint --strict
-      displayName: swiftlint
+      displayName: swift lint
+
+- job: Linux_Tests
+  dependsOn: Code_Quality
+  timeoutInMinutes: 5
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  container: norionomura/swift:swift-4.2.1
+  steps:
+    - script: |
+        set -o pipefail
+        swift test --parallel
+      displayName: swift test
