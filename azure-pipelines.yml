@@ -32,12 +32,17 @@ jobs:
   timeoutInMinutes: 5
   steps:
   - task: Xcode@5
-    displayName: 'Xcode Tests'
+    displayName: 'Xcode iOS Tests'
     inputs:
       actions: 'build test'
       scheme: 'Aurora iOS'
+      sdk: 'iphonesimulator'
+      configuration: 'Debug'
       xcodeVersion: '10'
       packageApp: false
+      destinationSimulators: 'iPhone 7'
+      destinationTypeOption: 'simulators'
+      destinationPlatformOption: 'iOS'
       signingOption: "auto"
       useXcpretty: true
       publishJUnitResults: 'build/reports/junit.xml'
@@ -49,12 +54,14 @@ jobs:
   timeoutInMinutes: 5
   steps:
   - task: Xcode@5
-    displayName: 'Xcode Tests'
+    displayName: 'Xcode macOS Tests'
     inputs:
       actions: 'build test'
       scheme: 'Aurora macOS'
+      configuration: 'Debug'
       xcodeVersion: '10'
       packageApp: false
+      destinationPlatformOption: 'macOS'
       signingOption: "auto"
       useXcpretty: true
       publishJUnitResults: 'build/reports/junit.xml'
