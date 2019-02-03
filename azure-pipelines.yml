@@ -1,5 +1,5 @@
 jobs:
-- job: Code Quality
+- job: CodeQuality
   timeoutInMinutes: 5
   pool:
     vmImage: 'Ubuntu 16.04'
