@@ -1,7 +1,6 @@
 import Foundation
 
 public final class Aurora {
-    
     public enum Mode: String, Codable, Equatable {
         /// Only one active scene is allowed, using global active lights selection.
         case simplex
