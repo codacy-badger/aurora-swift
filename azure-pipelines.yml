@@ -13,7 +13,6 @@ jobs:
       swiftlint lint --strict
     displayName: 'swift lint'
   
-
 - job: Linux_Tests
   dependsOn: Code_Quality
   pool:
@@ -37,13 +36,29 @@ jobs:
     inputs:
       actions: 'build test'
       scheme: 'Aurora iOS'
-      sdk: 'iphonesimulator'
-      configuration: 'Debug'
       xcodeVersion: '10'
       packageApp: false
       destinationSimulators: 'iPhone 7'
       destinationTypeOption: 'simulators'
       destinationPlatformOption: 'iOS'
+      signingOption: "auto"
+      useXcpretty: true
+      publishJUnitResults: 'build/reports/junit.xml'
+      
+- job: macOS_Tests
+  dependsOn: Code_Quality
+  pool:
+   vmImage: 'macOS 10.13'
+  timeoutInMinutes: 5
+  steps:
+  - task: Xcode@5
+    displayName: 'Xcode Tests'
+    inputs:
+      actions: 'build test'
+      scheme: 'Aurora macOS'
+      xcodeVersion: '10'
+      packageApp: false
+      destinationPlatformOption: 'macOS'
       signingOption: "auto"
       useXcpretty: true
       publishJUnitResults: 'build/reports/junit.xml'
