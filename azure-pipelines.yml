@@ -18,7 +18,7 @@ jobs:
   timeoutInMinutes: 5
   pool:
     vmImage: 'Ubuntu-16.04'
-  container: norionomura/swift:swift-4.2.1
+  container: swift:4.2.1
   steps:
     - script: |
         set -o pipefail
