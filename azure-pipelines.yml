@@ -22,5 +22,5 @@ jobs:
   steps:
     - script: |
         set -o pipefail
-        swift test --parallel
+        swift test --generate-linuxmain --parallel
       displayName: swift test
