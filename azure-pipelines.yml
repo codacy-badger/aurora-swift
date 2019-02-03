@@ -36,6 +36,7 @@ jobs:
     inputs:
       actions: 'build test'
       scheme: 'Aurora iOS'
+      sdk: 'iphonesimulator'
       xcodeVersion: '10'
       packageApp: false
       destinationSimulators: 'iPhone 7'
@@ -56,6 +57,7 @@ jobs:
     inputs:
       actions: 'build test'
       scheme: 'Aurora macOS'
+      sdk: 'macos'
       xcodeVersion: '10'
       packageApp: false
       destinationPlatformOption: 'macOS'
