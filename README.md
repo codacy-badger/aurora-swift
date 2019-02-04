@@ -1,4 +1,4 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/ce3ff6165f666fbe3770/maintainability)](https://codeclimate.com/repos/5c48878eee7eb40258013db7/maintainability)
+[![Build Status](https://dev.azure.com/spacenation/spacenation/_apis/build/status/spacenation.aurora-swift?branchName=master)](https://dev.azure.com/spacenation/spacenation/_build/latest?definitionId=1&branchName=master)
 
 ### Aurora Framework
 
