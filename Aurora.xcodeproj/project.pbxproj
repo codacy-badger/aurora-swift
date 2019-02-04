@@ -162,7 +162,6 @@
 		E1A008B521FE63DD00518F27 /* PhilipsHueConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhilipsHueConnector.swift; sourceTree = "<group>"; };
 		E1A008C521FE6CCD00518F27 /* HueSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HueSDK.framework; path = Dependencies/HueSDK/iOS/active/HueSDK.framework; sourceTree = "<group>"; };
 		E1A008C721FE6CE400518F27 /* HueSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HueSDK.framework; path = Dependencies/HueSDK/macOS/HueSDK.framework; sourceTree = "<group>"; };
-		E1AA401A21F8BDBD003E61D2 /* .codeclimate.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .codeclimate.yml; sourceTree = "<group>"; };
 		E1AA401B21F8BDC5003E61D2 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		E1AA401C21F8BDCC003E61D2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E1AA405421FB51E9003E61D2 /* libAurora.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAurora.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -352,9 +351,8 @@
 				E184F20B21FE98D900BD237B /* Package.swift */,
 				E1AA401C21F8BDCC003E61D2 /* README.md */,
 				E108DDB92204D49100B252FE /* .gitignore */,
-				E1CEC24222077A5700D4905C /* azure-pipelines.yml */,
-				E1AA401A21F8BDBD003E61D2 /* .codeclimate.yml */,
 				E1AA401B21F8BDC5003E61D2 /* .swiftlint.yml */,
+				E1CEC24222077A5700D4905C /* azure-pipelines.yml */,
 				E1DBF60C21FE70F600BA91E5 /* BridgingHeader.h */,
 				E1AA401921F8BD4F003E61D2 /* Sources */,
 				E184F20A21FE982D00BD237B /* Tests */,
