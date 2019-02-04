@@ -58,6 +58,7 @@ jobs:
     inputs:
       actions: 'build test'
       scheme: 'Aurora macOS'
+      sdk: 'macosx10.13'
       configuration: 'Debug'
       xcodeVersion: '10'
       packageApp: false
