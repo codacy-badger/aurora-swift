@@ -179,8 +179,6 @@
 		E1AA40A421FB74C3003E61D2 /* AuroraDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuroraDelegate.swift; sourceTree = "<group>"; };
 		E1AA40A721FBAFE1003E61D2 /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		E1CEC24222077A5700D4905C /* azure-pipelines.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "azure-pipelines.yml"; sourceTree = "<group>"; };
-		E1CEC243220796C400D4905C /* LinuxMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
-		E1CEC244220796CE00D4905C /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		E1DBF60C21FE70F600BA91E5 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		E1E7FBCC21FBE5CF0090CC2D /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		E1E7FBCF21FCA4380090CC2D /* Aurora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aurora.swift; sourceTree = "<group>"; };
@@ -243,7 +241,6 @@
 		E184F20A21FE982D00BD237B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				E1CEC243220796C400D4905C /* LinuxMain.swift */,
 				E184F20D21FE9B3E00BD237B /* AuroraTests */,
 			);
 			path = Tests;
@@ -299,7 +296,6 @@
 				E184F2242200A43B00BD237B /* SceneTests.swift */,
 				E1477FF42200CC8A0040C756 /* SimulatedConnector.swift */,
 				E14780002200FA500040C756 /* SimulatedConstructor.swift */,
-				E1CEC244220796CE00D4905C /* XCTestManifests.swift */,
 			);
 			path = AuroraTests;
 			sourceTree = "<group>";
