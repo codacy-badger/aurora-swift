@@ -63,6 +63,6 @@ jobs:
       xcodeVersion: '10'
       packageApp: false
       destinationPlatformOption: 'macOS'
-      signingOption: "auto"
+      signingOption: "nosign"
       useXcpretty: true
       publishJUnitResults: 'build/reports/junit.xml'
