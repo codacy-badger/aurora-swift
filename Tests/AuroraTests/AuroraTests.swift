@@ -26,7 +26,7 @@ class AuroraTests: XCTestCase {
                     "lights": [],
                     "input": { "mode": "time", "interval": 1.0, "transition": 1.0 },
                     "output": { "mode": "none", "track": null },
-                    "coloring": { "mode": "spectrum", "hue": 0.5, "range": "0.0...1.0", "spectrum": 127, "saturation": "0.0...1.0", "brightness": "0.0...1.0" },
+                    "coloring": { "mode": "spectrum", "hue": 0.5, "range": [0.0, 1.0], "spectrum": 127, "saturation": [0.0, 1.0], "brightness": [0.0, 1.0] },
                     "effects": 0
                 }
             ],
