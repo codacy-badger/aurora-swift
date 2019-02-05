@@ -13,7 +13,7 @@ jobs:
       swiftlint lint --strict
     displayName: 'swift lint'
   
-- job: Linux_Tests
+- job: SPM_Tests
   dependsOn: Code_Quality
   pool:
     vmImage: 'Ubuntu-16.04'
