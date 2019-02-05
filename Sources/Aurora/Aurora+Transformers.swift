@@ -66,7 +66,7 @@ extension Aurora {
                         hue: nil,
                         saturation: nil,
                         brightness: nil,
-                        isPowered: true
+                        isPowered: false
                     )
                 }
 

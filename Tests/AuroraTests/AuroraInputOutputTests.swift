@@ -22,8 +22,8 @@ class AuroraInputOutputTests: XCTestCase {
     ]
 
     func testAuroraInputsOutputs() {
-        verifyInputsOutputsTests(forMode: .simplex, randomizations: 100)
-        verifyInputsOutputsTests(forMode: .multiplex, randomizations: 300)
+        verifyInputsOutputsTests(forMode: .simplex, randomizations: 1_000)
+        verifyInputsOutputsTests(forMode: .multiplex, randomizations: 1_000)
     }
 
     func verifyInputsOutputsTests(forMode mode: Aurora.Mode, randomizations count: Int) {
@@ -59,7 +59,7 @@ class AuroraInputOutputTests: XCTestCase {
             XCTAssert(aurora.activeScenes.filter { $0.input.mode == .audio }.isEmpty == (aurora.input.audio == nil) )
             XCTAssert(aurora.activeScenes.filter { $0.input.mode == .video }.isEmpty == (aurora.input.video == nil) )
 
-            /// Test outputs
+            /// Test outputsd
             if aurora.mode == .simplex {
                 XCTAssert(aurora.activeScenes.filter { $0.output.mode == .audio }.isEmpty == (aurora.output.audio == nil) )
 

@@ -1,7 +1,6 @@
-import Foundation
 #if os(iOS)
+import Foundation
 import HueSDK
-#endif
 
 public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnectionObserver, PHSBridgeStateUpdateObserver, PHSFindNewDevicesCallback {
     public struct State: Equatable {
@@ -303,3 +302,4 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
         bridgeDiscovery.stop()
     }
 }
+#endif
