@@ -1,8 +1,8 @@
 import Foundation
 
 public class DeviceTimeInput: TimeInputable {
+    public var loopVariations: [UUID: UUID] = [:]
     private var onLoop: (UUID) -> Void = { _ in }
-    private var loopVariations: [UUID: UUID] = [:]
 
     public func start(onLoop: @escaping (UUID) -> Void) {
         self.onLoop = onLoop

@@ -11,10 +11,10 @@ public final class Aurora {
     public internal(set) var mode: Mode
 
     public internal(set) var lights: [Light]
-    internal var activeLightIdentifiers: Set<UUID>
+    var activeLightIdentifiers: Set<UUID>
 
     public internal(set) var scenes: [Scene]
-    internal var activeSceneIdentifiers: Set<UUID>
+    var activeSceneIdentifiers: Set<UUID>
 
     /// should be internal set
     public internal(set) var brightness: Float
@@ -22,17 +22,17 @@ public final class Aurora {
 
     public internal(set) var delegates: [AuroraDelegate]
 
-    internal var input: Input
-    internal var output: Output
+    var input: Input
+    var output: Output
 
-    internal var transformatorLock: Bool
-    /// Should be intenal/private
+    var transformatorLock: Bool
+
     public internal(set) var connectors: Set<String>
-    internal var attachedConnectors: [Connectable]
+    var attachedConnectors: [Connectable]
 
     public weak var constructor: Constructable?
 
-    public init(mode: Mode, lights: [Light], activeLightIdentifiers: Set<UUID>, scenes: [Scene], activeSceneIdentifiers: Set<UUID>, connectors: Set<String>, brightness: Float, volume: Float) {
+    public init(mode: Mode = .simplex, lights: [Light] = [], activeLightIdentifiers: Set<UUID> = [], scenes: [Scene] = [], activeSceneIdentifiers: Set<UUID> = [], connectors: Set<String> = [], brightness: Float = 1.0, volume: Float = 1.0) {
         self.mode = mode
         self.lights = lights
         self.activeLightIdentifiers = activeLightIdentifiers

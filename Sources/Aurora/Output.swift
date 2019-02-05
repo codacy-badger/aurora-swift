@@ -9,7 +9,7 @@ public struct Output {
         public var mode: Mode
         public var track: String?
 
-        public init(mode: Mode, track: String?) {
+        public init(mode: Mode = .none, track: String? = nil) {
             self.mode = mode
             self.track = track
         }

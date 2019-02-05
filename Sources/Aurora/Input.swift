@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Input {
-    public enum Mode: String, Equatable, Codable {
+    public enum Mode: String, Equatable, Codable, CaseIterable {
         case none, time, audio, video
     }
 
@@ -12,7 +12,7 @@ public struct Input {
         /// Burst duration
         public var transition: Float
 
-        public init(mode: Mode, interval: Float, transition: Float) {
+        public init(mode: Mode = .none, interval: Float = 1.0, transition: Float = 0.0) {
             self.mode = mode
             self.interval = interval
             self.transition = transition
@@ -25,6 +25,8 @@ public struct Input {
 }
 
 public protocol TimeInputable: AnyObject {
+    var loopVariations: [UUID: UUID] { get }
+
     func start(onLoop: @escaping (UUID) -> Void)
     func add(loop: UUID, duration: Float)
     func remove(loop: UUID)

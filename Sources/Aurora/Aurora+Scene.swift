@@ -49,9 +49,11 @@ extension Aurora {
     }
 
     public func set(effects: Scene.Effects, forSceneWithIdentifier identifier: UUID) {
+        scenes[identifier]?.effects = effects
     }
 
     public func toggle(effects: Scene.Effects, forSceneWithIdentifier identifier: UUID) {
+        fatalError("Not Implemented")
     }
 
     public func set(brightness: Float) {

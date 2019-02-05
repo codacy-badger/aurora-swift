@@ -17,16 +17,12 @@
 		E113458521FE40580052B43B /* DeviceAudioOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113458321FE40580052B43B /* DeviceAudioOutput.swift */; };
 		E113458721FE5C360052B43B /* Aurora+Outputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113458621FE5C360052B43B /* Aurora+Outputs.swift */; };
 		E113458821FE5C360052B43B /* Aurora+Outputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E113458621FE5C360052B43B /* Aurora+Outputs.swift */; };
-		E1477FF52200CC8A0040C756 /* SimulatedConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1477FF42200CC8A0040C756 /* SimulatedConnector.swift */; };
-		E1477FF62200CC8A0040C756 /* SimulatedConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1477FF42200CC8A0040C756 /* SimulatedConnector.swift */; };
 		E1477FF82200CD6B0040C756 /* Aurora+Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1477FF72200CD6B0040C756 /* Aurora+Persistence.swift */; };
 		E1477FF92200CD6B0040C756 /* Aurora+Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1477FF72200CD6B0040C756 /* Aurora+Persistence.swift */; };
 		E1477FFB2200DBEB0040C756 /* Aurora+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1477FFA2200DBEB0040C756 /* Aurora+Codable.swift */; };
 		E1477FFC2200DBEB0040C756 /* Aurora+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1477FFA2200DBEB0040C756 /* Aurora+Codable.swift */; };
 		E1477FFE2200F56B0040C756 /* Constructable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1477FFD2200F56B0040C756 /* Constructable.swift */; };
 		E1477FFF2200F56B0040C756 /* Constructable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1477FFD2200F56B0040C756 /* Constructable.swift */; };
-		E14780032200FA940040C756 /* SimulatedConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14780002200FA500040C756 /* SimulatedConstructor.swift */; };
-		E14780042200FA940040C756 /* SimulatedConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14780002200FA500040C756 /* SimulatedConstructor.swift */; };
 		E14780092201E5A90040C756 /* Aurora+SceneInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14780082201E5A90040C756 /* Aurora+SceneInput.swift */; };
 		E147800A2201E5A90040C756 /* Aurora+SceneInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14780082201E5A90040C756 /* Aurora+SceneInput.swift */; };
 		E147800C2201E6240040C756 /* Aurora+SceneColoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147800B2201E6240040C756 /* Aurora+SceneColoring.swift */; };
@@ -77,6 +73,20 @@
 		E1AA40A621FB74C3003E61D2 /* AuroraDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AA40A421FB74C3003E61D2 /* AuroraDelegate.swift */; };
 		E1AA40A821FBAFE1003E61D2 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AA40A721FBAFE1003E61D2 /* Light.swift */; };
 		E1AA40A921FBAFE1003E61D2 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AA40A721FBAFE1003E61D2 /* Light.swift */; };
+		E1CEC2BE2209E76300D4905C /* SimulatedConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14780002200FA500040C756 /* SimulatedConstructor.swift */; };
+		E1CEC2BF2209E76400D4905C /* SimulatedConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14780002200FA500040C756 /* SimulatedConstructor.swift */; };
+		E1CEC2C02209E76400D4905C /* SimulatedConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1477FF42200CC8A0040C756 /* SimulatedConnector.swift */; };
+		E1CEC2C12209E76400D4905C /* SimulatedConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1477FF42200CC8A0040C756 /* SimulatedConnector.swift */; };
+		E1CEC2C32209E97E00D4905C /* SimulatedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC2C22209E97E00D4905C /* SimulatedDelegate.swift */; };
+		E1CEC2C42209E97E00D4905C /* SimulatedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC2C22209E97E00D4905C /* SimulatedDelegate.swift */; };
+		E1CEC2C92209EE2E00D4905C /* SimulatedAudioInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC2C82209EE2E00D4905C /* SimulatedAudioInput.swift */; };
+		E1CEC2CA2209EE2E00D4905C /* SimulatedAudioInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC2C82209EE2E00D4905C /* SimulatedAudioInput.swift */; };
+		E1CEC2CC2209EE4400D4905C /* SimulatedAudioOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC2CB2209EE4400D4905C /* SimulatedAudioOutput.swift */; };
+		E1CEC2CD2209EE4400D4905C /* SimulatedAudioOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC2CB2209EE4400D4905C /* SimulatedAudioOutput.swift */; };
+		E1CEC2CF2209EE5C00D4905C /* SimulatedVideoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC2CE2209EE5C00D4905C /* SimulatedVideoInput.swift */; };
+		E1CEC2D02209EE5C00D4905C /* SimulatedVideoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC2CE2209EE5C00D4905C /* SimulatedVideoInput.swift */; };
+		E1CEC2D22209F1B900D4905C /* AuroraInputOutputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC2D12209F1B900D4905C /* AuroraInputOutputTests.swift */; };
+		E1CEC2D32209F1B900D4905C /* AuroraInputOutputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC2D12209F1B900D4905C /* AuroraInputOutputTests.swift */; };
 		E1E7FBCD21FBE5CF0090CC2D /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7FBCC21FBE5CF0090CC2D /* Scene.swift */; };
 		E1E7FBCE21FBE5CF0090CC2D /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7FBCC21FBE5CF0090CC2D /* Scene.swift */; };
 		E1E7FBD021FCA4380090CC2D /* Aurora.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7FBCF21FCA4380090CC2D /* Aurora.swift */; };
@@ -181,6 +191,11 @@
 		E1CEC24222077A5700D4905C /* azure-pipelines.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = "azure-pipelines.yml"; sourceTree = "<group>"; };
 		E1CEC2BC2209D46E00D4905C /* LinuxMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 		E1CEC2BD2209D47800D4905C /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
+		E1CEC2C22209E97E00D4905C /* SimulatedDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatedDelegate.swift; sourceTree = "<group>"; };
+		E1CEC2C82209EE2E00D4905C /* SimulatedAudioInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatedAudioInput.swift; sourceTree = "<group>"; };
+		E1CEC2CB2209EE4400D4905C /* SimulatedAudioOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatedAudioOutput.swift; sourceTree = "<group>"; };
+		E1CEC2CE2209EE5C00D4905C /* SimulatedVideoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatedVideoInput.swift; sourceTree = "<group>"; };
+		E1CEC2D12209F1B900D4905C /* AuroraInputOutputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuroraInputOutputTests.swift; sourceTree = "<group>"; };
 		E1DBF60C21FE70F600BA91E5 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		E1E7FBCC21FBE5CF0090CC2D /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		E1E7FBCF21FCA4380090CC2D /* Aurora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aurora.swift; sourceTree = "<group>"; };
@@ -286,6 +301,17 @@
 				E113456821FE00470052B43B /* Input.swift */,
 				E113457A21FE3D570052B43B /* Output.swift */,
 				E113456E21FE204C0052B43B /* DeviceTimeInput.swift */,
+				E184F1F021FE765C00BD237B /* DeviceAudioInput.swift */,
+				E113458321FE40580052B43B /* DeviceAudioOutput.swift */,
+				E184F1F321FE796000BD237B /* DeviceVideoInput.swift */,
+				E1A008B221FE633F00518F27 /* HomeKitConnector.swift */,
+				E1A008B521FE63DD00518F27 /* PhilipsHueConnector.swift */,
+				E14780002200FA500040C756 /* SimulatedConstructor.swift */,
+				E1477FF42200CC8A0040C756 /* SimulatedConnector.swift */,
+				E1CEC2C82209EE2E00D4905C /* SimulatedAudioInput.swift */,
+				E1CEC2CE2209EE5C00D4905C /* SimulatedVideoInput.swift */,
+				E1CEC2CB2209EE4400D4905C /* SimulatedAudioOutput.swift */,
+				E1CEC2C22209E97E00D4905C /* SimulatedDelegate.swift */,
 			);
 			path = Aurora;
 			sourceTree = "<group>";
@@ -294,11 +320,10 @@
 			isa = PBXGroup;
 			children = (
 				E184F20121FE978F00BD237B /* AuroraTests.swift */,
+				E1CEC2D12209F1B900D4905C /* AuroraInputOutputTests.swift */,
 				E184F21E21FF44B100BD237B /* LightSyncTests.swift */,
 				E17A2276220351EC0088B76E /* LightUnreachableTests.swift */,
 				E184F2242200A43B00BD237B /* SceneTests.swift */,
-				E1477FF42200CC8A0040C756 /* SimulatedConnector.swift */,
-				E14780002200FA500040C756 /* SimulatedConstructor.swift */,
 				E1CEC2BD2209D47800D4905C /* XCTestManifests.swift */,
 			);
 			path = AuroraTests;
@@ -367,11 +392,6 @@
 			isa = PBXGroup;
 			children = (
 				E184F20C21FE9B1A00BD237B /* Aurora */,
-				E184F1F021FE765C00BD237B /* DeviceAudioInput.swift */,
-				E113458321FE40580052B43B /* DeviceAudioOutput.swift */,
-				E184F1F321FE796000BD237B /* DeviceVideoInput.swift */,
-				E1A008B221FE633F00518F27 /* HomeKitConnector.swift */,
-				E1A008B521FE63DD00518F27 /* PhilipsHueConnector.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -594,10 +614,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E184F2252200A43B00BD237B /* SceneTests.swift in Sources */,
+				E1CEC2D22209F1B900D4905C /* AuroraInputOutputTests.swift in Sources */,
 				E184F20221FE978F00BD237B /* AuroraTests.swift in Sources */,
-				E1477FF52200CC8A0040C756 /* SimulatedConnector.swift in Sources */,
 				E184F21F21FF44B100BD237B /* LightSyncTests.swift in Sources */,
-				E14780032200FA940040C756 /* SimulatedConstructor.swift in Sources */,
 				E17A2277220351EC0088B76E /* LightUnreachableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -607,10 +626,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E184F2262200A43B00BD237B /* SceneTests.swift in Sources */,
+				E1CEC2D32209F1B900D4905C /* AuroraInputOutputTests.swift in Sources */,
 				E184F21D21FE9C8900BD237B /* AuroraTests.swift in Sources */,
-				E1477FF62200CC8A0040C756 /* SimulatedConnector.swift in Sources */,
 				E184F22021FF44B100BD237B /* LightSyncTests.swift in Sources */,
-				E14780042200FA940040C756 /* SimulatedConstructor.swift in Sources */,
 				E17A2278220351EC0088B76E /* LightUnreachableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -619,6 +637,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1CEC2CF2209EE5C00D4905C /* SimulatedVideoInput.swift in Sources */,
 				E1E7FBE521FCCB8D0090CC2D /* Aurora+Transformers.swift in Sources */,
 				E1AA409321FB6481003E61D2 /* AudioProcessor.swift in Sources */,
 				E113457B21FE3D570052B43B /* Output.swift in Sources */,
@@ -628,6 +647,7 @@
 				E1E7FBF721FCE55E0090CC2D /* Aurora+Scene.swift in Sources */,
 				E1AA408D21FB6387003E61D2 /* Identifiable.swift in Sources */,
 				E1AA409021FB63FB003E61D2 /* Color.swift in Sources */,
+				E1CEC2C32209E97E00D4905C /* SimulatedDelegate.swift in Sources */,
 				E1E7FBD021FCA4380090CC2D /* Aurora.swift in Sources */,
 				E1E7FBF121FCD1E80090CC2D /* Aurora+Actions.swift in Sources */,
 				E1AA408421FB5E0D003E61D2 /* ClosedRange+Utilities.swift in Sources */,
@@ -638,8 +658,11 @@
 				E1AA40A821FBAFE1003E61D2 /* Light.swift in Sources */,
 				E1477FF82200CD6B0040C756 /* Aurora+Persistence.swift in Sources */,
 				E1E7FBD921FCC7300090CC2D /* Aurora+Delegates.swift in Sources */,
+				E1CEC2BF2209E76400D4905C /* SimulatedConstructor.swift in Sources */,
 				E1477FFB2200DBEB0040C756 /* Aurora+Codable.swift in Sources */,
 				E1AA409C21FB67DF003E61D2 /* RelativePoint.swift in Sources */,
+				E1CEC2C12209E76400D4905C /* SimulatedConnector.swift in Sources */,
+				E1CEC2CC2209EE4400D4905C /* SimulatedAudioOutput.swift in Sources */,
 				E184F1F421FE796000BD237B /* DeviceVideoInput.swift in Sources */,
 				E1E7FBCD21FBE5CF0090CC2D /* Scene.swift in Sources */,
 				E1E7FBEB21FCD07A0090CC2D /* Aurora+Sync.swift in Sources */,
@@ -648,6 +671,7 @@
 				E1E7FBDC21FCC9210090CC2D /* Aurora+Inputs.swift in Sources */,
 				E1E7FBDF21FCCA200090CC2D /* Aurora+Scenes.swift in Sources */,
 				E1AA409621FB648D003E61D2 /* VideoProcessor.swift in Sources */,
+				E1CEC2C92209EE2E00D4905C /* SimulatedAudioInput.swift in Sources */,
 				E1AA409F21FB69A6003E61D2 /* Connectable.swift in Sources */,
 				E113456921FE00470052B43B /* Input.swift in Sources */,
 				E1AA40A521FB74C3003E61D2 /* AuroraDelegate.swift in Sources */,
@@ -665,6 +689,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1CEC2D02209EE5C00D4905C /* SimulatedVideoInput.swift in Sources */,
 				E1E7FBE621FCCB8D0090CC2D /* Aurora+Transformers.swift in Sources */,
 				E1AA409421FB6481003E61D2 /* AudioProcessor.swift in Sources */,
 				E113457C21FE3D570052B43B /* Output.swift in Sources */,
@@ -674,6 +699,7 @@
 				E1E7FBF821FCE55E0090CC2D /* Aurora+Scene.swift in Sources */,
 				E1AA408E21FB6387003E61D2 /* Identifiable.swift in Sources */,
 				E1AA409121FB63FB003E61D2 /* Color.swift in Sources */,
+				E1CEC2C42209E97E00D4905C /* SimulatedDelegate.swift in Sources */,
 				E1E7FBD121FCA4380090CC2D /* Aurora.swift in Sources */,
 				E1E7FBF221FCD1E80090CC2D /* Aurora+Actions.swift in Sources */,
 				E1AA408521FB5E0D003E61D2 /* ClosedRange+Utilities.swift in Sources */,
@@ -684,8 +710,11 @@
 				E1AA40A921FBAFE1003E61D2 /* Light.swift in Sources */,
 				E1477FF92200CD6B0040C756 /* Aurora+Persistence.swift in Sources */,
 				E1E7FBDA21FCC7300090CC2D /* Aurora+Delegates.swift in Sources */,
+				E1CEC2BE2209E76300D4905C /* SimulatedConstructor.swift in Sources */,
 				E1477FFC2200DBEB0040C756 /* Aurora+Codable.swift in Sources */,
 				E1AA409D21FB67DF003E61D2 /* RelativePoint.swift in Sources */,
+				E1CEC2C02209E76400D4905C /* SimulatedConnector.swift in Sources */,
+				E1CEC2CD2209EE4400D4905C /* SimulatedAudioOutput.swift in Sources */,
 				E184F1F521FE796000BD237B /* DeviceVideoInput.swift in Sources */,
 				E1E7FBCE21FBE5CF0090CC2D /* Scene.swift in Sources */,
 				E1E7FBEC21FCD07A0090CC2D /* Aurora+Sync.swift in Sources */,
@@ -694,6 +723,7 @@
 				E1E7FBDD21FCC9210090CC2D /* Aurora+Inputs.swift in Sources */,
 				E1E7FBE021FCCA200090CC2D /* Aurora+Scenes.swift in Sources */,
 				E1AA409721FB648D003E61D2 /* VideoProcessor.swift in Sources */,
+				E1CEC2CA2209EE2E00D4905C /* SimulatedAudioInput.swift in Sources */,
 				E1AA40A021FB69A6003E61D2 /* Connectable.swift in Sources */,
 				E113456A21FE00470052B43B /* Input.swift in Sources */,
 				E1AA40A621FB74C3003E61D2 /* AuroraDelegate.swift in Sources */,
