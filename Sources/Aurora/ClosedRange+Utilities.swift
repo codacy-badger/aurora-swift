@@ -6,18 +6,19 @@ extension ClosedRange: Codable where Bound == Float {
     }
 
     public init(from decoder: Decoder) throws {
-        let stringValue = try decoder.singleValueContainer().decode(String.self)
-        let values: [Float] = stringValue.components(separatedBy: "...").compactMap { Float($0) }
-        if let lowerBound = values.first, let upperBound = values.last {
-            self = lowerBound...upperBound
-        } else {
+        var container = try decoder.unkeyedContainer()
+        let lowerBound = try container.decode(Bound.self)
+        let upperBound = try container.decode(Bound.self)
+        guard lowerBound <= upperBound else {
             throw CodableError.decodingFailed
         }
+        self.init(uncheckedBounds: (lower: lowerBound, upper: upperBound))
     }
 
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode("\(lowerBound)...\(upperBound)")
+        var container = encoder.unkeyedContainer()
+        try container.encode(self.lowerBound)
+        try container.encode(self.upperBound)
     }
 }
 

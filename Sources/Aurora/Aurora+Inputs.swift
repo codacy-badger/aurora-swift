@@ -2,14 +2,31 @@ import Foundation
 
 extension Aurora {
     /// Should be called after setting scene input mode to sync inputs
-    internal func refreshInputForSceneWith(identifier: UUID) {
-        /// Remove old time loops that might still be in progress
-        input.time?.remove(loop: identifier)
-        removeUnusedInputs()
+    internal func refreshInputs() {
+        /// Remove unused inputs
+        if activeScenes.filter({ $0.input.mode == .time }).isEmpty {
+            input.time = nil
+        }
+        if activeScenes.filter({ $0.input.mode == .audio }).isEmpty {
+            input.audio = nil
+        }
+        if activeScenes.filter({ $0.input.mode == .video }).isEmpty {
+            input.video = nil
+        }
 
-        if let scene = scenes[identifier], isActive(sceneWithIdentifier: identifier) {
-            /// Refresh time input loop
-            /// Start shared inputs
+        switch mode {
+        case .simplex:
+            scenes.forEach {
+                input.time?.remove(loop: $0.identifier)
+            }
+        case .multiplex:
+            inactiveScenes.forEach {
+                input.time?.remove(loop: $0.identifier)
+            }
+        }
+
+        /// Sync inputs for active scenes. If input time does not exist add it.
+        activeScenes.forEach { scene in
             switch scene.input.mode {
             case .none:
                 print("Aurora: Refreshing input for mode `none` is not required")
@@ -19,7 +36,7 @@ extension Aurora {
                     input.time = timeInput
                     input.time?.start(onLoop: self.onTimeLoop)
                 }
-                input.time?.add(loop: identifier, duration: scene.input.interval)
+                input.time?.add(loop: scene.identifier, duration: scene.input.interval)
 
             case .audio:
                 if input.audio == nil, let audioInput = constructor?.constructAudioInput() {
@@ -33,19 +50,6 @@ extension Aurora {
                     input.video?.start(index: 0, onColor: self.onVideoColorChange)
                 }
             }
-        }
-    }
-
-    /// Checks if input is still needed, if removes it.
-    internal func removeUnusedInputs() {
-        if activeScenes.filter({ $0.input.mode == .time }).isEmpty {
-            input.time = nil
-        }
-        if activeScenes.filter({ $0.input.mode == .audio }).isEmpty {
-            input.audio = nil
-        }
-        if activeScenes.filter({ $0.input.mode == .video }).isEmpty {
-            input.video = nil
         }
     }
 

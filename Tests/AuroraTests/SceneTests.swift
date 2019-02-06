@@ -4,8 +4,8 @@ import XCTest
 class SceneTests: XCTestCase {
     func testSceneInit() {
         let scene = Scene(
-            identifier: UUID(),
             name: "Scene",
+            identifier: UUID(),
             lights: [UUID(), UUID()],
             input: Input.Settings(mode: .time, interval: 1.0, transition: 1.0),
             output: Output.Settings(mode: .none, track: nil),

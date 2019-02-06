@@ -14,7 +14,7 @@ public struct Coloring: Codable, Equatable {
     public var saturation: ClosedRange<Float>
     public var brightness: ClosedRange<Float>
 
-    public init(mode: Mode, hue: Float, range: ClosedRange<Float>, spectrum: Spectrum, saturation: ClosedRange<Float>, brightness: ClosedRange<Float>) {
+    public init(mode: Mode = .spectrum, hue: Float = 0.0, range: ClosedRange<Float> = .unitInterval, spectrum: Spectrum = .allColors, saturation: ClosedRange<Float> = .unitInterval, brightness: ClosedRange<Float> = .unitInterval) {
         self.mode = mode
         self.hue = max(0.0, min(1.0, hue))
         self.range = range.clamped(to: .unitInterval)

@@ -13,6 +13,10 @@ extension Aurora {
         return scenes.filter { activeSceneIdentifiers.contains($0.identifier) }
     }
 
+    public var inactiveScenes: [Scene] {
+        return scenes.filter { !activeSceneIdentifiers.contains($0.identifier) }
+    }
+
     public func isActive(sceneWithIdentifier identifier: UUID) -> Bool {
         return activeSceneIdentifiers.contains(identifier)
     }
@@ -38,16 +42,16 @@ extension Aurora {
             }
         }
 
-        refreshInputForSceneWith(identifier: identifier)
-        refreshOutputForSceneWith(identifier: identifier)
+        refreshInputs()
+        refreshOutputs()
 
         delegates.forEach { $0.didUpdateScenes() }
     }
 
     public func deactivateScenes() {
         activeSceneIdentifiers = []
-        removeUnusedInputs()
-        removeUnusedOutputs()
+        refreshInputs()
+        refreshOutputs()
         delegates.forEach { $0.didUpdateScenes() }
     }
 

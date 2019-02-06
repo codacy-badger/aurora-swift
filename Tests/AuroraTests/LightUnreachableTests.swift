@@ -5,25 +5,22 @@ class LightUnreachableTests: XCTestCase {
     func testForceUnrechable() {
         var lights = [
             Light(
-                identifier: UUID(),
                 name: "Light1",
                 type: "simulated",
-                state: Light.State(hue: 0.2, saturation: 0.3, brightness: 0.4, isPowered: true),
-                manufacturerIdentifier: "1"
+                manufacturerIdentifier: "1",
+                state: Light.State(hue: 0.2, saturation: 0.3, brightness: 0.4, isPowered: true)
             ),
             Light(
-                identifier: UUID(),
                 name: "Light2",
                 type: "simulated",
-                state: Light.State(hue: 0.2, saturation: 0.3, brightness: 0.4, isPowered: true),
-                manufacturerIdentifier: "2"
+                manufacturerIdentifier: "2",
+                state: Light.State(hue: 0.2, saturation: 0.3, brightness: 0.4, isPowered: true)
             ),
             Light(
-                identifier: UUID(),
                 name: "Light3",
                 type: "unknown",
-                state: Light.State(hue: 0.2, saturation: 0.3, brightness: 0.4, isPowered: true),
-                manufacturerIdentifier: "1"
+                manufacturerIdentifier: "1",
+                state: Light.State(hue: 0.2, saturation: 0.3, brightness: 0.4, isPowered: true)
             )
         ]
 

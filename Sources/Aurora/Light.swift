@@ -26,12 +26,14 @@ public struct Light: Identifiable, Codable, Equatable {
         public let transitionTime: Float
     }
 
-    public internal(set) var identifier: UUID
     public internal(set) var name: String
     public internal(set) var type: String
-    public internal(set) var state: State?
-    /// Serial number or other manufactirer identifier
+    /// Serial number or other unique manufacturer identifier
     public internal(set) var manufacturerIdentifier: String
+    public internal(set) var identifier: UUID
+
+    public internal(set) var state: State?
+
     /// Bridge identifier like bridge's serial number
     /// Nil if light is not bridged
     public internal(set) var bridgeIdentifier: String?
@@ -44,13 +46,13 @@ public struct Light: Identifiable, Codable, Equatable {
         return state != nil
     }
 
-    internal init(identifier: UUID, name: String, type: String, state: State?, manufacturerIdentifier: String, bridgeIdentifier: String? = nil, model: String? = nil) {
-        self.identifier = identifier
+    internal init(name: String, type: String, manufacturerIdentifier: String, identifier: UUID = UUID(), bridgeIdentifier: String? = nil, state: State? = nil, model: String? = nil) {
         self.name = name
         self.type = type
-        self.state = state
         self.manufacturerIdentifier = manufacturerIdentifier
+        self.identifier = identifier
         self.bridgeIdentifier = bridgeIdentifier
+        self.state = state
         self.model = model
     }
     /// Updates lights properties and creates an update

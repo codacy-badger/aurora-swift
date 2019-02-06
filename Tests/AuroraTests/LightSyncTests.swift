@@ -7,12 +7,11 @@ class LightSyncTests: XCTestCase {
 
         /// Sync new light
         let firstLight = Light(
-            identifier: UUID(),
             name: "Light1",
             type: "simulated",
-            state: Light.State(hue: 0.1, saturation: 0.2, brightness: 0.3, isPowered: true),
             manufacturerIdentifier: "1",
             bridgeIdentifier: "DJKLHLJ22D",
+            state: Light.State(hue: 0.1, saturation: 0.2, brightness: 0.3, isPowered: true),
             model: "v1"
         )
 
@@ -21,12 +20,11 @@ class LightSyncTests: XCTestCase {
 
         /// Sync same light with chnages
         let updatedLight = Light(
-            identifier: UUID(),
             name: "Light2",
             type: "simulated",
-            state: Light.State(hue: 0.8, saturation: 0.9, brightness: 1.0, isPowered: false),
             manufacturerIdentifier: "1",
             bridgeIdentifier: "DJKLHLJ22D",
+            state: Light.State(hue: 0.8, saturation: 0.9, brightness: 1.0, isPowered: false),
             model: "v2"
         )
 
@@ -49,12 +47,11 @@ class LightSyncTests: XCTestCase {
 
         /// Sync same light as unreachable without state
         let unreachableLight = Light(
-            identifier: UUID(),
             name: "Light2",
             type: "simulated",
-            state: nil,
             manufacturerIdentifier: "1",
             bridgeIdentifier: "DJKLHLJ22D",
+            state: nil,
             model: "v2"
         )
 
@@ -76,12 +73,11 @@ class LightSyncTests: XCTestCase {
 
         /// Sync same light as reachable with state
         let reconnectedLight = Light(
-            identifier: UUID(),
             name: "Light",
             type: "simulated",
-            state: Light.State(hue: 0.8, saturation: 0.9, brightness: 1.0, isPowered: false),
             manufacturerIdentifier: "1",
             bridgeIdentifier: "DJKLHLJ22D",
+            state: Light.State(hue: 0.8, saturation: 0.9, brightness: 1.0, isPowered: false),
             model: "v2"
         )
 
@@ -103,12 +99,11 @@ class LightSyncTests: XCTestCase {
 
         /// Sync same light as reachable with state
         let secondLight = Light(
-            identifier: UUID(),
             name: "Another Light",
             type: "simulated",
-            state: Light.State(hue: 0.8, saturation: 0.9, brightness: 1.0, isPowered: false),
             manufacturerIdentifier: "2",
             bridgeIdentifier: "DJKLHLJ22D",
+            state: Light.State(hue: 0.8, saturation: 0.9, brightness: 1.0, isPowered: false),
             model: "v2"
         )
 
