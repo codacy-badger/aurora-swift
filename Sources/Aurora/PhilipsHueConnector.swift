@@ -1,9 +1,12 @@
 #if os(iOS) || os(macOS)
 import Foundation
+#endif
+
 #if os(iOS)
 import HueSDK
 #endif
 
+#if os(iOS) || os(macOS)
 public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnectionObserver, PHSBridgeStateUpdateObserver, PHSFindNewDevicesCallback {
     public struct State: Equatable {
         public var bridge: Bridge?
