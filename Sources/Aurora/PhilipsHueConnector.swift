@@ -1,6 +1,8 @@
-#if os(iOS)
+#if os(iOS) || os(macOS)
 import Foundation
+#if os(iOS)
 import HueSDK
+#endif
 
 public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnectionObserver, PHSBridgeStateUpdateObserver, PHSFindNewDevicesCallback {
     public struct State: Equatable {
@@ -228,12 +230,11 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
                 )
 
                 let light = Light(
-                    identifier: UUID(),
                     name: light.name,
                     type: PhilipsHueConnector.type,
-                    state: light.lightState.reachable.boolValue ? lightState : nil,
                     manufacturerIdentifier: light.identifier,
                     bridgeIdentifier: bridge.identifier,
+                    state: light.lightState.reachable.boolValue ? lightState : nil,
                     model: light.lightInfo.modelId
                 )
                 return light

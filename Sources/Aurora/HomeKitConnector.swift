@@ -90,37 +90,14 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
                 )
 
                 let light = Light(
-                    identifier: UUID(),
                     name: accessory.name,
                     type: HomeKitConnector.type,
-                    state: accessory.isReachable ? lightState : nil,
                     manufacturerIdentifier: accessory.uniqueIdentifier.uuidString,
-                    model: nil
+                    state: accessory.isReachable ? lightState : nil
                 )
                 return light
             }
         )
-
-//        onSync(
-//            home.allColorfulLightServices.map { service in
-//                let lightState = Light.State(
-//                    hue: service.characteristics.first { $0.characteristicType == HMCharacteristicTypeHue }?.value as? Float ?? 0.0,
-//                    saturation: service.characteristics.first { $0.characteristicType == HMCharacteristicTypeSaturation }?.value as? Float ?? 1.0,
-//                    brightness: service.characteristics.first { $0.characteristicType == HMCharacteristicTypeBrightness }?.value as? Float ?? 1.0,
-//                    isPowered: service.characteristics.first { $0.characteristicType == HMCharacteristicTypePowerState }?.value as? Bool ?? true
-//                )
-//
-//                let light = Light(
-//                    identifier: UUID(),
-//                    name: service.name,
-//                    type: HomeKitConnector.type,
-//                    state: service.accessory?.isReachable ?? false ? lightState : nil,
-//                    manufacturerIdentifier: service.name,
-//                    model: service.characteristics.first { $0.characteristicType == HMCharacteristicTypeModel }?.value as? String
-//                )
-//                return light
-//            }
-//        )
     }
 
     public func perform(lightUpdate: Light.Update) {
