@@ -171,10 +171,9 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
         print("Did Update Homes")
         print(manager.homes)
 
-        if let primaryHome = manager.primaryHome {
-            self.home = primaryHome
-
-            state = State(home: home?.name, homeSelection: manager.homes.map { $0.name })
+        if let home = manager.primaryHome ?? manager.homes.first {
+            self.home = home
+            state = State(home: self.home?.name, homeSelection: manager.homes.map { $0.name })
         } else {
             print("HomeKit Connector: Creating a default Home")
             manager.addHome(withName: "Home") { home, error in
