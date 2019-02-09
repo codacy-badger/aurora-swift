@@ -25,13 +25,7 @@ public class SimulatedConstructor: Constructable {
     }
 
     public func constructConnectorFor(type: String) -> Connectable? {
-        switch type {
-        case SimulatedConnector.type:
-            return SimulatedConnector()
-
-        default:
-            return nil
-        }
+        return SimulatedConnector(type: type)
     }
 
     deinit {

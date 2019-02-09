@@ -37,7 +37,7 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
         didSet { if oldValue != state { send(state: self.state) } }
     }
 
-    public static let type: String = "philipsHue"
+    public let type: String
 
     private lazy var bridgeDiscovery = PHSBridgeDiscovery()
 
@@ -50,7 +50,8 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
     private let deviceId: String
     private let deviceName: String
 
-    public init(appName: String, deviceName: String, deviceId: String) {
+    public init(type: String, appName: String, deviceName: String, deviceId: String) {
+        self.type = type
         self.appName = appName
         self.deviceName = deviceName
         self.deviceId = deviceId
@@ -234,7 +235,7 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
 
                 let light = Light(
                     name: light.name,
-                    type: PhilipsHueConnector.type,
+                    type: type,
                     manufacturerIdentifier: light.identifier,
                     bridgeIdentifier: bridge.identifier,
                     state: light.lightState.reachable.boolValue ? lightState : nil,
@@ -247,7 +248,7 @@ public final class PhilipsHueConnector: NSObject, Connectable, PHSBridgeConnecti
 
     func send(state: State) {
         onEvent(
-            Event(name: "philipsHueStateUpdate", type: PhilipsHueConnector.type, payload: state)
+            Event(name: "philipsHueStateUpdate", type: type, payload: state)
         )
     }
 

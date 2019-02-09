@@ -23,7 +23,7 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
         }
     }
 
-    public static let type = "homeKit"
+    public let type: String
 
     private var state = State() {
         didSet {
@@ -46,7 +46,8 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
         }
     }
 
-    override public init() {
+    public init(type: String) {
+        self.type = type
         super.init()
         homeManager.delegate = self
     }
@@ -69,7 +70,7 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
 
     private func send(_ state: State) {
         onEvent(
-            Event(name: EventName.stateUpdate.rawValue, type: HomeKitConnector.type, payload: state)
+            Event(name: EventName.stateUpdate.rawValue, type: type, payload: state)
         )
     }
 
@@ -91,7 +92,7 @@ public final class HomeKitConnector: NSObject, HMHomeManagerDelegate, HMHomeDele
 
                 let light = Light(
                     name: accessory.name,
-                    type: HomeKitConnector.type,
+                    type: type,
                     manufacturerIdentifier: accessory.uniqueIdentifier.uuidString,
                     state: accessory.isReachable ? lightState : nil
                 )
