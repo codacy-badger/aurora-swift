@@ -1,12 +1,13 @@
 import Foundation
 
 public class SimulatedConnector: Connectable {
-    public static let type: String = "simulated"
+    public let type: String
 
     public var onSync: ([Light]) -> Void = { _ in }
     public var onEvent: (Event) -> Void = { _ in }
 
-    public init() {
+    public init(type: String) {
+        self.type = type
         print("SimulatedConnector: Init")
     }
 

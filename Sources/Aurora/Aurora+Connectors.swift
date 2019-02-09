@@ -28,10 +28,10 @@ extension Aurora {
 
     internal func update(connectors: Set<String>) {
         /// Remove Connectors that are missing from the set.
-        self.attachedConnectors.removeAll { !connectors.contains(type(of: $0).type) }
+        self.attachedConnectors.removeAll { !connectors.contains($0.type) }
         /// Add connectors that are in the set but not in an connectors array.
         connectors.forEach { type in
-            if !self.attachedConnectors.contains(where: { Swift.type(of: $0).type == type }) {
+            if !self.attachedConnectors.contains(where: { $0.type == type }) {
                 if let connector = constructor?.constructConnectorFor(type: type) {
                     /// Add connector to connectors array.
                     self.attachedConnectors.append(connector)
@@ -42,7 +42,7 @@ extension Aurora {
                 }
             }
         }
-        print("Aurora: Attached connectors:", self.attachedConnectors.map { type(of: $0).type })
+        print("Aurora: Attached connectors:", self.attachedConnectors.map { $0.type })
         delegates.forEach { $0.didUpdateConnectors() }
     }
 }

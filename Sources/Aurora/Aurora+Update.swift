@@ -27,12 +27,12 @@ extension Aurora {
 
     public func send(lightUpdates: [Light.Update]) {
         lightUpdates.forEach { update in
-            attachedConnectors.first { Swift.type(of: $0).type == update.type }?.perform(lightUpdate: update)
+            attachedConnectors.first { $0.type == update.type }?.perform(lightUpdate: update)
         }
     }
 
     public func send(event: Event) {
-        if let connector = attachedConnectors.first(where: { Swift.type(of: $0).type == event.type }) {
+        if let connector = attachedConnectors.first(where: { $0.type == event.type }) {
             connector.send(event: event)
         }
     }
