@@ -304,14 +304,13 @@
 				E184F1F021FE765C00BD237B /* DeviceAudioInput.swift */,
 				E113458321FE40580052B43B /* DeviceAudioOutput.swift */,
 				E184F1F321FE796000BD237B /* DeviceVideoInput.swift */,
-				E1A008B221FE633F00518F27 /* HomeKitConnector.swift */,
-				E1A008B521FE63DD00518F27 /* PhilipsHueConnector.swift */,
 				E14780002200FA500040C756 /* SimulatedConstructor.swift */,
 				E1477FF42200CC8A0040C756 /* SimulatedConnector.swift */,
 				E1CEC2C82209EE2E00D4905C /* SimulatedAudioInput.swift */,
 				E1CEC2CE2209EE5C00D4905C /* SimulatedVideoInput.swift */,
 				E1CEC2CB2209EE4400D4905C /* SimulatedAudioOutput.swift */,
 				E1CEC2C22209E97E00D4905C /* SimulatedDelegate.swift */,
+				E1A008B221FE633F00518F27 /* HomeKitConnector.swift */,
 			);
 			path = Aurora;
 			sourceTree = "<group>";
@@ -392,6 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				E184F20C21FE9B1A00BD237B /* Aurora */,
+				E1A008B521FE63DD00518F27 /* PhilipsHueConnector.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
