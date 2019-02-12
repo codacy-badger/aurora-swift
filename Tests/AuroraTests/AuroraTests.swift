@@ -1,4 +1,5 @@
 @testable import Aurora
+import Simulated
 import XCTest
 
 class AuroraTests: XCTestCase {

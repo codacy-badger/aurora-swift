@@ -1,6 +1,0 @@
-framework module HueSDK {
-  umbrella header "HueSDK.h"
-
-  export *
-  module * { export * }
-}

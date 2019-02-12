@@ -25,15 +25,16 @@ extension Aurora {
         }
     }
 
-    public func send(lightUpdates: [Light.Update]) {
+    public func send(lightUpdates: [[String: Any]]) {
         lightUpdates.forEach { update in
-            attachedConnectors.first { $0.type == update.type }?.perform(lightUpdate: update)
+            guard let updateType = update[Attribute.type.rawValue] as? String else { return }
+            attachedConnectors.first { $0.type == updateType }?.perform(lightUpdate: update)
         }
     }
 
     public func send(event: Event) {
         if let connector = attachedConnectors.first(where: { $0.type == event.type }) {
-            connector.send(event: event)
+            connector.send(event: event.name, payload: event.payload)
         }
     }
 }

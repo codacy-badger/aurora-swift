@@ -8,19 +8,19 @@ class LightUnreachableTests: XCTestCase {
                 name: "Light1",
                 type: "simulated",
                 manufacturerIdentifier: "1",
-                state: Light.State(hue: 0.2, saturation: 0.3, brightness: 0.4, isPowered: true)
+                state: Light.State(isPowered: true, hue: 0.2, saturation: 0.3, brightness: 0.4)
             ),
             Light(
                 name: "Light2",
                 type: "simulated",
                 manufacturerIdentifier: "2",
-                state: Light.State(hue: 0.2, saturation: 0.3, brightness: 0.4, isPowered: true)
+                state: Light.State(isPowered: true, hue: 0.2, saturation: 0.3, brightness: 0.4)
             ),
             Light(
                 name: "Light3",
                 type: "unknown",
                 manufacturerIdentifier: "1",
-                state: Light.State(hue: 0.2, saturation: 0.3, brightness: 0.4, isPowered: true)
+                state: Light.State(isPowered: true, hue: 0.2, saturation: 0.3, brightness: 0.4)
             )
         ]
 

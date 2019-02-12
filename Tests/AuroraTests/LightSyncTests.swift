@@ -11,7 +11,7 @@ class LightSyncTests: XCTestCase {
             type: "simulated",
             manufacturerIdentifier: "1",
             bridgeIdentifier: "DJKLHLJ22D",
-            state: Light.State(hue: 0.1, saturation: 0.2, brightness: 0.3, isPowered: true),
+            state: Light.State(isPowered: true, hue: 0.1, saturation: 0.2, brightness: 0.3),
             model: "v1"
         )
 
@@ -24,7 +24,7 @@ class LightSyncTests: XCTestCase {
             type: "simulated",
             manufacturerIdentifier: "1",
             bridgeIdentifier: "DJKLHLJ22D",
-            state: Light.State(hue: 0.8, saturation: 0.9, brightness: 1.0, isPowered: false),
+            state: Light.State(isPowered: false, hue: 0.8, saturation: 0.9, brightness: 1.0),
             model: "v2"
         )
 
@@ -77,7 +77,7 @@ class LightSyncTests: XCTestCase {
             type: "simulated",
             manufacturerIdentifier: "1",
             bridgeIdentifier: "DJKLHLJ22D",
-            state: Light.State(hue: 0.8, saturation: 0.9, brightness: 1.0, isPowered: false),
+            state: Light.State(isPowered: false, hue: 0.8, saturation: 0.9, brightness: 1.0),
             model: "v2"
         )
 
@@ -88,7 +88,7 @@ class LightSyncTests: XCTestCase {
             XCTAssert(light.identifier == firstLight.identifier)
             XCTAssert(light.name == "Light")
             XCTAssert(light.type == "simulated")
-            XCTAssert(light.state == Light.State(hue: 0.8, saturation: 0.9, brightness: 1.0, isPowered: false))
+            XCTAssert(light.state == Light.State(isPowered: false, hue: 0.8, saturation: 0.9, brightness: 1.0))
             XCTAssert(light.isReachable == true)
             XCTAssert(light.manufacturerIdentifier == "1")
             XCTAssert(light.bridgeIdentifier == "DJKLHLJ22D")
@@ -103,7 +103,7 @@ class LightSyncTests: XCTestCase {
             type: "simulated",
             manufacturerIdentifier: "2",
             bridgeIdentifier: "DJKLHLJ22D",
-            state: Light.State(hue: 0.8, saturation: 0.9, brightness: 1.0, isPowered: false),
+            state: Light.State(isPowered: false, hue: 0.8, saturation: 0.9, brightness: 1.0),
             model: "v2"
         )
 
@@ -114,7 +114,7 @@ class LightSyncTests: XCTestCase {
             XCTAssert(light.identifier == secondLight.identifier)
             XCTAssert(light.name == "Another Light")
             XCTAssert(light.type == "simulated")
-            XCTAssert(light.state == Light.State(hue: 0.8, saturation: 0.9, brightness: 1.0, isPowered: false))
+            XCTAssert(light.state == Light.State(isPowered: false, hue: 0.8, saturation: 0.9, brightness: 1.0))
             XCTAssert(light.isReachable == true)
             XCTAssert(light.manufacturerIdentifier == "2")
             XCTAssert(light.bridgeIdentifier == "DJKLHLJ22D")

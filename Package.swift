@@ -4,10 +4,11 @@ import PackageDescription
 let package = Package(
     name: "Aurora",
     products: [
-        .library(name: "Aurora", targets: ["Aurora"])
+        .library(name: "Aurora", type: .static, targets: ["Aurora"])
     ],
     targets: [
         .target(name: "Aurora"),
-        .testTarget(name: "AuroraTests", dependencies: ["Aurora"])
+        .target(name: "Simulated", dependencies: ["Aurora"]),
+        .testTarget(name: "AuroraTests", dependencies: ["Aurora", "Simulated"])
     ]
 )

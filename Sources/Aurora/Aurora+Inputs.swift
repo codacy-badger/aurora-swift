@@ -65,19 +65,19 @@ extension Aurora {
     /// Audio
     private func onAudioLevelChange(level: Float) {
         print("Aurora: Audio Level", level)
-        if input.audio?.processor.update(level: level) == true {
+        if audioProcessor.update(level: level) == true {
             print("Aurora: Audio Burst")
             activeScenes.filter { $0.input.mode == .audio }.forEach { activeLightScene in
                 let transformer = lightsTransformer(preset: activeLightScene)
                 updateActiveReachableLightsFor(activeLightScene: activeLightScene, with: transformer)
             }
         }
-        delegates.forEach { $0.didUpdateAudioLevel(current: input.audio?.processor.level ?? 0.0, threshold: input.audio?.processor.thresholdLevel ?? 0.0) }
+        delegates.forEach { $0.didUpdateAudioLevel(current: audioProcessor.level, threshold: audioProcessor.thresholdLevel) }
     }
 
     /// Video
     private func onVideoColorChange(hue: Float, brightness: Float, saturation: Float) {
-        if input.video?.processor.update(hue: hue, brightness: brightness, saturation: saturation) == true {
+        if videoProcessor.update(hue: hue, brightness: brightness, saturation: saturation) == true {
             print("Aurora: Video Burst")
             activeScenes.filter { $0.input.mode == .video }.forEach { activeLightScene in
                 let transformer = lightsTransformer(preset: activeLightScene, hue: hue, brightness: brightness, saturation: saturation)

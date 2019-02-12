@@ -7,7 +7,7 @@
 
 import Foundation
 
-internal typealias LightsTransformer = ([Light]) -> [(updatedLight: Light, update: Light.Update)]
+internal typealias LightsTransformer = ([Light]) -> [(updatedLight: Light, update: [String: Any])]
 
 extension Aurora {
     /// Updates lights from preset
@@ -16,10 +16,10 @@ extension Aurora {
             lights.compactMap { [weak self] light in
                 var light = light
                 let lightState = Light.State(
+                    isPowered: preset.effects.contains(.strobe) ? !(light.state?.isPowered ?? false) : true,
                     hue: preset.coloring.randomHue,
                     saturation: preset.coloring.randomSaturation,
-                    brightness: preset.coloring.randomBrightness * (self?.brightness ?? 1.0),
-                    isPowered: preset.effects.contains(.strobe) ? !(light.state?.isPowered ?? false) : true
+                    brightness: preset.coloring.randomBrightness * (self?.brightness ?? 1.0)
                 )
                 let update = light.update(from: lightState, withTransitionTime: preset.input.transition)
                 return (light, update)
@@ -36,10 +36,10 @@ extension Aurora {
 
                 var light = light
                 let lightState = Light.State(
+                    isPowered: true,
                     hue: hue,
                     saturation: saturation,
-                    brightness: brightness * (self?.brightness ?? 1.0),
-                    isPowered: true
+                    brightness: brightness * (self?.brightness ?? 1.0)
                 )
                 let update = light.update(from: lightState, withTransitionTime: preset.input.transition)
                 return (light, update)
@@ -56,17 +56,17 @@ extension Aurora {
 
                 if power {
                     lightState = Light.State(
+                        isPowered: true,
                         hue: nil,
                         saturation: 1.0,
-                        brightness: 1.0 * (self?.brightness ?? 1.0),
-                        isPowered: true
+                        brightness: 1.0 * (self?.brightness ?? 1.0)
                     )
                 } else {
                     lightState = Light.State(
+                        isPowered: false,
                         hue: nil,
                         saturation: nil,
-                        brightness: nil,
-                        isPowered: false
+                        brightness: nil
                     )
                 }
 
@@ -81,10 +81,10 @@ extension Aurora {
             lights.compactMap { [weak self] light in
                 var light = light
                 let lightState = Light.State(
+                    isPowered: true,
                     hue: Float.random(in: 0...1),
                     saturation: Float.random(in: 0...1),
-                    brightness: Float.random(in: 0...1) * (self?.brightness ?? 1.0),
-                    isPowered: true
+                    brightness: Float.random(in: 0...1) * (self?.brightness ?? 1.0)
                 )
                 let update = light.update(from: lightState, withTransitionTime: Float.random(in: 0...5))
                 return (light, update)

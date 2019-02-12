@@ -1,6 +1,6 @@
 import Foundation
 
-public struct AudioProcessor {
+struct AudioProcessor {
     /// Audio level, should be 0 at init.
     internal var level: Float = 0.0
     /// Auto audio threshold level, should be 0 at init.
@@ -12,10 +12,10 @@ public struct AudioProcessor {
     /// Audio level cool down, should be false at init.
     private var audioLevelIsCoolingDown: Bool = false
 
-    public init() {}
+    init() {}
 
     /// Returns true if threshold exceeded
-    public mutating func update(level: Float) -> Bool {
+    mutating func update(level: Float) -> Bool {
         self.level = level
         if level > thresholdLevel {
             thresholdLevel = level

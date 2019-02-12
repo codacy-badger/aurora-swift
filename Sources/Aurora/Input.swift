@@ -33,15 +33,9 @@ public protocol TimeInputable: AnyObject {
 }
 
 public protocol AudioInputable: AnyObject {
-    var processor: AudioProcessor { get set }
-
     func start(onLevel: @escaping (Float) -> Void)
-    func stop()
 }
 
 public protocol VideoInputable: AnyObject {
-    var processor: VideoProcessor { get set }
-
     func start(index: Int, onColor: @escaping (_ hue: Float, _ brightness: Float, _ saturation: Float) -> Void)
-    func stop()
 }

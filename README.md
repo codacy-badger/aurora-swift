@@ -2,5 +2,12 @@
 
 ### Aurora Framework
 
-### Generating LinuxMain.swift
+#### Generate .xcodeproj
+```
+swift package generate-xcodeproj
+```
+
+#### Generate LinuxMain.swift
+```
 swift test --generate-linuxmain
+```

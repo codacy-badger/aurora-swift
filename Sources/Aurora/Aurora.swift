@@ -25,6 +25,9 @@ public final class Aurora {
     var input: Input
     var output: Output
 
+    var audioProcessor: AudioProcessor
+    var videoProcessor: VideoProcessor
+
     var transformatorLock: Bool
 
     public internal(set) var connectors: Set<String>
@@ -43,6 +46,8 @@ public final class Aurora {
         delegates = []
         input = Input()
         output = Output()
+        audioProcessor = AudioProcessor()
+        videoProcessor = VideoProcessor()
         transformatorLock = false
         self.connectors = connectors
         self.attachedConnectors = []

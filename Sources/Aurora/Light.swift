@@ -11,10 +11,17 @@ public struct Light: Identifiable, Codable, Equatable {
     }
 
     public struct State: Codable, Equatable {
+        public internal(set) var isPowered: Bool
         public internal(set) var hue: Float?
         public internal(set) var saturation: Float?
         public internal(set) var brightness: Float?
-        public internal(set) var isPowered: Bool
+
+        public init(isPowered: Bool, hue: Float? = nil, saturation: Float? = nil, brightness: Float? = nil) {
+            self.isPowered = isPowered
+            self.hue = hue
+            self.saturation = saturation
+            self.brightness = brightness
+        }
     }
 
     public struct Update: Codable, Equatable {
@@ -46,7 +53,7 @@ public struct Light: Identifiable, Codable, Equatable {
         return state != nil
     }
 
-    internal init(name: String, type: String, manufacturerIdentifier: String, identifier: UUID = UUID(), bridgeIdentifier: String? = nil, state: State? = nil, model: String? = nil) {
+    public init(name: String, type: String, manufacturerIdentifier: String, identifier: UUID = UUID(), bridgeIdentifier: String? = nil, state: State? = nil, model: String? = nil) {
         self.name = name
         self.type = type
         self.manufacturerIdentifier = manufacturerIdentifier
@@ -55,30 +62,66 @@ public struct Light: Identifiable, Codable, Equatable {
         self.state = state
         self.model = model
     }
-    /// Updates lights properties and creates an update
-    internal mutating func update(from state: State, withTransitionTime transitionTime: Float) -> Update {
-        if let updatedHue = state.hue, self.state?.hue != updatedHue {
-            self.state?.hue = updatedHue
+
+    init?(attributes: [String: Any]) {
+        guard let name = attributes[Attribute.name.rawValue] as? String else { return nil }
+        guard let type = attributes[Attribute.type.rawValue] as? String else { return nil }
+        guard let manufacturerIdentifier = attributes[Attribute.manufacturerIdentifier.rawValue] as? String else { return nil }
+
+        let bridgeIdentifier: String? = attributes[Attribute.bridgeIdentifier.rawValue] as? String
+        let model: String? = attributes[Attribute.model.rawValue] as? String
+
+        var state: State?
+
+        if let isPowered = attributes[Attribute.power.rawValue] as? Bool {
+            let hue: Float? = attributes[Attribute.hue.rawValue] as? Float
+            let saturation: Float? = attributes[Attribute.saturation.rawValue] as? Float
+            let brightness: Float? = attributes[Attribute.brightness.rawValue] as? Float
+            state = State(isPowered: isPowered, hue: hue, saturation: saturation, brightness: brightness)
         }
 
-        if let updatedSaturation = state.saturation, self.state?.saturation != updatedSaturation {
-            self.state?.saturation = updatedSaturation
-        }
-
-        if let updatedBrightness = state.brightness, self.state?.brightness != updatedBrightness {
-            self.state?.brightness = updatedBrightness
-        }
-
-        self.state?.isPowered = state.isPowered
-
-        return Update(
-            identifier: identifier,
+        self.init(
+            name: name,
             type: type,
             manufacturerIdentifier: manufacturerIdentifier,
             bridgeIdentifier: bridgeIdentifier,
             state: state,
-            transitionTime: transitionTime
+            model: model
         )
+    }
+
+    /// Updates lights properties and creates an update
+    internal mutating func update(from state: State, withTransitionTime transitionTime: Float) -> [String: Any] {
+        var lightUpdate: [String: Any] = [
+            Attribute.identifier.rawValue: identifier,
+            Attribute.type.rawValue: type,
+            Attribute.manufacturerIdentifier.rawValue: manufacturerIdentifier,
+            Attribute.transitionTime.rawValue: transitionTime
+        ]
+
+        if let updatedHue = state.hue, self.state?.hue != updatedHue {
+            self.state?.hue = updatedHue
+            lightUpdate[Attribute.hue.rawValue] = updatedHue
+        }
+
+        if let updatedSaturation = state.saturation, self.state?.saturation != updatedSaturation {
+            self.state?.saturation = updatedSaturation
+            lightUpdate[Attribute.saturation.rawValue] = updatedSaturation
+        }
+
+        if let updatedBrightness = state.brightness, self.state?.brightness != updatedBrightness {
+            self.state?.brightness = updatedBrightness
+            lightUpdate[Attribute.brightness.rawValue] = updatedBrightness
+        }
+
+        self.state?.isPowered = state.isPowered
+        lightUpdate[Attribute.brightness.rawValue] = state.isPowered
+
+        if let bridgeIdentifier = bridgeIdentifier {
+            lightUpdate[Attribute.bridgeIdentifier.rawValue] = bridgeIdentifier
+        }
+
+        return lightUpdate
     }
 
     /// Returns true if sync made changes
