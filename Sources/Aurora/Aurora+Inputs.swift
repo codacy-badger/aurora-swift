@@ -72,7 +72,7 @@ extension Aurora {
                 updateActiveReachableLightsFor(activeLightScene: activeLightScene, with: transformer)
             }
         }
-        delegates.forEach { $0.didUpdateAudioLevel(current: audioProcessor.level, threshold: audioProcessor.thresholdLevel) }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateAudioLevel(current: self.audioProcessor.level, threshold: self.audioProcessor.thresholdLevel) } }
     }
 
     /// Video
@@ -84,7 +84,7 @@ extension Aurora {
                 updateActiveReachableLightsFor(activeLightScene: activeLightScene, with: transformer)
             }
         }
-        delegates.forEach { $0.didUpdateVideoColor(hue: hue, saturation: saturation, brightness: brightness) }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateVideoColor(hue: hue, saturation: saturation, brightness: brightness) } }
     }
 
     private func updateActiveReachableLightsFor(activeLightScene: Scene, with transformer: @escaping LightsTransformer) {

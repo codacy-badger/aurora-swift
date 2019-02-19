@@ -18,7 +18,7 @@ extension Aurora {
         }
         scenes[sceneIdentifier]?.lights.formUnion(identifiers)
         print(activeLightIdentifiers)
-        delegates.forEach { $0.didUpdateLightsForSceneWith(identifier: sceneIdentifier) }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateLightsForSceneWith(identifier: sceneIdentifier) } }
     }
 
     public func remove(lightIdentifiers identifiers: [UUID], fromSceneWithIdentifier sceneIdentifier: UUID) {
@@ -27,7 +27,7 @@ extension Aurora {
         }
         scenes[sceneIdentifier]?.lights.subtract(identifiers)
         print(activeLightIdentifiers)
-        delegates.forEach { $0.didUpdateLightsForSceneWith(identifier: sceneIdentifier) }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateLightsForSceneWith(identifier: sceneIdentifier) } }
     }
 
     public func set(name: String, forSceneWithIdentifier identifier: UUID) {
@@ -45,7 +45,7 @@ extension Aurora {
         }
 
         scenes[identifier]?.name = name
-        delegates.forEach { $0.didUpdateScenes() }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateScenes() } }
     }
 
     public func set(effects: Scene.Effects, forSceneWithIdentifier identifier: UUID) {

@@ -5,7 +5,7 @@ extension Aurora {
         if let scene = scenes[identifier], scene.input.mode != inputMode {
             scenes[identifier]?.input.mode = inputMode
             refreshInputs()
-            delegates.forEach { $0.didUpdateScenes() }
+            DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateScenes() } }
         }
     }
 

@@ -20,12 +20,12 @@ extension Aurora {
 
     public func activate(lightsWithIdentifiers identifiers: [UUID]) {
         activeLightIdentifiers.formUnion(identifiers)
-        delegates.forEach { $0.didUpdateLights() }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateLights() } }
     }
 
     public func deactivate(lightsWithIdentifiers identifiers: [UUID]) {
         activeLightIdentifiers.subtract(identifiers)
-        delegates.forEach { $0.didUpdateLights() }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateLights() } }
     }
 
     public func activeLights(forSceneWithIdentifier identifier: UUID) -> [Light] {
@@ -37,11 +37,11 @@ extension Aurora {
 
     public func resetLights() {
         self.lights = []
-        delegates.forEach { $0.didUpdateLights() }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateLights() } }
     }
 
     public func removeUnreachableLights() {
         self.lights = lights.reachable
-        delegates.forEach { $0.didUpdateLights() }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateLights() } }
     }
 }

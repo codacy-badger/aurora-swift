@@ -23,7 +23,7 @@ extension Aurora {
         connectors.remove(type)
         self.lights = lights.forcedUnreachable(forType: type)
         update(connectors: connectors)
-        delegates.forEach { $0.didUpdateLights() }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateLights() } }
     }
 
     internal func update(connectors: Set<String>) {
@@ -43,6 +43,6 @@ extension Aurora {
             }
         }
         print("Aurora: Attached connectors:", self.attachedConnectors.map { $0.type })
-        delegates.forEach { $0.didUpdateConnectors() }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateConnectors() } }
     }
 }

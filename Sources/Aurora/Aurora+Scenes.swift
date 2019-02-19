@@ -45,19 +45,19 @@ extension Aurora {
         refreshInputs()
         refreshOutputs()
 
-        delegates.forEach { $0.didUpdateScenes() }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateScenes() } }
     }
 
     public func deactivateScenes() {
         activeSceneIdentifiers = []
         refreshInputs()
         refreshOutputs()
-        delegates.forEach { $0.didUpdateScenes() }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateScenes() } }
     }
 
     public func add(scenes: [Scene]) {
         self.scenes += scenes
-        delegates.forEach { $0.didUpdateScenes() }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateScenes() } }
     }
 
     public func remove(scene: Scene) {
@@ -65,12 +65,12 @@ extension Aurora {
             return
         }
         scenes.remove(at: index)
-        delegates.forEach { $0.didUpdateScenes() }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateScenes() } }
     }
 
     public func reset(scenes: [Scene]) {
         activeSceneIdentifiers = []
         self.scenes = scenes
-        delegates.forEach { $0.didUpdateScenes() }
+        DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateScenes() } }
     }
 }
