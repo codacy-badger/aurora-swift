@@ -1,7 +1,7 @@
 import Foundation
 
 extension Aurora {
-    public func set(outputMode: Output.Mode, forSceneWithIdentifier identifier: UUID) {
+    public func set(outputMode: Outputs.Mode, forSceneWithIdentifier identifier: UUID) {
         if let scene = scenes[identifier], scene.output.mode != outputMode {
             scenes[identifier]?.output.mode = outputMode
             refreshOutputs()

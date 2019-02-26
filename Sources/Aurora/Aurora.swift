@@ -22,8 +22,10 @@ public final class Aurora {
 
     public internal(set) var delegates: [AuroraDelegate]
 
-    var input: Input
-    var output: Output
+    var input: Inputs
+    public var inputsGenerator: Inputs.Generator?
+    var output: Outputs
+    public var outputsGenerator: Outputs.Generator?
 
     var audioProcessor: AudioProcessor
     var videoProcessor: VideoProcessor
@@ -32,8 +34,7 @@ public final class Aurora {
 
     public internal(set) var connectors: Set<String>
     var attachedConnectors: [Connectable]
-
-    public weak var constructor: Constructable?
+    public var connectorsGenerator: (String) -> Connectable? = { _ in nil }
 
     public init(mode: Mode = .simplex, lights: [Light] = [], activeLightIdentifiers: Set<UUID> = [], scenes: [Scene] = [], activeSceneIdentifiers: Set<UUID> = [], connectors: Set<String> = [], brightness: Float = 1.0, volume: Float = 1.0) {
         self.mode = mode
@@ -43,12 +44,12 @@ public final class Aurora {
         self.activeSceneIdentifiers = activeSceneIdentifiers
         self.brightness = brightness
         self.volume = volume
-        delegates = []
-        input = Input()
-        output = Output()
-        audioProcessor = AudioProcessor()
-        videoProcessor = VideoProcessor()
-        transformatorLock = false
+        self.delegates = []
+        self.input = Inputs()
+        self.output = Outputs()
+        self.audioProcessor = AudioProcessor()
+        self.videoProcessor = VideoProcessor()
+        self.transformatorLock = false
         self.connectors = connectors
         self.attachedConnectors = []
     }

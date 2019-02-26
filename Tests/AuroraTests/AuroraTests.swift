@@ -53,10 +53,7 @@ class AuroraTests: XCTestCase {
         XCTAssert(aurora.connectors.count == 1)
         XCTAssert(aurora.attachedConnectors.isEmpty)
 
-        let constructor = SimulatedConstructor()
-        /// Add Constructor
-        aurora.constructor = constructor
-
+        aurora.connectorsGenerator = { SimulatedConnector(type: $0) }
         aurora.attachConnectors()
 
         XCTAssert(aurora.connectors.count == 1)

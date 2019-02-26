@@ -9,17 +9,17 @@ class AuroraInputOutputTests: XCTestCase {
         Scene(name: "Scene2"),
         Scene(name: "Scene3"),
         /// Time Input Scenes
-        Scene(name: "TimeInputScene1", input: Input.Settings(mode: .time)),
-        Scene(name: "TimeInputScene2", input: Input.Settings(mode: .time)),
-        Scene(name: "TimeInputScene3", input: Input.Settings(mode: .time), output: Output.Settings(mode: .audio, track: "simulatedTrack1")),
+        Scene(name: "TimeInputScene1", input: Inputs.Settings(mode: .time)),
+        Scene(name: "TimeInputScene2", input: Inputs.Settings(mode: .time)),
+        Scene(name: "TimeInputScene3", input: Inputs.Settings(mode: .time), output: Outputs.Settings(mode: .audio, track: "simulatedTrack1")),
         /// Audio Input Scenes
-        Scene(name: "AudioInputScene1", input: Input.Settings(mode: .audio)),
-        Scene(name: "AudioInputScene2", input: Input.Settings(mode: .audio)),
-        Scene(name: "AudioInputScene3", input: Input.Settings(mode: .audio), output: Output.Settings(mode: .audio, track: "simulatedTrack2")),
+        Scene(name: "AudioInputScene1", input: Inputs.Settings(mode: .audio)),
+        Scene(name: "AudioInputScene2", input: Inputs.Settings(mode: .audio)),
+        Scene(name: "AudioInputScene3", input: Inputs.Settings(mode: .audio), output: Outputs.Settings(mode: .audio, track: "simulatedTrack2")),
         /// Video Input Scenes
-        Scene(name: "VideoInputScene1", input: Input.Settings(mode: .video)),
-        Scene(name: "VideoInputScene2", input: Input.Settings(mode: .video)),
-        Scene(name: "VideoInputScene3", input: Input.Settings(mode: .video), output: Output.Settings(mode: .audio, track: "simulatedTrack3"))
+        Scene(name: "VideoInputScene1", input: Inputs.Settings(mode: .video)),
+        Scene(name: "VideoInputScene2", input: Inputs.Settings(mode: .video)),
+        Scene(name: "VideoInputScene3", input: Inputs.Settings(mode: .video), output: Outputs.Settings(mode: .audio, track: "simulatedTrack3"))
     ]
 
     func testAuroraInputsOutputs() {
@@ -30,8 +30,9 @@ class AuroraInputOutputTests: XCTestCase {
     func verifyInputsOutputsTests(forMode mode: Aurora.Mode, randomizations count: Int) {
         /// Setup aurora with simulated inputs,outputs
         let aurora = Aurora(mode: mode, scenes: defaultScenes)
-        let constructor = SimulatedConstructor()
-        aurora.constructor = constructor
+        aurora.connectorsGenerator = { SimulatedConnector(type: $0) }
+        aurora.inputsGenerator = Inputs.Generator(time: { DeviceTimeInput() }, audio: { SimulatedAudioInput() }, video: { SimulatedVideoInput() })
+        aurora.outputsGenerator = Outputs.Generator { SimulatedAudioOutput() }
 
         (0...count).forEach { step in
             print("Step:", step)
@@ -65,7 +66,7 @@ class AuroraInputOutputTests: XCTestCase {
                 XCTAssert(aurora.activeScenes.filter { $0.output.mode == .audio }.isEmpty == (aurora.output.audio == nil) )
 
                 /// Switch input to a new random
-                if .random(), let randomInput = Input.Mode.allCases.randomElement() {
+                if .random(), let randomInput = Inputs.Mode.allCases.randomElement() {
                     aurora.set(inputMode: randomInput, forSceneWithIdentifier: scene.identifier)
                 }
             }

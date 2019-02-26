@@ -7,8 +7,8 @@ class SceneTests: XCTestCase {
             name: "Scene",
             identifier: UUID(),
             lights: [UUID(), UUID()],
-            input: Input.Settings(mode: .time, interval: 1.0, transition: 1.0),
-            output: Output.Settings(mode: .none, track: nil),
+            input: Inputs.Settings(mode: .time, interval: 1.0, transition: 1.0),
+            output: Outputs.Settings(mode: .none, track: nil),
             coloring: Coloring(
                 mode: .spectrum,
                 hue: 0.5,

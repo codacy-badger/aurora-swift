@@ -32,20 +32,20 @@ extension Aurora {
                 print("Aurora: Refreshing input for mode `none` is not required")
 
             case .time:
-                if input.time == nil, let timeInput = constructor?.constructTimeInput() {
+                if input.time == nil, let timeInput = inputsGenerator?.time() {
                     input.time = timeInput
                     input.time?.start(onLoop: self.onTimeLoop)
                 }
                 input.time?.add(loop: scene.identifier, duration: scene.input.interval)
 
             case .audio:
-                if input.audio == nil, let audioInput = constructor?.constructAudioInput() {
+                if input.audio == nil, let audioInput = inputsGenerator?.audio() {
                     input.audio = audioInput
                     input.audio?.start(onLevel: self.onAudioLevelChange)
                 }
 
             case .video:
-                if input.video == nil, let videoInput = constructor?.constructVideoInput() {
+                if input.video == nil, let videoInput = inputsGenerator?.video() {
                     input.video = videoInput
                     input.video?.start(index: 0, onColor: self.onVideoColorChange)
                 }

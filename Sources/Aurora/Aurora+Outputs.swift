@@ -16,7 +16,7 @@ extension Aurora {
             print("No output")
 
         case .audio:
-            if let track = scene.output.track, let audioOutput = constructor?.constructAudioOutput() {
+            if let track = scene.output.track, let audioOutput = outputsGenerator?.audio() {
                 print("Aurora: Building Audio Output")
                 output.audio = audioOutput
                 output.audio?.play(track: track, volume: self.volume)

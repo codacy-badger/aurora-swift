@@ -1,7 +1,7 @@
 import Foundation
 
 extension Aurora {
-    public func set(inputMode: Input.Mode, forSceneWithIdentifier identifier: UUID) {
+    public func set(inputMode: Inputs.Mode, forSceneWithIdentifier identifier: UUID) {
         if let scene = scenes[identifier], scene.input.mode != inputMode {
             scenes[identifier]?.input.mode = inputMode
             refreshInputs()

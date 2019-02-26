@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Input {
+public struct Inputs {
     public enum Mode: String, Equatable, Codable, CaseIterable {
         case none, time, audio, video
     }
@@ -16,6 +16,18 @@ public struct Input {
             self.mode = mode
             self.interval = interval
             self.transition = transition
+        }
+    }
+
+    public struct Generator {
+        let time: () -> TimeInputable?
+        let audio: () -> AudioInputable?
+        let video: () -> VideoInputable?
+
+        public init(time: @escaping () -> TimeInputable? = { nil }, audio: @escaping () -> AudioInputable? = { nil }, video: @escaping () -> VideoInputable? = { nil }) {
+            self.time = time
+            self.audio = audio
+            self.video = video
         }
     }
 

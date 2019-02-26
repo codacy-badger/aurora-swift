@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Output {
+public struct Outputs {
     public enum Mode: String, Equatable, Codable {
         case none, audio
     }
@@ -12,6 +12,14 @@ public struct Output {
         public init(mode: Mode = .none, track: String? = nil) {
             self.mode = mode
             self.track = track
+        }
+    }
+
+    public struct Generator {
+        let audio: () -> AudioOutputable?
+
+        public init(audio: @escaping () -> AudioOutputable? = { nil }) {
+            self.audio = audio
         }
     }
 

@@ -32,7 +32,7 @@ extension Aurora {
         /// Add connectors that are in the set but not in an connectors array.
         connectors.forEach { type in
             if !self.attachedConnectors.contains(where: { $0.type == type }) {
-                if let connector = constructor?.constructConnectorFor(type: type) {
+                if let connector = connectorsGenerator(type) {
                     /// Add connector to connectors array.
                     self.attachedConnectors.append(connector)
                     connector.connect(onSync: { self.sync(lights: $0) }, onEvent: { self.sync(event: $0) })
