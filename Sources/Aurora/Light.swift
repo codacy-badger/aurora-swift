@@ -99,6 +99,9 @@ public struct Light: Identifiable, Codable, Equatable {
             Attribute.transitionTime.rawValue: transitionTime
         ]
 
+        self.state?.isPowered = state.isPowered
+        lightUpdate[Attribute.power.rawValue] = state.isPowered
+
         if let updatedHue = state.hue, self.state?.hue != updatedHue {
             self.state?.hue = updatedHue
             lightUpdate[Attribute.hue.rawValue] = updatedHue
@@ -113,9 +116,6 @@ public struct Light: Identifiable, Codable, Equatable {
             self.state?.brightness = updatedBrightness
             lightUpdate[Attribute.brightness.rawValue] = updatedBrightness
         }
-
-        self.state?.isPowered = state.isPowered
-        lightUpdate[Attribute.brightness.rawValue] = state.isPowered
 
         if let bridgeIdentifier = bridgeIdentifier {
             lightUpdate[Attribute.bridgeIdentifier.rawValue] = bridgeIdentifier

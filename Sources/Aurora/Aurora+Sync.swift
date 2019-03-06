@@ -1,11 +1,15 @@
 import Foundation
 
 extension Aurora {
-    func sync(lights: [[String: Any]]) {
+    public func sync(lights: [[String: Any]]) {
+        print("Aurora: Syncing lights from attributes")
+        print(lights)
         sync(lights: lights.compactMap { Light(attributes: $0) })
     }
 
-    func sync(lights: [Light]) {
+    public func sync(lights: [Light]) {
+        print("Aurora: Syncing lights")
+        print(lights)
         /// Sync lights
         if self.lights.sync(with: lights) {
             /// Notify delegate if necessary
@@ -13,7 +17,7 @@ extension Aurora {
         }
     }
 
-    func sync(event: [String: Any]) {
+    public func sync(event: [String: Any]) {
         /// Check if event has a type attribute and is coming from active connector.
         guard let type = event[Attribute.type.rawValue] as? String, connectors.contains(type) else { return }
         /// Check if event has a name attribute.

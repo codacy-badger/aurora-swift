@@ -1,10 +1,3 @@
-//
-//  Aurora+Transformers.swift
-//  Aurora
-//
-//  Created by Alex Buzov on 2019-01-26.
-//
-
 import Foundation
 
 internal typealias LightsTransformer = ([Light]) -> [(updatedLight: Light, update: [String: Any])]
