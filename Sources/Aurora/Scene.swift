@@ -22,7 +22,7 @@ public struct Scene: Codable, Identifiable, Equatable {
     public var effects: Effects
 
     /// Context identifier for this scene.
-    public let context: String?
+    public var context: String?
 
     public init(name: String, identifier: UUID = UUID(), lights: Set<UUID> = [], input: Inputs.Settings = Inputs.Settings(), output: Outputs.Settings = Outputs.Settings(), coloring: Coloring = Coloring(), effects: Effects = [], context: String? = nil) {
         self.name = name
