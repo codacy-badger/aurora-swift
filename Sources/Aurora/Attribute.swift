@@ -14,4 +14,5 @@ public enum Attribute: String, Equatable {
     case brightness
     case saturation
     case payload
+    case context
 }

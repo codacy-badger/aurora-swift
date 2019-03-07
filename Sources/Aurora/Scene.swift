@@ -21,7 +21,10 @@ public struct Scene: Codable, Identifiable, Equatable {
     public var coloring: Coloring
     public var effects: Effects
 
-    public init(name: String, identifier: UUID = UUID(), lights: Set<UUID> = [], input: Inputs.Settings = Inputs.Settings(), output: Outputs.Settings = Outputs.Settings(), coloring: Coloring = Coloring(), effects: Effects = []) {
+    /// Context identifier for this scene.
+    public let context: String?
+
+    public init(name: String, identifier: UUID = UUID(), lights: Set<UUID> = [], input: Inputs.Settings = Inputs.Settings(), output: Outputs.Settings = Outputs.Settings(), coloring: Coloring = Coloring(), effects: Effects = [], context: String? = nil) {
         self.name = name
         self.identifier = identifier
         self.lights = lights
@@ -29,5 +32,6 @@ public struct Scene: Codable, Identifiable, Equatable {
         self.output = output
         self.coloring = coloring
         self.effects = effects
+        self.context = context
     }
 }

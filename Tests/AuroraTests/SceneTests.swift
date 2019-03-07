@@ -17,7 +17,8 @@ class SceneTests: XCTestCase {
                 saturation: 0.0...0.5,
                 brightness: 0.5...1.0
             ),
-            effects: []
+            effects: [],
+            context: "ea69bb74-a7c9-428f-b48b-44168c70db5a"
         )
 
         XCTAssert(scene.name == "Scene")

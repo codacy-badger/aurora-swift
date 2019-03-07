@@ -48,12 +48,15 @@ public struct Light: Identifiable, Codable, Equatable {
     /// Model of the device
     public internal(set) var model: String?
 
+    /// Context
+    public internal(set) var context: String?
+
     /// Reachability
     public var isReachable: Bool {
         return state != nil
     }
 
-    public init(name: String, type: String, manufacturerIdentifier: String, identifier: UUID = UUID(), bridgeIdentifier: String? = nil, state: State? = nil, model: String? = nil) {
+    public init(name: String, type: String, manufacturerIdentifier: String, identifier: UUID = UUID(), bridgeIdentifier: String? = nil, state: State? = nil, model: String? = nil, context: String? = nil) {
         self.name = name
         self.type = type
         self.manufacturerIdentifier = manufacturerIdentifier
@@ -61,6 +64,7 @@ public struct Light: Identifiable, Codable, Equatable {
         self.bridgeIdentifier = bridgeIdentifier
         self.state = state
         self.model = model
+        self.context = context
     }
 
     init?(attributes: [String: Any]) {
@@ -70,6 +74,7 @@ public struct Light: Identifiable, Codable, Equatable {
 
         let bridgeIdentifier: String? = attributes[Attribute.bridgeIdentifier.rawValue] as? String
         let model: String? = attributes[Attribute.model.rawValue] as? String
+        let context: String? = attributes[Attribute.context.rawValue] as? String
 
         var state: State?
 
@@ -86,7 +91,8 @@ public struct Light: Identifiable, Codable, Equatable {
             manufacturerIdentifier: manufacturerIdentifier,
             bridgeIdentifier: bridgeIdentifier,
             state: state,
-            model: model
+            model: model,
+            context: context
         )
     }
 
@@ -147,7 +153,11 @@ public struct Light: Identifiable, Codable, Equatable {
     }
 
     func phisicallyEqual(to light: Light) -> Bool {
-        return self.manufacturerIdentifier == light.manufacturerIdentifier && self.type == light.type && self.bridgeIdentifier == light.bridgeIdentifier
+        return
+            self.manufacturerIdentifier == light.manufacturerIdentifier &&
+            self.type == light.type &&
+            self.bridgeIdentifier == light.bridgeIdentifier &&
+            self.context == light.context
     }
 
     var forcedUnreachable: Light {

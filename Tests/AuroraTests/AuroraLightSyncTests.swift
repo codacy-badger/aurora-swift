@@ -9,6 +9,8 @@ class AuroraLightSyncTests: XCTestCase {
         /// Sync first light with minimum attributes and without a state
         let light1Attributes1: [String: Any] = [
             Attribute.manufacturerIdentifier.rawValue: "1",
+            Attribute.bridgeIdentifier.rawValue: "ac6b9a9c-5c1e-41b4-b350-49b382983e7e",
+            Attribute.context.rawValue: "fec05f25-058c-44bf-97f6-acc20412e6ed",
             Attribute.name.rawValue: "Light 1",
             Attribute.type.rawValue: "simulated"
         ]
@@ -21,7 +23,8 @@ class AuroraLightSyncTests: XCTestCase {
             XCTAssert(light.manufacturerIdentifier == "1")
             XCTAssert(light.name == "Light 1")
             XCTAssert(light.type == "simulated")
-            XCTAssert(light.bridgeIdentifier == nil)
+            XCTAssert(light.bridgeIdentifier == "ac6b9a9c-5c1e-41b4-b350-49b382983e7e")
+            XCTAssert(light.context == "fec05f25-058c-44bf-97f6-acc20412e6ed")
             XCTAssert(light.model == nil)
             XCTAssert(light.state == nil)
             XCTAssert(light.isReachable == false)
@@ -33,6 +36,8 @@ class AuroraLightSyncTests: XCTestCase {
 
         let light1Attributes2: [String: Any] = [
             Attribute.manufacturerIdentifier.rawValue: "1",
+            Attribute.bridgeIdentifier.rawValue: "ac6b9a9c-5c1e-41b4-b350-49b382983e7e",
+            Attribute.context.rawValue: "fec05f25-058c-44bf-97f6-acc20412e6ed",
             Attribute.name.rawValue: "Light 2",
             Attribute.type.rawValue: "simulated",
             Attribute.model.rawValue: "v1",
