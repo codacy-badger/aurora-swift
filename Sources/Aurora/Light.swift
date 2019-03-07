@@ -8,6 +8,7 @@ public struct Light: Identifiable, Codable, Equatable {
         case manufacturerIdentifier
         case bridgeIdentifier
         case model
+        case context
     }
 
     public struct State: Codable, Equatable {
