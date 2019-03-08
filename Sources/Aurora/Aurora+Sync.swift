@@ -10,10 +10,23 @@ extension Aurora {
     public func sync(lights: [Light]) {
         print("Aurora: Syncing lights")
         print(lights)
-        /// Sync lights
-        if self.lights.sync(with: lights) {
+        /// Sync lights from valid connectors
+        let syncResults = self.lights.sync(with: lights.filter { connectors.contains($0.type) })
+        DispatchQueue.main.async {
             /// Notify delegate if necessary
-            DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateLights() } }
+            if !syncResults.isEmpty {
+                self.delegates.forEach { $0.didUpdateLights() }
+            }
+
+            let lightsWithUpdatedReachability = syncResults.filter { $0.1.contains(.updatedReachability) }.map { $0.0 }
+            if !lightsWithUpdatedReachability.isEmpty {
+                self.delegates.forEach { $0.didUpdateReachabilityForLightsWith(identifiers: lightsWithUpdatedReachability) }
+            }
+
+            let lightsWithUpdatedColors = syncResults.filter { $0.1.contains(.updatedColor) }.map { $0.0 }
+            if !lightsWithUpdatedColors.isEmpty {
+                self.delegates.forEach { $0.didUpdateColorsForLightsWith(identifiers: lightsWithUpdatedColors) }
+            }
         }
     }
 

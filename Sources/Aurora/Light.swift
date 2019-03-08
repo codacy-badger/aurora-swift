@@ -34,6 +34,15 @@ public struct Light: Identifiable, Codable, Equatable {
         public let transitionTime: Float
     }
 
+    struct SyncResult: OptionSet {
+        let rawValue: Int
+        static let updatedName = SyncResult(rawValue: 1 << 0)
+        static let updatedColor = SyncResult(rawValue: 1 << 1)
+        static let updatedReachability = SyncResult(rawValue: 1 << 2)
+        static let updatedModel = SyncResult(rawValue: 1 << 3)
+        static let newLight = SyncResult(rawValue: 1 << 4)
+    }
+
     public internal(set) var name: String
     public internal(set) var type: String
     /// Serial number or other unique manufacturer identifier
@@ -132,25 +141,37 @@ public struct Light: Identifiable, Codable, Equatable {
     }
 
     /// Returns true if sync made changes
-    mutating func sync(with light: Light) -> Bool {
-        var hasChanges = false
+    mutating func sync(with light: Light) -> SyncResult {
+        var syncResult: SyncResult = []
 
         if self.name != light.name {
             self.name = light.name
-            hasChanges = true
+            syncResult.insert(.updatedName)
         }
 
         if self.state != light.state {
+            /// Reachability updated when state went from nil to non-nil or from non-nil to nil.
+            switch (self.state, light.state) {
+            case let (oldState, newState) where oldState != nil && newState == nil:
+                syncResult.insert(.updatedReachability)
+            case let (oldState, newState) where oldState == nil && newState != nil:
+                syncResult.insert(.updatedReachability)
+                syncResult.insert(.updatedColor)
+            /// Color updated when one of the color componets is updated.
+            case let (oldState, newState) where oldState?.isPowered != newState?.isPowered || oldState?.hue != newState?.hue || oldState?.saturation != newState?.saturation || oldState?.brightness != newState?.brightness:
+                syncResult.insert(.updatedColor)
+            default:
+                break
+            }
             self.state = light.state
-            hasChanges = true
         }
 
         if self.model != light.model {
             self.model = light.model
-            hasChanges = true
+            syncResult.insert(.updatedModel)
         }
 
-        return hasChanges
+        return syncResult
     }
 
     func phisicallyEqual(to light: Light) -> Bool {
@@ -181,21 +202,22 @@ extension Array where Element == Light {
         return self.map { $0.type == type ? $0.forcedUnreachable : $0 }
     }
 
-    mutating func sync(with lights: [Light]) -> Bool {
+    mutating func sync(with lights: [Light]) -> [(UUID, Light.SyncResult)] {
         /// Track changes
-        var hasChanges = false
+        var syncResults: [(UUID, Light.SyncResult)] = []
         lights.forEach { lightToSync in
             if let index = self.index(where: { $0.phisicallyEqual(to: lightToSync) }) {
                 /// Light exists
-                if self[index].sync(with: lightToSync) {
-                    hasChanges = true
+                let syncResult = self[index].sync(with: lightToSync)
+                if !syncResult.isEmpty {
+                    syncResults.append((self[index].identifier, syncResult))
                 }
             } else {
                 /// New light
                 self.append(lightToSync)
-                hasChanges = true
+                syncResults.append((lightToSync.identifier, .newLight))
             }
         }
-        return hasChanges
+        return syncResults
     }
 }

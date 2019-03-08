@@ -8,6 +8,7 @@ public struct Scene: Codable, Identifiable, Equatable {
             self.rawValue = rawValue
         }
 
+        public static let none = Effects(rawValue: 0)
         public static let strobe = Effects(rawValue: 1 << 0)
     }
 

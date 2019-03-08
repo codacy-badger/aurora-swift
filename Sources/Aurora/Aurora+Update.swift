@@ -13,14 +13,16 @@ extension Aurora {
             let result = transformer(lights)
             DispatchQueue.main.async {
                 self.transformatorLock = false
-                var lights = self.lights
-                let updatedLights = result.map { $0.updatedLight }
-                updatedLights.forEach {
-                    lights[$0.identifier] = $0
-                }
-                self.lights = lights
+                //var lights = self.lights
+                //let updatedLights =
+
+                self.sync(lights: result.map { $0.updatedLight })
+                //updatedLights.forEach {
+                //    lights[$0.identifier] = $0
+                // }
+                //self.lights = lights
                 self.send(lightUpdates: result.map { $0.update })
-                self.delegates.forEach { $0.didUpdateColorsForLightsWith(identifiers: updatedLights.map { $0.identifier }) }
+                //self.delegates.forEach { $0.didUpdateColorsForLightsWith(identifiers: updatedLights.map { $0.identifier }) }
             }
         }
     }

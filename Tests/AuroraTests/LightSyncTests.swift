@@ -15,7 +15,10 @@ class LightSyncTests: XCTestCase {
             model: "v1"
         )
 
-        XCTAssert(lights.sync(with: [firstLight]) == true)
+        let result = lights.sync(with: [firstLight])
+        XCTAssert(result.count == 1)
+        XCTAssert(result.first?.0 == firstLight.identifier)
+        XCTAssert(result.first?.1 == .newLight)
         XCTAssert(lights.first == firstLight)
 
         /// Sync same light with chnages
@@ -28,7 +31,10 @@ class LightSyncTests: XCTestCase {
             model: "v2"
         )
 
-        XCTAssert(lights.sync(with: [updatedLight]) == true)
+        let result2 = lights.sync(with: [updatedLight])
+        XCTAssert(result2.count == 1)
+        XCTAssert(result2.first?.0 == firstLight.identifier)
+        XCTAssert(result2.first?.1 == [.updatedName, .updatedColor, .updatedModel])
         XCTAssert(lights.count == 1)
 
         if let light = lights.first {
@@ -55,7 +61,10 @@ class LightSyncTests: XCTestCase {
             model: "v2"
         )
 
-        XCTAssert(lights.sync(with: [unreachableLight]) == true)
+        let result3 = lights.sync(with: [unreachableLight])
+        XCTAssert(result3.count == 1)
+        XCTAssert(result3.first?.0 == firstLight.identifier)
+        XCTAssert(result3.first?.1 == [.updatedReachability])
         XCTAssert(lights.count == 1)
 
         if let light = lights.first {
@@ -81,7 +90,10 @@ class LightSyncTests: XCTestCase {
             model: "v2"
         )
 
-        XCTAssert(lights.sync(with: [reconnectedLight]) == true)
+        let result4 = lights.sync(with: [reconnectedLight])
+        XCTAssert(result4.count == 1)
+        XCTAssert(result4.first?.0 == firstLight.identifier)
+        XCTAssert(result4.first?.1 == [.updatedReachability, .updatedColor, .updatedName])
         XCTAssert(lights.count == 1)
 
         if let light = lights.first {
@@ -107,7 +119,10 @@ class LightSyncTests: XCTestCase {
             model: "v2"
         )
 
-        XCTAssert(lights.sync(with: [secondLight]) == true)
+        let result5 = lights.sync(with: [secondLight])
+        XCTAssert(result5.count == 1)
+        XCTAssert(result5.first?.0 == secondLight.identifier)
+        XCTAssert(result5.first?.1 == [.newLight])
         XCTAssert(lights.count == 2)
 
         if let light = lights.last {

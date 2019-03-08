@@ -3,7 +3,7 @@ import XCTest
 
 class AuroraLightSyncTests: XCTestCase {
     func testLightsSyncFromAttributes() {
-        let aurora = Aurora(mode: .simplex)
+        let aurora = Aurora(mode: .simplex, connectors: ["simulated"])
         XCTAssert(aurora.lights.isEmpty)
 
         /// Sync first light with minimum attributes and without a state
