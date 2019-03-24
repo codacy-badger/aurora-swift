@@ -48,10 +48,48 @@ public enum ValueScope: Codable, Equatable {
             try container.encode(value, forKey: .spectrum)
         }
     }
+
+    public static func ==(lhs: ValueScope, rhs: ValueScope) -> Bool {
+        switch (rhs, lhs) {
+        case (.constant, .constant), (.range, .range), (.spectrum, .spectrum):
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 extension ValueScope: ExpressibleByFloatLiteral {
     public init(floatLiteral value: Float) {
         self = .constant(value)
+    }
+}
+
+extension ValueScope {
+    public var random: Float {
+        switch self {
+        case let .constant(value):
+            return value
+        case let .range(value):
+            return .random(in: value)
+        case let .spectrum(value):
+            return value.randomHue
+        }
+    }
+}
+
+extension Float {
+    public func clamped(to scope: ValueScope?) -> Float {
+        switch scope {
+        case let .some(.constant(value)):
+            return value
+        case let .some(.range(value)):
+            return min(value.upperBound, max(self, value.lowerBound))
+        case .some(.spectrum(_)):
+            /// No spectrum support yet
+            return self
+        case .none:
+            return self
+        }
     }
 }

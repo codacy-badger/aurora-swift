@@ -24,17 +24,10 @@ extension Aurora {
     internal func lightsTransformer(preset: Scene, hue: Float, brightness: Float, saturation: Float) -> LightsTransformer {
         return { lights in
             lights.compactMap { [weak self] light in
-                //fix me
-                //let saturation = min(preset.coloring.saturation.maximum, max(saturation, preset.coloring.saturation.minimum))
-                //let brightness = min(preset.coloring.brightness.maximum, max(brightness, preset.coloring.brightness.minimum))
-
+                let saturation = saturation.clamped(to: preset.saturation)
+                let brightness = saturation.clamped(to: preset.brightness) * (self?.brightness ?? 1.0)
                 var light = light
-                let lightState = Light.State(
-                    isPowered: true,
-                    hue: hue,
-                    saturation: saturation,
-                    brightness: brightness * (self?.brightness ?? 1.0)
-                )
+                let lightState = Light.State(isPowered: true, hue: hue, saturation: saturation, brightness: brightness)
                 let update = light.update(from: lightState, withTransitionTime: preset.randomTransition)
                 return (light, update)
             }

@@ -48,20 +48,40 @@ extension Aurora {
         DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateScenes() } }
     }
 
+    public func set(input: Input.Settings?, forSceneWithIdentifier identifier: UUID) {
+        if let scene = scenes[identifier], scene.input != input {
+            scenes[identifier]?.input = input
+            refreshInputs()
+            DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateScenes() } }
+        }
+    }
+
+    public func set(output: Output.Settings?, forSceneWithIdentifier identifier: UUID) {
+        if let scene = scenes[identifier], scene.output != output {
+            scenes[identifier]?.output = output
+            refreshOutputs()
+            DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateScenes() } }
+        }
+    }
+
+    public func set(hue: ValueScope?, forSceneWithIdentifier identifier: UUID) {
+        scenes[identifier]?.hue = hue
+    }
+
+    public func set(saturation: ValueScope?, forSceneWithIdentifier identifier: UUID) {
+        scenes[identifier]?.saturation = saturation
+    }
+
+    public func set(brightness: ValueScope?, forSceneWithIdentifier identifier: UUID) {
+        scenes[identifier]?.brightness = brightness
+    }
+
     public func set(effects: Scene.Effects?, forSceneWithIdentifier identifier: UUID) {
         scenes[identifier]?.effects = effects
     }
 
-    public func toggle(effects: Scene.Effects, forSceneWithIdentifier identifier: UUID) {
-        fatalError("Not Implemented")
-    }
-
-    public func set(brightness: Float) {
-        self.brightness = max(0.0, min(brightness, 1.0))
-    }
-
-    public func set(volume: Float) {
-        self.volume = max(0.0, min(volume, 1.0))
-        output.audio?.set(volume: self.volume)
+    public func set(transition: ValueScope?, forSceneWithIdentifier identifier: UUID) {
+        scenes[identifier]?.transition = transition
+        refreshInputs()
     }
 }

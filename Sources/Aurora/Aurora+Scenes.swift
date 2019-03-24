@@ -1,14 +1,11 @@
 import Foundation
 
 extension Aurora {
-    /// Stable
-
     /// Simplex-only property get an active scene. This will return `nil` in a multiplex mode.
     public var scene: Scene? {
         return mode == .simplex ? activeScenes.first : nil
     }
 
-    ///
     public var activeScenes: [Scene] {
         return scenes.filter { activeSceneIdentifiers.contains($0.identifier) }
     }
@@ -22,23 +19,31 @@ extension Aurora {
     }
 
     public func toggle(sceneWithIdentifier identifier: UUID) {
-        guard scenes.contains(where: { $0.identifier == identifier }) else {
-            return
-        }
+        guard let scene = scenes.first(where: { $0.identifier == identifier }) else { return }
 
-        switch mode {
-        case .simplex:
-            if isActive(sceneWithIdentifier: identifier) {
-                activeSceneIdentifiers = []
-            } else {
-                activeSceneIdentifiers = [identifier]
+        if scene.requiresContiniousExecution {
+            switch mode {
+            case .simplex:
+                if isActive(sceneWithIdentifier: identifier) {
+                    activeSceneIdentifiers = []
+                } else {
+                    activeSceneIdentifiers = [identifier]
+                }
+
+            case .multiplex:
+                if isActive(sceneWithIdentifier: identifier) {
+                    activeSceneIdentifiers.remove(identifier)
+                } else {
+                    activeSceneIdentifiers.insert(identifier)
+                }
             }
-
-        case .multiplex:
-            if isActive(sceneWithIdentifier: identifier) {
-                activeSceneIdentifiers.remove(identifier)
-            } else {
-                activeSceneIdentifiers.insert(identifier)
+        } else {
+            switch mode {
+            case .simplex:
+                activeSceneIdentifiers = []
+                execute(sceneWithIdentifier: scene.identifier)
+            case .multiplex:
+                execute(sceneWithIdentifier: scene.identifier)
             }
         }
 

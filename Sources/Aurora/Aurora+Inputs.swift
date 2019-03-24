@@ -34,7 +34,7 @@ extension Aurora {
                     input.time = timeInput
                     input.time?.start(onLoop: self.onTimeLoop)
                 }
-                input.time?.add(loop: scene.identifier, duration: settings.interval)
+                input.time?.add(loop: scene.identifier, duration: settings.interval?.random ?? Float.random(in: timeIntervalRange))
 
             case let .some(.audio(settings)):
                 print(settings)
@@ -53,6 +53,14 @@ extension Aurora {
                 print("Aurora: Refreshing input for mode `none` is not required")
             }
         }
+    }
+
+    /// Manual
+    public func execute(sceneWithIdentifier identifier: UUID) {
+        print("Aurora: Scene execution", identifier)
+        guard let scene = scenes.first(where: { $0.identifier == identifier }) else { return }
+        let transformer = lightsTransformer(preset: scene)
+        updateActiveReachableLightsFor(activeLightScene: scene, with: transformer)
     }
 
     /// Time

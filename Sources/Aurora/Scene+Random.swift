@@ -2,42 +2,18 @@ import Foundation
 
 extension Scene {
     public var randomHue: Float {
-        return random(from: hue)
+        return hue?.random ?? .random(in: .unitInterval)
     }
 
     public var randomBrightness: Float {
-        return random(from: brightness)
+        return brightness?.random ?? .random(in: .unitInterval)
     }
 
     public var randomSaturation: Float {
-        return random(from: saturation)
+        return saturation?.random ?? .random(in: .unitInterval)
     }
 
     public var randomTransition: Float {
-        return randomTransition(from: transition)
-    }
-
-    private func random(from scope: ValueScope?) -> Float {
-        guard let scope = scope else { return .random(in: .unitInterval) }
-        switch scope {
-        case let .constant(value):
-            return value
-        case let .range(value):
-            return .random(in: value)
-        case let .spectrum(value):
-            return value.randomHue
-        }
-    }
-
-    private func randomTransition(from scope: ValueScope?) -> Float {
-        guard let scope = scope else { return 0.0 }
-        switch scope {
-        case let .constant(value):
-            return value
-        case let .range(value):
-            return .random(in: value)
-        case let .spectrum(value):
-            return value.randomHue
-        }
+        return transition?.random ?? 0.0
     }
 }

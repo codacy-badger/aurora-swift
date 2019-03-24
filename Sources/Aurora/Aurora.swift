@@ -8,6 +8,9 @@ public final class Aurora {
         case multiplex
     }
 
+    public let timeIntervalRange: ClosedRange<Float> = 0.5 ... 10.0
+    public let transitionRange: ClosedRange<Float> = 0.0 ... 10.0
+
     public internal(set) var mode: Mode
 
     public internal(set) var lights: [Light]

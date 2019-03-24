@@ -68,7 +68,8 @@ class AuroraInputOutputTests: XCTestCase {
                 }.isEmpty == (aurora.output.audio == nil) )
 
                 /// Switch input to a new random
-                if .random(), let randomInput = Input.Settings.allCases.randomElement() {
+                let cases: [Input.Settings] = [.time(.interval(1.0)), .audio(.source()), .video(.source())]
+                if .random(), let randomInput = cases.randomElement() {
                     aurora.set(input: randomInput, forSceneWithIdentifier: scene.identifier)
                 }
             }

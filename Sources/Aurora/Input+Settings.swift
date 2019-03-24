@@ -1,13 +1,18 @@
 import Foundation
 
 extension Input {
-    public enum Settings: Codable, Equatable, CaseIterable {
+    public enum Settings: Codable, Equatable {
         case time(TimeInputSettings)
         case audio(AudioInputSettings)
         case video(VideoInputSettings)
 
-        public static var allCases: [Input.Settings] {
-            return [.time(.interval(1.0)), .audio(.source()), .video(.source())]
+        public static func ==(lhs: Settings, rhs: Settings) -> Bool {
+            switch (rhs, lhs) {
+            case (.time, .time), (.audio, .audio), (.video, .video):
+                return true
+            default:
+                return false
+            }
         }
 
         enum Key: CodingKey {
@@ -53,27 +58,16 @@ extension Input {
             }
         }
     }
-
-//    public struct Settings: Codable, Equatable {
-//        public var mode: Mode
-//        /// Time between bursts
-//        public var interval: Float
-//
-//        public init(mode: Mode = .none, interval: Float = 1.0) {
-//            self.mode = mode
-//            self.interval = interval
-//        }
-//    }
 }
 
 public struct TimeInputSettings: Codable, Equatable {
-    public static func interval(_ seconds: Float) -> TimeInputSettings {
+    public static func interval(_ seconds:  ValueScope?) -> TimeInputSettings {
         return TimeInputSettings(interval: seconds)
     }
 
-    public var interval: Float
+    public var interval: ValueScope?
 
-    public init(interval: Float) {
+    public init(interval:  ValueScope?) {
         self.interval = interval
     }
 }

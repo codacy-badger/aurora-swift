@@ -35,6 +35,12 @@ public struct Scene: Identifiable, Equatable {
 }
 
 extension Scene {
+    var requiresContiniousExecution: Bool {
+        return input != nil
+    }
+}
+
+extension Scene {
     public struct Effects: OptionSet, Codable, Equatable {
         public let rawValue: Int
 
