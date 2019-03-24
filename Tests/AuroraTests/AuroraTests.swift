@@ -25,9 +25,12 @@ class AuroraTests: XCTestCase {
                     "identifier": "6e0dc91a-9090-468e-b193-91dddb1f616b",
                     "name": "Milky Way",
                     "lights": [],
-                    "input": { "mode": "time", "interval": 1.0, "transition": 1.0 },
-                    "output": { "mode": "none", "track": null },
-                    "coloring": { "mode": "spectrum", "hue": 0.5, "range": [0.0, 1.0], "spectrum": 127, "saturation": [0.0, 1.0], "brightness": [0.0, 1.0] },
+                    "input": { "time": { "interval": 1.0 } },
+                    "output": { "audio": { "track": "123" } },
+                    "hue": { "constant": 0.5 },
+                    "saturation": { "range": [0.0, 1.0] },
+                    "brightness": { "range":  [0.0, 1.0] },
+                    "transition": { "constant": 0.5 },
                     "effects": 0
                 }
             ],

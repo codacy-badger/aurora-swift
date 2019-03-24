@@ -22,10 +22,10 @@ public final class Aurora {
 
     public internal(set) var delegates: [AuroraDelegate]
 
-    var input: Inputs
-    public var inputsGenerator: Inputs.Generator?
-    var output: Outputs
-    public var outputsGenerator: Outputs.Generator?
+    var input: Input
+    public var inputGenerator: Input.Generator?
+    var output: Output
+    public var outputGenerator: Output.Generator?
 
     var audioProcessor: AudioProcessor
     var videoProcessor: VideoProcessor
@@ -45,8 +45,8 @@ public final class Aurora {
         self.brightness = brightness
         self.volume = volume
         self.delegates = []
-        self.input = Inputs()
-        self.output = Outputs()
+        self.input = Input()
+        self.output = Output()
         self.audioProcessor = AudioProcessor()
         self.videoProcessor = VideoProcessor()
         self.transformatorLock = false

@@ -2,7 +2,7 @@ import Foundation
 
 extension Aurora {
     func refreshOutputs() {
-        if activeScenes.filter({ $0.output.mode == .audio }).filter({ $0.output.track != nil }).isEmpty {
+        if activeScenes.audioOutputScenes.isEmpty {
             output.audio = nil
         }
 
@@ -11,16 +11,15 @@ extension Aurora {
             return
         }
 
-        switch scene.output.mode {
-        case .none:
-            print("No output")
-
-        case .audio:
-            if let track = scene.output.track, let audioOutput = outputsGenerator?.audio() {
+        switch scene.output {
+        case let .some(.audio(settings)):
+            if let audioOutput = outputGenerator?.audio() {
                 print("Aurora: Building Audio Output")
                 output.audio = audioOutput
-                output.audio?.play(track: track, volume: self.volume)
+                output.audio?.play(track: settings.track, volume: self.volume)
             }
+        default:
+            print("No output")
         }
     }
 }

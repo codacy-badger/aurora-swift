@@ -48,7 +48,7 @@ extension Aurora {
         DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateScenes() } }
     }
 
-    public func set(effects: Scene.Effects, forSceneWithIdentifier identifier: UUID) {
+    public func set(effects: Scene.Effects?, forSceneWithIdentifier identifier: UUID) {
         scenes[identifier]?.effects = effects
     }
 

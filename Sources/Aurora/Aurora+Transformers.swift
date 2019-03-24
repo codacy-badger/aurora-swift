@@ -9,12 +9,12 @@ extension Aurora {
             lights.compactMap { [weak self] light in
                 var light = light
                 let lightState = Light.State(
-                    isPowered: preset.effects.contains(.strobe) ? !(light.state?.isPowered ?? false) : true,
-                    hue: preset.coloring.randomHue,
-                    saturation: preset.coloring.randomSaturation,
-                    brightness: preset.coloring.randomBrightness * (self?.brightness ?? 1.0)
+                    isPowered: (preset.effects?.contains(.strobe) ?? false) ? !(light.state?.isPowered ?? false) : true,
+                    hue: preset.randomHue,
+                    saturation: preset.randomSaturation,
+                    brightness: preset.randomBrightness * (self?.brightness ?? 1.0)
                 )
-                let update = light.update(from: lightState, withTransitionTime: preset.input.transition)
+                let update = light.update(from: lightState, withTransitionTime: preset.randomTransition)
                 return (light, update)
             }
         }
@@ -24,8 +24,9 @@ extension Aurora {
     internal func lightsTransformer(preset: Scene, hue: Float, brightness: Float, saturation: Float) -> LightsTransformer {
         return { lights in
             lights.compactMap { [weak self] light in
-                let saturation = min(preset.coloring.saturation.maximum, max(saturation, preset.coloring.saturation.minimum))
-                let brightness = min(preset.coloring.brightness.maximum, max(brightness, preset.coloring.brightness.minimum))
+                //fix me
+                //let saturation = min(preset.coloring.saturation.maximum, max(saturation, preset.coloring.saturation.minimum))
+                //let brightness = min(preset.coloring.brightness.maximum, max(brightness, preset.coloring.brightness.minimum))
 
                 var light = light
                 let lightState = Light.State(
@@ -34,7 +35,7 @@ extension Aurora {
                     saturation: saturation,
                     brightness: brightness * (self?.brightness ?? 1.0)
                 )
-                let update = light.update(from: lightState, withTransitionTime: preset.input.transition)
+                let update = light.update(from: lightState, withTransitionTime: preset.randomTransition)
                 return (light, update)
             }
         }

@@ -1,24 +1,6 @@
 import Foundation
 
-public struct Inputs {
-    public enum Mode: String, Equatable, Codable, CaseIterable {
-        case none, time, audio, video
-    }
-
-    public struct Settings: Codable, Equatable {
-        public var mode: Mode
-        /// Time between bursts
-        public var interval: Float
-        /// Burst duration
-        public var transition: Float
-
-        public init(mode: Mode = .none, interval: Float = 1.0, transition: Float = 0.0) {
-            self.mode = mode
-            self.interval = interval
-            self.transition = transition
-        }
-    }
-
+public struct Input {
     public struct Generator {
         let time: () -> TimeInputable?
         let audio: () -> AudioInputable?

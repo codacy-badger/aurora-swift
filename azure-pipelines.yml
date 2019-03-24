@@ -1,26 +1,31 @@
+
 trigger:
 - master
 
-jobs:
-- job: Code_Quality
+jobs:    
+- job: iOS_Tests
   pool:
-    vmImage: 'Ubuntu 16.04'
-  container: norionomura/swiftlint:swift-4.2.1
-  timeoutInMinutes: 5
+   vmImage: 'macOS 10.13'
+  timeoutInMinutes: 10
+  strategy:
+    maxParallel: 3
+    matrix:
+      iPhone_5s_iOS12_1:
+        device: 'iPhone 5s,OS=12.1'
   steps:
-  - script: |
-      set -o pipefail
-      swiftlint lint --strict
-    displayName: 'swift lint'
-  
-- job: SPM_Tests
-  dependsOn: Code_Quality
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  container: swift:4.2.1
-  timeoutInMinutes: 5
-  steps:
-  - script: |
-      set -o pipefail
-      swift test --parallel
-    displayName: 'swift test'
+  - script: swift package generate-xcodeproj
+  - task: Xcode@5
+    displayName: 'Xcode iOS Build'
+    inputs:
+      actions: 'test'
+      scheme: 'Aurora-Package'
+      xcWorkspacePath: 'Aurora.xcodeproj'
+      sdk: 'iphonesimulator12.1'
+      configuration: 'Debug'
+      xcodeVersion: '10'
+      packageApp: false
+      destinationSimulators: $(device)
+      destinationTypeOption: 'simulators'
+      destinationPlatformOption: 'iOS'
+      signingOption: "auto"
+      useXcpretty: false
