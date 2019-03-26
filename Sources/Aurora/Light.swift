@@ -206,7 +206,7 @@ extension Array where Element == Light {
         /// Track changes
         var syncResults: [(UUID, Light.SyncResult)] = []
         lights.forEach { lightToSync in
-            if let index = self.index(where: { $0.phisicallyEqual(to: lightToSync) }) {
+            if let index = self.firstIndex(where: { $0.phisicallyEqual(to: lightToSync) }) {
                 /// Light exists
                 let syncResult = self[index].sync(with: lightToSync)
                 if !syncResult.isEmpty {

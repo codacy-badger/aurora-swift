@@ -16,7 +16,7 @@ extension Aurora {
     /// Removes delegate from the array.
     /// Delegate is responsible for deleting itself with this method call.
     public func remove(delegate: AuroraDelegate) {
-        if let index = delegates.index(where: { $0 === delegate }) {
+        if let index = delegates.firstIndex(where: { $0 === delegate }) {
             delegates.remove(at: index)
             print("Delegates", delegates.count)
         }

@@ -66,7 +66,7 @@ extension Aurora {
     }
 
     public func remove(scene: Scene) {
-        guard let index = scenes.index(of: scene) else {
+        guard let index = scenes.firstIndex(of: scene) else {
             return
         }
         scenes.remove(at: index)

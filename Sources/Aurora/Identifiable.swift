@@ -10,7 +10,7 @@ extension Array where Element: Identifiable {
             return first { $0.identifier == identifier }
         }
         set {
-            if let index = index(where: { $0.identifier == identifier }), let element = newValue {
+            if let index = firstIndex(where: { $0.identifier == identifier }), let element = newValue {
                 self[index] = element
             }
         }
