@@ -19,7 +19,7 @@ class AuroraInputOutputTests: XCTestCase {
         /// Video Input Scenes
         Scene(name: "VideoInputScene1", input: .video(.source())),
         Scene(name: "VideoInputScene2", input: .video(.source())),
-        Scene(name: "VideoInputScene3", input:.video(.source()), output: .audio(.track("simulatedTrack3")))
+        Scene(name: "VideoInputScene3", input: .video(.source()), output: .audio(.track("simulatedTrack3")))
     ]
 
     func testAuroraInputsOutputs() {
@@ -63,10 +63,7 @@ class AuroraInputOutputTests: XCTestCase {
 
             /// Test outputs
             if aurora.mode == .simplex {
-                XCTAssert(aurora.activeScenes.compactMap { $0.output }.filter {
-                    if case Output.Settings.audio(_) = $0 { return true } else { return false }
-                }.isEmpty == (aurora.output.audio == nil) )
-
+                XCTAssert(aurora.activeScenes.compactMap { $0.output }.filter { if case Output.Settings.audio(_) = $0 { return true } else { return false } }.isEmpty == (aurora.output.audio == nil))
                 /// Switch input to a new random
                 let cases: [Input.Settings] = [.time(.interval(1.0)), .audio(.source()), .video(.source())]
                 if .random(), let randomInput = cases.randomElement() {

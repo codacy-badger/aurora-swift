@@ -54,30 +54,30 @@ extension Scene {
 
 extension Collection where Element == Scene {
     public var timeInputScenes: [Scene] {
-        return self.filter({
+        return self.filter {
             guard let input = $0.input else { return false }
             if case Input.Settings.time = input { return true } else { return false }
-        })
+        }
     }
 
     public var audioInputScenes: [Scene] {
-        return self.filter({
+        return self.filter {
             guard let input = $0.input else { return false }
             if case Input.Settings.audio = input { return true } else { return false }
-        })
+        }
     }
 
     public var videoInputScenes: [Scene] {
-        return self.filter({
+        return self.filter {
             guard let input = $0.input else { return false }
             if case Input.Settings.video = input { return true } else { return false }
-        })
+        }
     }
 
     public var audioOutputScenes: [Scene] {
-        return self.filter({
+        return self.filter {
             guard let output = $0.output else { return false }
             if case Output.Settings.audio = output { return true } else { return false }
-        })
+        }
     }
 }

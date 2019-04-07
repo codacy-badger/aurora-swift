@@ -36,7 +36,6 @@ opt_in_rules:
 - multiline_literal_brackets
 - multiline_parameters
 - multiline_parameters_brackets
-- no_grouping_extension
 - nslocalizedstring_key
 - number_separator
 - operator_usage_whitespace
@@ -69,9 +68,12 @@ opt_in_rules:
 - xct_specific_matcher
 - yoda_condition
 
+nesting:
+  type_level: 2
+
 line_length:
-  warning: 300
-  error: 300
+  warning: 400
+  error: 400
 
 type_body_length:
   warning: 1000

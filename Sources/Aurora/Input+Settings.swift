@@ -6,7 +6,7 @@ extension Input {
         case audio(AudioInputSettings)
         case video(VideoInputSettings)
 
-        public static func ==(lhs: Settings, rhs: Settings) -> Bool {
+        public static func == (lhs: Settings, rhs: Settings) -> Bool {
             switch (rhs, lhs) {
             case (.time, .time), (.audio, .audio), (.video, .video):
                 return true
@@ -61,13 +61,13 @@ extension Input {
 }
 
 public struct TimeInputSettings: Codable, Equatable {
-    public static func interval(_ seconds:  ValueScope?) -> TimeInputSettings {
+    public static func interval(_ seconds: ValueScope?) -> TimeInputSettings {
         return TimeInputSettings(interval: seconds)
     }
 
     public var interval: ValueScope?
 
-    public init(interval:  ValueScope?) {
+    public init(interval: ValueScope?) {
         self.interval = interval
     }
 }

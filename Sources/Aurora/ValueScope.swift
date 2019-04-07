@@ -1,7 +1,6 @@
 import Foundation
 
 public enum ValueScope: Codable, Equatable {
-
     enum Key: CodingKey {
         case constant
         case range
@@ -49,7 +48,7 @@ public enum ValueScope: Codable, Equatable {
         }
     }
 
-    public static func ==(lhs: ValueScope, rhs: ValueScope) -> Bool {
+    public static func == (lhs: ValueScope, rhs: ValueScope) -> Bool {
         switch (rhs, lhs) {
         case (.constant, .constant), (.range, .range), (.spectrum, .spectrum):
             return true
@@ -85,7 +84,7 @@ extension Float {
             return value
         case let .some(.range(value)):
             return min(value.upperBound, max(self, value.lowerBound))
-        case .some(.spectrum(_)):
+        case .some(.spectrum):
             /// No spectrum support yet
             return self
         case .none:

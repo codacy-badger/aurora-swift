@@ -84,7 +84,6 @@ extension Aurora {
                     let transformer = lightsTransformer(preset: activeLightScene)
                     updateActiveReachableLightsFor(activeLightScene: activeLightScene, with: transformer)
                 }
-
             }
         }
         DispatchQueue.main.async { self.delegates.forEach { $0.didUpdateAudioLevel(current: self.audioProcessor.level, threshold: self.audioProcessor.thresholdLevel) } }
